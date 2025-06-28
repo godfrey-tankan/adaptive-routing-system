@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: adaptive-routing-prod
+    container_name: routing-web
+    command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - static_volume:/app/staticfiles # Mount volume for static files
+    # - media_volume:/app/media # If you handle user-uploaded media files
+    environment:
+      - ENVIRONMENT=production
+      - DB_HOST=db # Refers to the 'db' service in this compose file
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - Maps_API_KEY=${Maps_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - SECRET_KEY=${SECRET_KEY} # Pass the secret key from .env.production
+      - ANONYMIZE_LOCATIONS=${ANONYMIZE_LOCATIONS}
+    depends_on:
+      - db
+      - redis # Web service depends on Redis for caching/rate limiting
+    networks:
+      - backend
+
+  db:
+    image: postgis/postgis:16-3.4 # Using PostGIS image directly
+    container_name: routing-db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/ # Persistent data
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    networks:
+      - backend
+
+  redis:
+    image: redis:7-alpine # Lightweight Redis image
+    container_name: routing-redis
+    command: redis-server --appendonly yes # Enable AOF persistence
+    volumes:
+      - redis_data:/data # Persistent data for Redis
+    networks:
+      - backend
+
+volumes:
+  postgres_data:
+  static_volume:
+  redis_data:
+# media_volume: # Uncomment if using media files
+
+networks:
+  backend:
+    driver: bridge

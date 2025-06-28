@@ -1,0 +1,56 @@
+from django.shortcuts import render
+
+# Create your views here.
+from rest_framework import generics, permissions, status
+from rest_framework.response import Response
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from django.contrib.auth import get_user_model
+from .serializers import UserRegistrationSerializer, UserDetailsSerializer, UserLoginSerializer
+from rest_framework.views import APIView
+from django.contrib.auth import authenticate, logout
+from rest_framework_simplejwt.tokens import RefreshToken
+
+CustomUser = get_user_model()
+
+class RegisterUserView(generics.CreateAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserRegistrationSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            "user": UserDetailsSerializer(user).data,
+            "access": str(refresh.access_token),
+            "refresh": str(refresh),
+        }, status=status.HTTP_201_CREATED)
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    pass
+
+class CustomTokenRefreshView(TokenRefreshView):
+    pass
+
+class LogoutView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            logout(request)
+            return Response(status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+class ManageUserView(generics.RetrieveUpdateAPIView):
+    serializer_class = UserDetailsSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
