@@ -89,7 +89,6 @@ After installing PostgreSQL, you need to create a database and a user for your D
     ALTER USER routing_user WITH SUPERUSER;
     \q -- To exit psql
     ```
-
       * **Important**: Replace `routing_db` and `routing_user` with your preferred names if different, and replace `'your_secure_local_password'` with a strong password. You'll use these credentials in your Django settings.
       * We specifically named the database `routing_db` and user `routing_user` to match the default values in your `core/settings.py` and `.env` for consistency.
 
