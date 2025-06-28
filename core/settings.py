@@ -47,7 +47,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -78,12 +78,20 @@ TEMPLATES = [
 SITE_ID = 1
 
 # allauth settings (recommended minimal setup)
-ACCOUNT_AUTHENTICATION_METHOD = "email" 
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_EMAIL_VERIFICATION = "none" 
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_ADAPTER = 'allauth.account.adapter.DefaultAccountAdapter'
+ACCOUNT_LOGIN_METHODS = ["email"]
+
+ACCOUNT_SIGNUP_FIELDS = [
+    "email",
+    "password",
+    "password2",
+    "phone_number",
+    "preferred_transport",
+]
 REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'users.serializers.UserRegistrationSerializer',
 }
@@ -202,6 +210,7 @@ REST_AUTH = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "http://localhost:8080",
     "https://your-frontend-domain.com"
 ]
 CORS_ALLOW_CREDENTIALS = True # Allow cookies to be sent with cross-origin requests
@@ -224,10 +233,6 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    # More production settings:
-    # ALLOWED_HOSTS = ['your-production-domain.com', 'your-server-ip']
-    # LOGGING (for production errors)
-    # CACHES (e.g., Redis for faster cache)
 
 # Flag for location anonymization
 ANONYMIZE_LOCATIONS = os.getenv('ANONYMIZE_LOCATIONS', 'False') == 'True'

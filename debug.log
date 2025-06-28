@@ -1,0 +1,173 @@
+INFO 2025-06-28 12:44:56,065 autoreload 150494 135575418388608 Watching for file changes with StatReloader
+INFO 2025-06-28 12:45:22,548 autoreload 151350 137357187747968 Watching for file changes with StatReloader
+INFO 2025-06-28 19:12:36,889 autoreload 412725 124039486238848 Watching for file changes with StatReloader
+INFO 2025-06-28 19:23:23,370 autoreload 412725 124039486238848 /home/tnqn/Documents/adaptive-routing-backend/core/settings.py changed, reloading.
+INFO 2025-06-28 19:23:25,307 autoreload 419279 135313216536704 Watching for file changes with StatReloader
+INFO 2025-06-28 19:23:37,752 autoreload 419482 139667949158528 Watching for file changes with StatReloader
+INFO 2025-06-28 19:39:29,773 basehttp 419482 139667597948608 "OPTIONS /api/users/login/ HTTP/1.1" 200 0
+INFO 2025-06-28 19:40:08,195 autoreload 419482 139667949158528 /home/tnqn/Documents/adaptive-routing-backend/core/settings.py changed, reloading.
+INFO 2025-06-28 19:40:15,613 autoreload 430912 136269654929536 Watching for file changes with StatReloader
+INFO 2025-06-28 19:40:22,094 basehttp 430912 136269303641792 "OPTIONS /api/users/login/ HTTP/1.1" 200 0
+WARNING 2025-06-28 19:40:22,865 log 430912 136269303641792 Unauthorized: /api/users/login/
+WARNING 2025-06-28 19:40:22,865 basehttp 430912 136269303641792 "POST /api/users/login/ HTTP/1.1" 401 63
+INFO 2025-06-28 19:41:01,207 basehttp 430912 136269303641792 "OPTIONS /api/users/register/ HTTP/1.1" 200 0
+ERROR 2025-06-28 19:41:01,386 log 430912 136269303641792 Internal Server Error: /api/users/register/
+Traceback (most recent call last):
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/users/views.py", line 23, in post
+    user = serializer.save()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 208, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/users/serializers.py", line 22, in create
+    user = CustomUser.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+ERROR 2025-06-28 19:41:01,390 basehttp 430912 136269303641792 "POST /api/users/register/ HTTP/1.1" 500 120410
+INFO 2025-06-28 19:42:00,404 autoreload 430912 136269654929536 /home/tnqn/Documents/adaptive-routing-backend/users/serializers.py changed, reloading.
+INFO 2025-06-28 19:42:01,769 autoreload 432175 135392240128128 Watching for file changes with StatReloader
+ERROR 2025-06-28 19:42:06,172 log 432175 135391888799424 Internal Server Error: /api/users/register/
+Traceback (most recent call last):
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/users/views.py", line 23, in post
+    user = serializer.save()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 208, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/users/serializers.py", line 22, in create
+    user = CustomUser.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/contrib/auth/models.py", line 161, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/contrib/auth/models.py", line 153, in _create_user
+    user = self.model(username=username, email=email, **extra_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/models/base.py", line 567, in __init__
+    raise TypeError(
+TypeError: CustomUser() got unexpected keyword arguments: 'username'
+ERROR 2025-06-28 19:42:06,178 basehttp 432175 135391888799424 "POST /api/users/register/ HTTP/1.1" 500 137567
+INFO 2025-06-28 19:42:17,403 autoreload 432175 135392240128128 /home/tnqn/Documents/adaptive-routing-backend/users/serializers.py changed, reloading.
+INFO 2025-06-28 19:42:18,575 autoreload 432478 133970405568640 Watching for file changes with StatReloader
+ERROR 2025-06-28 19:42:23,240 log 432478 133970054346432 Internal Server Error: /api/users/register/
+Traceback (most recent call last):
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/users/views.py", line 23, in post
+    user = serializer.save()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 208, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/users/serializers.py", line 22, in create
+    user = CustomUser.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+ERROR 2025-06-28 19:42:23,244 basehttp 432478 133970054346432 "POST /api/users/register/ HTTP/1.1" 500 120410
+INFO 2025-06-28 19:44:51,786 autoreload 432478 133970405568640 /home/tnqn/Documents/adaptive-routing-backend/users/models.py changed, reloading.
+INFO 2025-06-28 19:44:53,159 autoreload 434169 129859105845376 Watching for file changes with StatReloader
+INFO 2025-06-28 19:45:58,545 autoreload 434169 129859105845376 /home/tnqn/Documents/adaptive-routing-backend/users/serializers.py changed, reloading.
+INFO 2025-06-28 19:45:59,534 autoreload 435028 133306745184384 Watching for file changes with StatReloader
+WARNING 2025-06-28 19:47:00,191 log 435028 133306389624512 Bad Request: /api/users/register/
+WARNING 2025-06-28 19:47:00,192 basehttp 435028 133306389624512 "POST /api/users/register/ HTTP/1.1" 400 80
+WARNING 2025-06-28 19:47:22,995 log 435028 133306389624512 Bad Request: /api/users/register/
+WARNING 2025-06-28 19:47:22,996 basehttp 435028 133306389624512 "POST /api/users/register/ HTTP/1.1" 400 80
+INFO 2025-06-28 19:50:08,634 autoreload 435028 133306745184384 /home/tnqn/Documents/adaptive-routing-backend/core/settings.py changed, reloading.
+INFO 2025-06-28 19:50:09,659 autoreload 437946 123362838704256 Watching for file changes with StatReloader
+INFO 2025-06-28 19:50:22,305 autoreload 438198 137041309769856 Watching for file changes with StatReloader
+INFO 2025-06-28 19:51:11,902 autoreload 438198 137041309769856 /home/tnqn/Documents/adaptive-routing-backend/core/settings.py changed, reloading.
+INFO 2025-06-28 19:51:13,216 autoreload 438778 125874411176064 Watching for file changes with StatReloader
+INFO 2025-06-28 19:52:21,218 autoreload 438778 125874411176064 /home/tnqn/Documents/adaptive-routing-backend/core/settings.py changed, reloading.
+INFO 2025-06-28 19:52:22,340 autoreload 439577 131274019229824 Watching for file changes with StatReloader
+INFO 2025-06-28 19:52:48,632 autoreload 439964 137913377505408 Watching for file changes with StatReloader
+WARNING 2025-06-28 19:55:57,529 log 439964 137913093322432 Bad Request: /api/users/register/
+WARNING 2025-06-28 19:55:57,531 basehttp 439964 137913093322432 "POST /api/users/register/ HTTP/1.1" 400 80
+WARNING 2025-06-28 19:56:12,778 log 439964 137913093322432 Bad Request: /api/users/register/
+WARNING 2025-06-28 19:56:12,779 basehttp 439964 137913093322432 "POST /api/users/register/ HTTP/1.1" 400 80
+WARNING 2025-06-28 19:57:09,408 log 439964 137913093322432 Bad Request: /api/users/register/
+WARNING 2025-06-28 19:57:09,410 basehttp 439964 137913093322432 "POST /api/users/register/ HTTP/1.1" 400 80
+WARNING 2025-06-28 19:59:18,505 log 439964 137913093322432 Unauthorized: /api/users/login/
+WARNING 2025-06-28 19:59:18,507 basehttp 439964 137913093322432 "POST /api/users/login/ HTTP/1.1" 401 63
+WARNING 2025-06-28 19:59:27,232 log 439964 137913093322432 Unauthorized: /api/users/login/
+WARNING 2025-06-28 19:59:27,233 basehttp 439964 137913093322432 "POST /api/users/login/ HTTP/1.1" 401 63
+INFO 2025-06-28 19:59:33,339 basehttp 439964 137913093322432 "POST /api/users/login/ HTTP/1.1" 200 483
+INFO 2025-06-28 20:05:24,095 autoreload 439964 137913377505408 /home/tnqn/Documents/adaptive-routing-backend/users/serializers.py changed, reloading.
+INFO 2025-06-28 20:05:25,117 autoreload 447672 123509164175488 Watching for file changes with StatReloader
+INFO 2025-06-28 20:06:50,162 autoreload 447672 123509164175488 /home/tnqn/Documents/adaptive-routing-backend/core/settings.py changed, reloading.
+INFO 2025-06-28 20:06:51,040 autoreload 448578 129283138744448 Watching for file changes with StatReloader
+INFO 2025-06-28 20:07:49,787 autoreload 448578 129283138744448 /home/tnqn/Documents/adaptive-routing-backend/users/serializers.py changed, reloading.
+INFO 2025-06-28 20:07:50,720 autoreload 449190 131071292498048 Watching for file changes with StatReloader
+INFO 2025-06-28 20:10:01,826 autoreload 449190 131071292498048 /home/tnqn/Documents/adaptive-routing-backend/users/serializers.py changed, reloading.
+INFO 2025-06-28 20:10:02,776 autoreload 450685 124241412993152 Watching for file changes with StatReloader
+INFO 2025-06-28 20:11:20,862 autoreload 450685 124241412993152 /home/tnqn/Documents/adaptive-routing-backend/users/views.py changed, reloading.
+INFO 2025-06-28 20:11:22,641 autoreload 451690 132807888679040 Watching for file changes with StatReloader
+WARNING 2025-06-28 20:11:40,399 log 451690 132807536932544 Unauthorized: /api/users/register/
+WARNING 2025-06-28 20:11:40,403 basehttp 451690 132807536932544 "POST /api/users/register/ HTTP/1.1" 401 58
+INFO 2025-06-28 20:12:00,501 autoreload 451690 132807888679040 /home/tnqn/Documents/adaptive-routing-backend/users/views.py changed, reloading.
+INFO 2025-06-28 20:12:01,518 autoreload 452242 133381785211008 Watching for file changes with StatReloader
+INFO 2025-06-28 20:12:05,639 basehttp 452242 133381501220544 "POST /api/users/register/ HTTP/1.1" 201 163
+INFO 2025-06-28 20:12:11,621 basehttp 452242 133381501220544 "POST /api/users/login/ HTTP/1.1" 200 483
