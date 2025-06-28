@@ -1,9 +1,13 @@
 
+// src/components/DashboardHeader.tsx
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { Bell, Settings } from "lucide-react";
+import { useAuth } from "@/context/AuthContext"; // Import useAuth
 
 export const DashboardHeader = () => {
+  const { user } = useAuth(); // Use the auth hook
+
   return (
     <header className="h-16 border-b bg-white flex items-center justify-between px-4">
       <div className="flex items-center space-x-4">
@@ -17,7 +21,7 @@ export const DashboardHeader = () => {
           </p>
         </div>
       </div>
-      
+
       <div className="flex items-center space-x-2">
         <Button variant="ghost" size="icon" className="w-10 h-10">
           <Bell className="w-5 h-5" />

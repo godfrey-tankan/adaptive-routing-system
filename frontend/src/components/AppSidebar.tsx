@@ -55,11 +55,10 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
-                    className={`h-12 ${
-                      isActive(item.url)
+                    className={`h-12 ${isActive(item.url)
                         ? "bg-primary/10 text-primary border-r-2 border-primary"
                         : "hover:bg-muted/50"
-                    }`}
+                      }`}
                   >
                     <NavLink to={item.url} className="flex items-center">
                       <item.icon className="w-5 h-5 flex-shrink-0" />
