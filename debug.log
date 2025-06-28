@@ -171,3 +171,6 @@ INFO 2025-06-28 20:12:00,501 autoreload 451690 132807888679040 /home/tnqn/Docume
 INFO 2025-06-28 20:12:01,518 autoreload 452242 133381785211008 Watching for file changes with StatReloader
 INFO 2025-06-28 20:12:05,639 basehttp 452242 133381501220544 "POST /api/users/register/ HTTP/1.1" 201 163
 INFO 2025-06-28 20:12:11,621 basehttp 452242 133381501220544 "POST /api/users/login/ HTTP/1.1" 200 483
+INFO 2025-06-28 20:13:24,321 basehttp 452242 133381501220544 "POST /api/users/login/ HTTP/1.1" 200 483
+INFO 2025-06-28 20:16:20,394 autoreload 452242 133381785211008 /home/tnqn/Documents/adaptive-routing-backend/users/views.py changed, reloading.
+INFO 2025-06-28 20:16:21,679 autoreload 455179 133372464328832 Watching for file changes with StatReloader
