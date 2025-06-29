@@ -111,11 +111,11 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
 
     // Zimbabwe-specific fare calculation
     if (distanceFromCBD < 15) {
-      return "ZWL $1.00 (Standard Harare kombi fare)";
+      return "$1.00 (Standard Harare kombi fare)";
     } else if (distanceFromCBD < 30) {
-      return "ZWL $2.00 (Nearby towns like Chitungwiza, Norton)";
+      return "$2.00 (Nearby towns like Chitungwiza, Norton)";
     } else {
-      return "ZWL $3.00+ (Long distance to places like Marondera, Chegutu)";
+      return "$3.00+ (Long distance to places like Marondera, Chegutu)";
     }
   };
 
@@ -514,7 +514,7 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="DRIVING">🚗 Private Car</SelectItem>
-                  <SelectItem value="TRANSIT">🚌 Kombi (Transit)</SelectItem>
+                  {/* <SelectItem value="TRANSIT">🚌 Kombi (Transit)</SelectItem> */}
                   <SelectItem value="WALKING">🚶 Walking</SelectItem>
                   <SelectItem value="BICYCLING">🚴 Bicycle</SelectItem>
                 </SelectContent>
@@ -641,10 +641,10 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
                   <Star className="w-4 h-4 mr-2" />
                   Save Route
                 </Button>
-                <Button className="flex-1 bg-secondary hover:bg-secondary/90">
+                {/* <Button className="flex-1 bg-secondary hover:bg-secondary/90">
                   <Save className="w-4 h-4 mr-2" />
                   Start Navigation
-                </Button>
+                </Button> */}
               </div>
             </CardContent>
           </Card>

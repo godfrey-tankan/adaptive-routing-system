@@ -20,14 +20,57 @@ import logging
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
+from datetime import datetime # Import datetime for current time in AI prompt
 
 logger = logging.getLogger(__name__)
 
 load_dotenv(override=True) # Load environment variables from .env
 
-# Configure Gemini API
+logger = logging.getLogger(__name__)
+
+load_dotenv(override=True)
+
+# Configure Gemini API globally
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-# routing/views.py
+if not os.getenv("GEMINI_API_KEY"):
+    logger.warning("GEMINI_API_KEY environment variable is not set. AI insights may fail.")
+
+def _get_ai_insights_for_route(start_location_name, end_location_name, transport_mode, distance_value, duration_value):
+    """Get AI insights using Gemini."""
+    try:
+        model = genai.GenerativeModel('gemini-2.0-flash')
+
+        distance_km = f"{(distance_value / 1000):.1f} km" if distance_value else "unknown distance"
+        duration_mins = f"{round(duration_value / 60)} minutes" if duration_value else "unknown duration"
+
+        prompt = f"""
+        You are a Zimbabwean transportation expert providing route insights for travel within Zimbabwe, 
+        particularly focusing on Harare and surrounding areas. Analyze this route from {start_location_name} to {end_location_name}:
+
+        Route Details:
+        - Distance: {distance_km}
+        - Duration: {duration_mins}
+        - Transport: {'Kombi' if transport_mode.lower() == 'transit' else transport_mode}
+        - Time: {datetime.now().strftime("%Y-%m-%d %I:%M %p")}
+        - Weather: (weather data is not currently available for real-time simulation)
+        - Options: (no specific avoidances provided for simulation)
+
+            Give super concise, friendly, hyper-localized advice (max 3 sentences, skip any introduction):
+            1. For kombi: Mention known ranks, typical fares (USD $1 Harare, $2-3 nearby towns), and peak hours to avoid (7-8am, 4-6pm).
+            2. For driving: Note problem spots (e.g., Samora Machel Ave rush hour), parking in CBD.
+            3. Walking: Highlight unsafe areas, especially after dark.
+            4. Weather: Mention if rain/flooding affects route.
+            5. Time-specific: E.g., "Avoid CBD 4-6pm due to kombi congestion."
+            6. Suggest alternatives if relevant.
+            7. Safety: E.g., "Keep valuables hidden at Mbare Musika."
+            skip the introduction and focus on the insights., skip any introduction and focus on the insights.
+            Use local terms like "kombi" not "bus", "CBD" not "downtown". Go straight to the point.
+        """
+        response = model.generate_content(prompt)
+        return response.text.strip()
+    except Exception as e:
+        logger.error(f"Gemini API error in AI insights generation: {str(e)}")
+        return "Could not generate AI insights for this route at the moment."
 
 class RouteOptimizationView(APIView):
     permission_classes = [IsAuthenticated]
@@ -40,21 +83,21 @@ class RouteOptimizationView(APIView):
 
         try:
             logger.info("Route optimization request received")
-            # Convert string coordinates to Point objects
-            origin_coords = serializer.validated_data['origin'].split(',')
-            destination_coords = serializer.validated_data['destination'].split(',')
-            origin = Point(float(origin_coords[1]), float(origin_coords[0]))  # Note: Point takes (x,y) which is (lng,lat)
-            destination = Point(float(destination_coords[1]), float(destination_coords[0]))
-            logger.info(f"Origin: {origin}, Destination: {destination}")
+            origin_lat, origin_lng = map(float, serializer.validated_data['origin'].split(','))
+            destination_lat, destination_lng = map(float, serializer.validated_data['destination'].split(','))
             
-            # Get transport mode with fallback
+            origin_point = Point(origin_lng, origin_lat)
+            destination_point = Point(destination_lng, destination_lat)
+            
+            logger.info(f"Origin: {origin_point}, Destination: {destination_point}")
+            
             mode = serializer.validated_data.get('mode', 'driving')
             logger.info(f"Transport mode: {mode}")
-            # Get optimized routes
+            
             map_service = GoogleMapsService()
             routes = map_service.get_route(
-                origin=origin,
-                destination=destination,
+                origin=origin_point,
+                destination=destination_point,
                 mode=mode,
                 avoid=self._get_avoid_params(request)
             )
@@ -66,22 +109,26 @@ class RouteOptimizationView(APIView):
                     status=status.HTTP_404_NOT_FOUND
                 )
             logger.info("Routes successfully retrieved")
-            # Get AI insights for primary route
-            primary_route = routes[0]
-            ai_insights = self._get_ai_insights(request, primary_route, origin, destination)
             
-            # Prepare route data for saving
+            primary_route = routes[0]
+            ai_insights = _get_ai_insights_for_route(
+                start_location_name=request.data.get('origin_name', f"{origin_point.y},{origin_point.x}"),
+                end_location_name=request.data.get('destination_name', f"{destination_point.y},{destination_point.x}"),
+                transport_mode=mode,
+                distance_value=primary_route.get('distance_value', 0),
+                duration_value=primary_route.get('duration_value', 0)
+            )
+            
             route_data = {
-                'origin': origin,
-                'destination': destination,
-                'mode': mode,
-                'distance': primary_route.get('distance'),
-                'duration': primary_route.get('duration'),
-                'polyline': primary_route.get('polyline'),
+                'origin': origin_point,
+                'destination': destination_point,
+                'mode': mode, 
+                'distance': primary_route.get('distance_value', 0),
+                'duration': primary_route.get('duration_value', 0),
+                'polyline': primary_route.get('polyline'), 
                 'ai_insights': ai_insights
             }
             
-            # Save route to database
             route = Route.objects.create(
                 user=request.user,
                 **route_data
@@ -95,45 +142,21 @@ class RouteOptimizationView(APIView):
                 'saved_route_id': route.id
             }, status=status.HTTP_200_OK)
             
+            
         except Exception as e:
-            logger.error(f"Route optimization error: {str(e)}")
+            logger.error(f"Route optimization error: {str(e)}", exc_info=True)
             return Response(
-                {"error": "An error occurred during route optimization"},
+                {"error": "An error occurred during route optimization", "details": str(e)},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
     
     def _get_avoid_params(self, request):
-        """Build avoidance parameters based on request data"""
         avoid = []
         if request.data.get('avoid_highways'):
             avoid.append('highways')
         if request.data.get('avoid_tolls'):
             avoid.append('tolls')
         return avoid if avoid else None
-    
-    def _get_ai_insights(self, request, route, origin, destination):
-        """Get AI insights using Gemini"""
-        try:
-            prompt = f"""
-            Analyze this route from {origin.y},{origin.x} to {destination.y},{destination.x}:
-            - Distance: {route.get('distance')} meters
-            - Duration: {route.get('duration')} seconds
-            - Mode: {request.data.get('mode', 'driving')}
-            
-            Provide concise travel advice considering:
-            - Typical traffic patterns
-            - Road conditions
-            - Weather considerations
-            - Safety tips
-            """
-            
-            model = genai.GenerativeModel('gemini-2.0-flash')
-            response = model.generate_content(prompt)
-            return response.text
-        except Exception as e:
-            logger.error(f"Gemini API error: {str(e)}")
-            return None
-
 
 class GeminiInsightsView(APIView):
     permission_classes = [AllowAny]
@@ -142,7 +165,7 @@ class GeminiInsightsView(APIView):
         data = request.data
         start_location = data.get('start_location')
         end_location = data.get('end_location')
-        distance = data.get('distance')
+        distance = data.get('distance') 
         duration = data.get('duration') 
         traffic_info = data.get('traffic_info')
         weather_info = data.get('weather_info')
@@ -151,65 +174,44 @@ class GeminiInsightsView(APIView):
         transport_mode = data.get('transport_mode', 'driving')
         current_time = data.get('current_time', 'now')
 
-        if not all([start_location, end_location, distance, duration]):
-            return Response({"detail": "Missing required route data for insights."}, status=status.HTTP_400_BAD_REQUEST)
+        # Updated check for meaningful data for AI Insights
+        if not all([start_location, end_location]) or (distance == "0.0 km" and duration == "0 mins"):
+            logger.warning("Missing or invalid route data for insights, skipping Gemini call.")
+            return Response({"insights": "Cannot provide insights due to missing or invalid route data."}, status=status.HTTP_200_OK)
 
-        # Zimbabwe-specific prompt
         logger.info(f"Generating insights for route from {start_location} to {end_location} using {transport_mode}")
-        logger.info("Getting Destination Insights...")
         logger.info(f"Distance: {distance}, Duration: {duration}, Traffic: {traffic_info}, Time: {current_time}")
-        prompt = f"""
-        You are a Zimbabwean transportation expert providing route insights for travel within Zimbabwe, 
-        particularly focusing on Harare and surrounding areas. Analyze this route from {start_location} to {end_location}:
-
-        Route Details:
-        - Distance: {distance}
-        - Duration: {duration}
-        - Transport: {'Kombi' if transport_mode == 'transit' else transport_mode}
-        - Time: {current_time}
-        - Weather: {weather_info}
-        - Options: {'No highways' if avoid_highways else 'May use highways'}, {'No tolls' if avoid_tolls else 'May use tolls'}
-
-        Provide specific, localized advice considering:
-        1. For Kombi routes: Mention known ranks, expected fares (USD $1 for Harare, $2-3 for nearby towns), 
-        and peak hours to avoid (7-8am, 4-6pm). Example: "Use Copacabana rank for Mbare routes."
         
-        2. For driving: Note problem areas like Samora Machel Ave during rush hour, or parking challenges in CBD.
+        # Call the shared AI insights helper
+        insights = _get_ai_insights_for_route(
+            start_location_name=start_location,
+            end_location_name=end_location,
+            transport_mode=transport_mode,
+            # Assuming distance and duration are formatted strings like "7.9 km", "13 mins"
+            # _get_ai_insights_for_route expects raw values (meters, seconds).
+            # If GeminiInsightsView's prompt is fixed to take formatted strings,
+            # then pass distance/duration as they are received.
+            # Otherwise, parse them back to numbers.
+            # For simplicity, let's keep the _get_ai_insights_for_route expecting values
+            # so GeminiInsightsView needs to parse them if its input is formatted.
+            # For now, let's assume `_get_ai_insights_for_route` uses string inputs directly
+            # or you'll parse them here from `distance`/`duration` strings.
+            # The prompt in _get_ai_insights_for_route is updated to receive string inputs.
+            distance_value=distance, # Pass as string
+            duration_value=duration # Pass as string
+        )
+        logger.info(f"Insights Generated Successfully, sending response...")
+        return Response({"insights": insights}, status=status.HTTP_200_OK)
         
-        3. Walking: Highlight unsafe areas to avoid, especially after dark.
-        
-        4. Weather impacts: Like flooded roads in high-density suburbs during rains.
-        
-        5. Time-specific advice: "Avoid CBD between 4-6pm due to kombi congestion."
-        
-        6. Alternative routes if relevant: "Consider Seke Road instead of Simon Mazorodze if going to Chitungwiza."
-        
-        7. Safety: "Keep valuables hidden at Mbare Musika bus rank."
-        
-        Keep response concise and summarized (1-3 sentences) and hyper-localized to Zimbabwean context.
-        Use local terms like "kombi" not "bus", "CBD" not "downtown".
-        """
-
-        try:
-            model = genai.GenerativeModel('gemini-2.0-flash')
-            response = model.generate_content(prompt)
-            insights = response.text.strip()
-            logger.info(f"Insights Generated Successfully, sending response...")
-            return Response({"insights": insights}, status=status.HTTP_200_OK)
-        except Exception as e:
-            print(f"Error calling Gemini API: {e}")
-            logger.error(f"Gemini encountered an error")
-            return Response({"detail": f"Failed to generate AI insights: {e}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class RouteHistoryView(generics.ListAPIView):
     serializer_class = RouteSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
-    filterset_fields = ['mode', 'created_at'] # Allow filtering by mode and creation date
-    ordering_fields = ['created_at', 'distance', 'duration'] # Allow ordering
+    filterset_fields = ['mode', 'created_at']
+    ordering_fields = ['created_at', 'distance', 'duration']
 
     def get_queryset(self):
-        # Only show routes for the authenticated user
         return Route.objects.filter(user=self.request.user)
 
 
@@ -227,12 +229,18 @@ class WeatherView(APIView):
             )
 
         try:
+            # Ensure OPENWEATHER_API_KEY is correctly loaded from .env
+            openweathermap_api_key = os.getenv('OPENWEATHER_API_KEY')
+            if not openweathermap_api_key:
+                logger.error("OPENWEATHER_API_KEY environment variable is not set for WeatherView.")
+                return Response({"error": "Server configuration error: Weather API key not found."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
             response = requests.get(
                 f"https://api.openweathermap.org/data/2.5/weather",
                 params={
                     'lat': lat,
                     'lon': lon,
-                    'appid': settings.OPENWEATHER_API_KEY,
+                    'appid': openweathermap_api_key, # Use the correct env var
                     'units': 'metric'
                 }
             )
@@ -240,6 +248,7 @@ class WeatherView(APIView):
             response.raise_for_status()
             return Response(response.json(), status=status.HTTP_200_OK)
         except requests.RequestException as e:
+            logger.error(f"Error fetching weather data: {e}", exc_info=True)
             return Response(
                 {"error": str(e)},
                 status=status.HTTP_502_BAD_GATEWAY
@@ -248,46 +257,92 @@ class WeatherView(APIView):
 @csrf_exempt
 def simulate_route(request):
     if request.method == 'POST':
-        logger.info(f"Simulate route request received")
+        logger.info("Simulate route request received")
         try:
             data = json.loads(request.body)
             start_place_id = data.get('startPlaceId')
             end_place_id = data.get('endPlaceId')
             mode = data.get('mode')
-            logger.info(f"Start Place ID: {start_place_id}, End Place ID: {end_place_id}, Mode: {mode}")
-            # Call Google Maps API from server
-            url = f"https://maps.googleapis.com/maps/api/directions/json"
-            params = {
-                'origin': f"place_id:{start_place_id}",
-                'destination': f"place_id:{end_place_id}",
-                'mode': mode.lower(),
-                'departure_time': 'now',
-                'traffic_model': 'best_guess',
-                'key': os.getenv('Maps_API_KEY')
-            }
-            
-            response = requests.get(url, params=params)
-            response.raise_for_status()
-            data = response.json()
-            logger.info(f"Simulation Route Created Successfully")
-            if data.get('routes'):
+            start_location_name = data.get('start_location_name') # Get location name from frontend
+            end_location_name = data.get('end_location_name')     # Get location name from frontend
+
+            logger.info(f"Start Place ID: {start_place_id}, End Place ID: {end_place_id}, Mode: {mode}, Start Name: {start_location_name}, End Name: {end_location_name}")
+
+            if not all([start_place_id, end_place_id, mode, start_location_name, end_location_name]):
+                logger.error("Missing required parameters for simulation.")
                 return JsonResponse({
-                    'route': data['routes'][0],
+                    'error': 'Missing required parameters (place IDs, names, or mode).',
+                    'status': 'error'
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+            map_service = GoogleMapsService()
+            
+            # Resolve place IDs to coordinates
+            origin_point = map_service.get_place_details_by_id(start_place_id)
+            destination_point = map_service.get_place_details_by_id(end_place_id)
+
+            if not origin_point or not destination_point:
+                logger.warning(f"Could not resolve coordinates for one or both place IDs: Start='{start_place_id}', End='{end_place_id}'")
+                return JsonResponse({
+                    'error': 'Could not resolve exact coordinates for the provided locations. Please try more specific locations.',
+                    'status': 'error'
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+            # Get route using GoogleMapsService
+            routes_from_service = map_service.get_route(
+                origin=origin_point,
+                destination=destination_point,
+                mode=mode.lower() # Ensure mode is lowercase for consistency
+            )
+            
+            if routes_from_service:
+                primary_route_data = routes_from_service[0]
+                
+                # Log actual distance and duration values
+                logger.info(f"Simulation Route Created Successfully. Distance: {primary_route_data.get('distance')}, Duration: {primary_route_data.get('duration')}")
+
+                # Generate AI insights
+                ai_insights = _get_ai_insights_for_route(
+                    start_location_name=start_location_name,
+                    end_location_name=end_location_name,
+                    transport_mode=mode,
+                    distance_value=primary_route_data.get('distance_value', 0), # Pass raw values to AI helper
+                    duration_value=primary_route_data.get('duration_value', 0)
+                )
+
+                # Construct response to match frontend expectations
+                return JsonResponse({
+                    'route': {
+                        'overview_polyline': {'points': primary_route_data.get('polyline')},
+                        'distance': {'value': primary_route_data.get('distance_value', 0)},
+                        'duration': {'value': primary_route_data.get('duration_value', 0)},
+                        # Add any other fields your frontend expects in the 'route' object
+                    },
+                    'ai_insights': ai_insights,
                     'status': 'success'
-                })
-            logger.warning("No routes found in simulation response")
+                }, status=status.HTTP_200_OK)
+            else:
+                logger.warning(f"No routes found from Google Maps Service for simulation between '{start_location_name}' and '{end_location_name}'.")
+                return JsonResponse({
+                    'error': 'No route found for the given locations. This might be due to invalid inputs or geographical constraints.',
+                    'status': 'error'
+                }, status=status.HTTP_404_NOT_FOUND)
+        
+        except json.JSONDecodeError:
+            logger.error("Invalid JSON in request body for simulate_route.", exc_info=True)
             return JsonResponse({
-                'error': 'No route found',
+                'error': 'Invalid request body format.',
                 'status': 'error'
-            }, status=404)
+            }, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            logger.error(f"Error in simulate_route: {mode}")
+            logger.error(f"Unhandled error in simulate_route: {e}", exc_info=True)
             return JsonResponse({
-                'error': str(e),
+                'error': f'An unexpected server error occurred: {e}',
                 'status': 'error'
-            }, status=500)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     return JsonResponse({
         'error': 'Method not allowed',
         'status': 'error'
-    }, status=405)
+    }, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+

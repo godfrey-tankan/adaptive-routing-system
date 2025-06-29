@@ -712,3 +712,897 @@ INFO 2025-06-29 13:36:13,907 views 99948 129921389164224 Insights Generated Succ
 INFO 2025-06-29 13:36:13,915 basehttp 99948 129921389164224 "POST /api/route/gemini-insights/ HTTP/1.1" 200 352
 INFO 2025-06-29 13:36:13,963 views 99948 129921379722944 Insights Generated Successfully, sending response...
 INFO 2025-06-29 13:36:13,964 basehttp 99948 129921379722944 "POST /api/route/gemini-insights/ HTTP/1.1" 200 454
+INFO 2025-06-29 13:37:40,016 basehttp 99948 129921379722944 "OPTIONS /api/route/weather/ HTTP/1.1" 200 0
+INFO 2025-06-29 13:37:40,055 views 99948 129921379722944 Weather request received for lat: -17.7959448, lon: 31.0332235
+INFO 2025-06-29 13:37:40,702 views 99948 129921379722944 Weather Status Updated...
+INFO 2025-06-29 13:37:40,705 basehttp 99948 129921379722944 "POST /api/route/weather/ HTTP/1.1" 200 512
+INFO 2025-06-29 13:37:59,666 basehttp 99948 129921379722944 "OPTIONS /api/route/optimize/ HTTP/1.1" 200 0
+INFO 2025-06-29 13:37:59,746 views 99948 129921379722944 Route optimization request received
+INFO 2025-06-29 13:37:59,748 views 99948 129921379722944 Origin: POINT (31.0332235 -17.7959448), Destination: POINT (31.0764167 -17.820269)
+INFO 2025-06-29 13:37:59,748 views 99948 129921379722944 Transport mode: driving
+INFO 2025-06-29 13:38:00,258 views 99948 129921379722944 Found 3 routes
+INFO 2025-06-29 13:38:00,259 views 99948 129921379722944 Routes successfully retrieved
+INFO 2025-06-29 13:38:04,518 views 99948 129921379722944 Route saved with ID: 12
+INFO 2025-06-29 13:38:04,520 basehttp 99948 129921379722944 "POST /api/route/optimize/ HTTP/1.1" 200 11003
+INFO 2025-06-29 13:38:04,844 basehttp 99948 129921379722944 "OPTIONS /api/route/gemini-insights/ HTTP/1.1" 200 0
+INFO 2025-06-29 13:38:04,853 views 99948 129921379722944 Generating insights for route from Avondale to Eastlea Shops using DRIVING
+INFO 2025-06-29 13:38:04,853 views 99948 129921379722944 Getting Destination Insights...
+INFO 2025-06-29 13:38:04,854 views 99948 129921379722944 Distance: 7.9 km, Duration: 13 mins, Traffic: Expected travel time with traffic is 13 mins., Time: 6/29/2025, 1:38:04 PM
+INFO 2025-06-29 13:38:06,066 views 99948 129921379722944 Insights Generated Successfully, sending response...
+INFO 2025-06-29 13:38:06,067 basehttp 99948 129921379722944 "POST /api/route/gemini-insights/ HTTP/1.1" 200 410
+INFO 2025-06-29 13:47:46,804 views 99948 129921379722944 Route optimization request received
+INFO 2025-06-29 13:47:46,804 views 99948 129921379722944 Origin: POINT (31.0332235 -17.7959448), Destination: POINT (31.0764167 -17.820269)
+INFO 2025-06-29 13:47:46,805 views 99948 129921379722944 Transport mode: driving
+INFO 2025-06-29 13:47:48,141 views 99948 129921379722944 Found 3 routes
+INFO 2025-06-29 13:47:48,141 views 99948 129921379722944 Routes successfully retrieved
+INFO 2025-06-29 13:47:53,384 views 99948 129921379722944 Route saved with ID: 13
+INFO 2025-06-29 13:47:53,386 basehttp 99948 129921379722944 "POST /api/route/optimize/ HTTP/1.1" 200 10940
+INFO 2025-06-29 13:47:53,760 views 99948 129921379722944 Generating insights for route from Avondale to Eastlea Shops using DRIVING
+INFO 2025-06-29 13:47:53,761 views 99948 129921379722944 Getting Destination Insights...
+INFO 2025-06-29 13:47:53,761 views 99948 129921379722944 Distance: 7.9 km, Duration: 13 mins, Traffic: Expected travel time with traffic is 13 mins., Time: 6/29/2025, 1:47:53 PM
+INFO 2025-06-29 13:47:54,749 views 99948 129921379722944 Insights Generated Successfully, sending response...
+INFO 2025-06-29 13:47:54,752 basehttp 99948 129921379722944 "POST /api/route/gemini-insights/ HTTP/1.1" 200 322
+INFO 2025-06-29 13:48:03,854 views 99948 129921379722944 Route optimization request received
+INFO 2025-06-29 13:48:03,857 views 99948 129921379722944 Origin: POINT (31.0332235 -17.7959448), Destination: POINT (31.0764167 -17.820269)
+INFO 2025-06-29 13:48:03,858 views 99948 129921379722944 Transport mode: driving
+INFO 2025-06-29 13:48:04,364 views 99948 129921379722944 Found 3 routes
+INFO 2025-06-29 13:48:04,364 views 99948 129921379722944 Routes successfully retrieved
+INFO 2025-06-29 13:48:10,268 views 99948 129921379722944 Route saved with ID: 14
+INFO 2025-06-29 13:48:10,284 basehttp 99948 129921379722944 "POST /api/route/optimize/ HTTP/1.1" 200 11657
+INFO 2025-06-29 13:48:10,612 views 99948 129921379722944 Generating insights for route from Avondale to Eastlea Shops using DRIVING
+INFO 2025-06-29 13:48:10,613 views 99948 129921379722944 Getting Destination Insights...
+INFO 2025-06-29 13:48:10,614 views 99948 129921379722944 Distance: 8.4 km, Duration: 13 mins, Traffic: Expected travel time with traffic is 13 mins., Time: 6/29/2025, 1:48:10 PM
+INFO 2025-06-29 13:48:11,481 views 99948 129921379722944 Insights Generated Successfully, sending response...
+INFO 2025-06-29 13:48:11,486 basehttp 99948 129921379722944 "POST /api/route/gemini-insights/ HTTP/1.1" 200 352
+INFO 2025-06-29 13:49:16,597 autoreload 99948 129921740079232 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 13:49:19,789 autoreload 110859 138259884802176 Watching for file changes with StatReloader
+INFO 2025-06-29 13:49:25,789 views 110859 138259532347072 Route optimization request received
+INFO 2025-06-29 13:49:25,795 views 110859 138259532347072 Origin: POINT (31.0332235 -17.7959448), Destination: POINT (31.0764167 -17.820269)
+INFO 2025-06-29 13:49:25,796 views 110859 138259532347072 Transport mode: driving
+INFO 2025-06-29 13:49:27,130 views 110859 138259532347072 Found 3 routes
+INFO 2025-06-29 13:49:27,133 views 110859 138259532347072 Routes successfully retrieved
+INFO 2025-06-29 13:49:30,771 views 110859 138259532347072 Route saved with ID: 15
+INFO 2025-06-29 13:49:30,772 basehttp 110859 138259532347072 "POST /api/route/optimize/ HTTP/1.1" 200 9690
+INFO 2025-06-29 13:49:31,142 views 110859 138259532347072 Generating insights for route from Avondale to Eastlea Shops using DRIVING
+INFO 2025-06-29 13:49:31,144 views 110859 138259532347072 Getting Destination Insights...
+INFO 2025-06-29 13:49:31,147 views 110859 138259532347072 Distance: 8.4 km, Duration: 12 mins, Traffic: Expected travel time with traffic is 12 mins., Time: 6/29/2025, 1:49:31 PM
+INFO 2025-06-29 13:49:33,422 views 110859 138259532347072 Insights Generated Successfully, sending response...
+INFO 2025-06-29 13:49:33,424 basehttp 110859 138259532347072 "POST /api/route/gemini-insights/ HTTP/1.1" 200 1048
+INFO 2025-06-29 13:51:37,585 autoreload 110859 138259884802176 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 13:51:40,647 autoreload 112191 129416186388608 Watching for file changes with StatReloader
+INFO 2025-06-29 13:51:42,364 views 112191 129415903180480 Route optimization request received
+INFO 2025-06-29 13:51:42,366 views 112191 129415903180480 Origin: POINT (31.0332235 -17.7959448), Destination: POINT (31.0764167 -17.820269)
+INFO 2025-06-29 13:51:42,367 views 112191 129415903180480 Transport mode: driving
+INFO 2025-06-29 13:51:42,892 views 112191 129415903180480 Found 3 routes
+INFO 2025-06-29 13:51:42,893 views 112191 129415903180480 Routes successfully retrieved
+INFO 2025-06-29 13:51:47,541 views 112191 129415903180480 Route saved with ID: 16
+INFO 2025-06-29 13:51:47,545 basehttp 112191 129415903180480 "POST /api/route/optimize/ HTTP/1.1" 200 10521
+INFO 2025-06-29 13:51:47,902 views 112191 129415903180480 Generating insights for route from Avondale to Eastlea Shops using DRIVING
+INFO 2025-06-29 13:51:47,905 views 112191 129415903180480 Getting Destination Insights...
+INFO 2025-06-29 13:51:47,905 views 112191 129415903180480 Distance: 7.6 km, Duration: 13 mins, Traffic: Expected travel time with traffic is 13 mins., Time: 6/29/2025, 1:51:47 PM
+INFO 2025-06-29 13:51:49,262 views 112191 129415903180480 Insights Generated Successfully, sending response...
+INFO 2025-06-29 13:51:49,265 basehttp 112191 129415903180480 "POST /api/route/gemini-insights/ HTTP/1.1" 200 451
+INFO 2025-06-29 13:52:51,299 autoreload 112191 129416186388608 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 13:52:54,255 autoreload 112898 123993134866560 Watching for file changes with StatReloader
+INFO 2025-06-29 13:53:04,846 views 112898 123992783451840 Route optimization request received
+INFO 2025-06-29 13:53:04,851 views 112898 123992783451840 Origin: POINT (31.0332235 -17.7959448), Destination: POINT (31.0764167 -17.820269)
+INFO 2025-06-29 13:53:04,851 views 112898 123992783451840 Transport mode: transit
+INFO 2025-06-29 13:53:05,328 views 112898 123992783451840 Found 0 routes
+WARNING 2025-06-29 13:53:05,347 log 112898 123992783451840 Not Found: /api/route/optimize/
+WARNING 2025-06-29 13:53:05,354 basehttp 112898 123992783451840 "POST /api/route/optimize/ HTTP/1.1" 404 51
+INFO 2025-06-29 13:53:45,704 views 112898 123992783451840 Route optimization request received
+INFO 2025-06-29 13:53:45,710 views 112898 123992783451840 Origin: POINT (31.0332235 -17.7959448), Destination: POINT (31.0764167 -17.820269)
+INFO 2025-06-29 13:53:45,711 views 112898 123992783451840 Transport mode: walking
+INFO 2025-06-29 13:53:47,121 views 112898 123992783451840 Found 3 routes
+INFO 2025-06-29 13:53:47,122 views 112898 123992783451840 Routes successfully retrieved
+INFO 2025-06-29 13:53:53,988 views 112898 123992783451840 Route saved with ID: 17
+INFO 2025-06-29 13:53:53,990 basehttp 112898 123992783451840 "POST /api/route/optimize/ HTTP/1.1" 200 14427
+INFO 2025-06-29 13:53:54,270 views 112898 123992783451840 Generating insights for route from Avondale to Eastlea Shops using WALKING
+INFO 2025-06-29 13:53:54,272 views 112898 123992783451840 Getting Destination Insights...
+INFO 2025-06-29 13:53:54,273 views 112898 123992783451840 Distance: 7.2 km, Duration: 99 mins, Traffic: Expected travel time with traffic is 99 mins., Time: 6/29/2025, 1:53:54 PM
+INFO 2025-06-29 13:53:55,222 views 112898 123992783451840 Insights Generated Successfully, sending response...
+INFO 2025-06-29 13:53:55,227 basehttp 112898 123992783451840 "POST /api/route/gemini-insights/ HTTP/1.1" 200 300
+INFO 2025-06-29 13:56:42,119 views 112898 123992783451840 Weather request received for lat: -17.7959448, lon: 31.0332235
+INFO 2025-06-29 13:56:42,780 views 112898 123992783451840 Weather Status Updated...
+INFO 2025-06-29 13:56:42,784 basehttp 112898 123992783451840 "POST /api/route/weather/ HTTP/1.1" 200 512
+INFO 2025-06-29 13:56:43,210 views 112898 123992783451840 Generating insights for route from Avondale to Eastlea Shops using WALKING
+INFO 2025-06-29 13:56:43,223 views 112898 123992783451840 Getting Destination Insights...
+INFO 2025-06-29 13:56:43,227 views 112898 123992783451840 Distance: 7.2 km, Duration: 99 mins, Traffic: Expected travel time with traffic is 99 mins., Time: 6/29/2025, 1:56:43 PM
+INFO 2025-06-29 13:56:44,270 views 112898 123992783451840 Insights Generated Successfully, sending response...
+INFO 2025-06-29 13:56:44,271 basehttp 112898 123992783451840 "POST /api/route/gemini-insights/ HTTP/1.1" 200 271
+INFO 2025-06-29 13:58:46,301 views 112898 123992783451840 Simulate route request received
+INFO 2025-06-29 13:58:46,302 views 112898 123992783451840 Start Place ID: ChIJ5Yp5KLWlMRkR-xXwka1rR0Y, End Place ID: ChIJ8-HGIMmlMRkRNtwipqzzrIc, Mode: driving
+INFO 2025-06-29 13:58:46,817 views 112898 123992783451840 Simulation Route Created Successfully
+INFO 2025-06-29 13:58:46,820 basehttp 112898 123992783451840 "POST /api/route/simulate/ HTTP/1.1" 200 2442
+INFO 2025-06-29 13:59:06,521 basehttp 112898 123992783451840 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 13:59:19,152 basehttp 112898 123992783451840 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 13:59:54,528 views 112898 123992783451840 Simulate route request received
+INFO 2025-06-29 13:59:54,528 views 112898 123992783451840 Start Place ID: ChIJ5Yp5KLWlMRkR-xXwka1rR0Y, End Place ID: ChIJ8-HGIMmlMRkRNtwipqzzrIc, Mode: driving
+INFO 2025-06-29 13:59:55,848 views 112898 123992783451840 Simulation Route Created Successfully
+INFO 2025-06-29 13:59:55,849 basehttp 112898 123992783451840 "POST /api/route/simulate/ HTTP/1.1" 200 2442
+INFO 2025-06-29 13:59:56,130 views 112898 123992783451840 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 13:59:56,130 views 112898 123992783451840 Getting Destination Insights...
+INFO 2025-06-29 13:59:56,130 views 112898 123992783451840 Distance: 0.0 km, Duration: 0 mins, Traffic: Expected travel time with traffic is 0 mins., Time: 6/29/2025, 1:59:56 PM
+INFO 2025-06-29 13:59:56,488 views 112898 123992643970752 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 13:59:56,493 views 112898 123992643970752 Getting Destination Insights...
+INFO 2025-06-29 13:59:56,508 views 112898 123992643970752 Distance: 0.0 km, Duration: 0 mins, Traffic: Expected travel time with traffic is 0 mins., Time: 6/29/2025, 1:59:56 PM
+INFO 2025-06-29 13:59:58,873 views 112898 123992643970752 Insights Generated Successfully, sending response...
+INFO 2025-06-29 13:59:58,880 basehttp 112898 123992643970752 "POST /api/route/gemini-insights/ HTTP/1.1" 200 505
+INFO 2025-06-29 13:59:58,966 views 112898 123992783451840 Insights Generated Successfully, sending response...
+INFO 2025-06-29 13:59:58,974 basehttp 112898 123992783451840 "POST /api/route/gemini-insights/ HTTP/1.1" 200 588
+INFO 2025-06-29 14:00:23,791 views 112898 123992783451840 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:00:23,791 views 112898 123992783451840 Getting Destination Insights...
+INFO 2025-06-29 14:00:23,791 views 112898 123992783451840 Distance: 0.0 km, Duration: 0 mins, Traffic: Expected travel time with traffic is 0 mins., Time: 6/29/2025, 2:00:23 PM
+INFO 2025-06-29 14:00:24,115 views 112898 123992643970752 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:00:24,123 views 112898 123992643970752 Getting Destination Insights...
+INFO 2025-06-29 14:00:24,123 views 112898 123992643970752 Distance: 0.0 km, Duration: 0 mins, Traffic: Expected travel time with traffic is 0 mins., Time: 6/29/2025, 2:00:24 PM
+INFO 2025-06-29 14:00:24,347 views 112898 123992635578048 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:00:24,348 views 112898 123992635578048 Getting Destination Insights...
+INFO 2025-06-29 14:00:24,348 views 112898 123992635578048 Distance: 0.0 km, Duration: 0 mins, Traffic: Expected travel time with traffic is 0 mins., Time: 6/29/2025, 2:00:24 PM
+INFO 2025-06-29 14:00:25,072 views 112898 123992783451840 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:00:25,074 basehttp 112898 123992783451840 "POST /api/route/gemini-insights/ HTTP/1.1" 200 268
+INFO 2025-06-29 14:00:25,719 views 112898 123992643970752 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:00:25,720 basehttp 112898 123992643970752 "POST /api/route/gemini-insights/ HTTP/1.1" 200 398
+INFO 2025-06-29 14:00:25,938 views 112898 123992635578048 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:00:25,939 basehttp 112898 123992635578048 "POST /api/route/gemini-insights/ HTTP/1.1" 200 242
+INFO 2025-06-29 14:02:10,407 autoreload 112898 123993134866560 /home/tnqn/Documents/adaptive-routing-backend/routing/services.py changed, reloading.
+INFO 2025-06-29 14:02:13,389 autoreload 116828 138250924798080 Watching for file changes with StatReloader
+INFO 2025-06-29 14:10:55,492 autoreload 116828 138250924798080 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 14:10:56,612 autoreload 119782 140041003909248 Watching for file changes with StatReloader
+INFO 2025-06-29 14:11:22,859 autoreload 119782 140041003909248 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 14:11:23,945 autoreload 120036 128795134914688 Watching for file changes with StatReloader
+INFO 2025-06-29 14:11:35,852 views 120036 128794783381184 Simulate route request received
+INFO 2025-06-29 14:11:35,852 views 120036 128794783381184 Start Place ID: ChIJ5Yp5KLWlMRkR-xXwka1rR0Y, End Place ID: ChIJ8-HGIMmlMRkRNtwipqzzrIc, Mode: driving, Start Name: None, End Name: None
+ERROR 2025-06-29 14:11:35,853 views 120036 128794783381184 Missing required parameters for simulation.
+WARNING 2025-06-29 14:11:35,854 log 120036 128794783381184 Bad Request: /api/route/simulate/
+WARNING 2025-06-29 14:11:35,855 basehttp 120036 128794783381184 "POST /api/route/simulate/ HTTP/1.1" 400 88
+INFO 2025-06-29 14:14:02,851 basehttp 120036 128794783381184 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 14:14:31,199 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:31,200 views 120036 128794783381184 Distance: , Duration: , Traffic: Expected travel time with traffic is ., Time: 6/29/2025, 2:14:31 PM
+INFO 2025-06-29 14:14:34,040 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:34,041 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 264
+INFO 2025-06-29 14:14:42,475 views 120036 128794783381184 Simulate route request received
+INFO 2025-06-29 14:14:42,475 views 120036 128794783381184 Start Place ID: ChIJ5Yp5KLWlMRkR-xXwka1rR0Y, End Place ID: ChIJ8-HGIMmlMRkRNtwipqzzrIc, Mode: driving, Start Name: Belvedere, End Name: Longcheng Plaza
+INFO 2025-06-29 14:14:42,554 views 120036 128794643912384 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:42,561 views 120036 128794643912384 Distance: , Duration: , Traffic: Expected travel time with traffic is ., Time: 6/29/2025, 2:14:42 PM
+INFO 2025-06-29 14:14:43,112 services 120036 128794783381184 Resolved place ID 'ChIJ5Yp5KLWlMRkR-xXwka1rR0Y' to 'Belvedere' at -17.82776,31.0201071
+INFO 2025-06-29 14:14:43,352 services 120036 128794783381184 Resolved place ID 'ChIJ8-HGIMmlMRkRNtwipqzzrIc' to 'Longcheng Plaza' at -17.82613719999999,31.0032596
+INFO 2025-06-29 14:14:43,597 views 120036 128794643912384 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:43,598 basehttp 120036 128794643912384 "POST /api/route/gemini-insights/ HTTP/1.1" 200 280
+INFO 2025-06-29 14:14:43,618 services 120036 128794783381184 Google Maps Directions API response status: N/A
+INFO 2025-06-29 14:14:43,619 views 120036 128794783381184 Simulation Route Created Successfully. Distance: 2.1 km, Duration: 4 mins
+INFO 2025-06-29 14:14:44,737 basehttp 120036 128794783381184 "POST /api/route/simulate/ HTTP/1.1" 200 516
+INFO 2025-06-29 14:14:45,156 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:45,160 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:45 PM
+ERROR 2025-06-29 14:14:45,160 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:45,161 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:45,163 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:45,620 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:45,621 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:45 PM
+ERROR 2025-06-29 14:14:45,621 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:45,621 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:45,625 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:52,901 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:52,901 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:52 PM
+ERROR 2025-06-29 14:14:52,904 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:52,904 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:52,905 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:53,320 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:53,321 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:53 PM
+ERROR 2025-06-29 14:14:53,321 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:53,322 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:53,325 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:53,870 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:53,872 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:53 PM
+ERROR 2025-06-29 14:14:53,874 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:53,877 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:53,879 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:54,307 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:54,307 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:54 PM
+ERROR 2025-06-29 14:14:54,307 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:54,307 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:54,308 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:54,550 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:54,550 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:54 PM
+ERROR 2025-06-29 14:14:54,550 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:54,550 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:54,551 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:54,751 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:54,751 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:54 PM
+ERROR 2025-06-29 14:14:54,752 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:54,752 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:54,753 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:55,079 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:55,086 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:55 PM
+ERROR 2025-06-29 14:14:55,087 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:55,087 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:55,089 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:55,282 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:55,282 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:55 PM
+ERROR 2025-06-29 14:14:55,282 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:55,282 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:55,283 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:55,499 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:55,500 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:55 PM
+ERROR 2025-06-29 14:14:55,500 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:55,503 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:55,514 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:55,690 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:55,698 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:55 PM
+ERROR 2025-06-29 14:14:55,703 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:55,703 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:55,705 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:55,939 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:55,947 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:55 PM
+ERROR 2025-06-29 14:14:55,951 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:55,953 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:55,964 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:56,189 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:56,191 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:56 PM
+ERROR 2025-06-29 14:14:56,193 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:56,194 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:56,197 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:56,367 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:56,376 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:56 PM
+ERROR 2025-06-29 14:14:56,377 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:56,378 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:56,386 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:56,570 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:56,572 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:56 PM
+ERROR 2025-06-29 14:14:56,575 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:56,578 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:56,585 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:56,911 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:56,916 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:56 PM
+ERROR 2025-06-29 14:14:56,916 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:56,917 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:56,920 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:57,225 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:57,226 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:57 PM
+ERROR 2025-06-29 14:14:57,226 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:57,227 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:57,235 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:57,543 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:57,543 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:57 PM
+ERROR 2025-06-29 14:14:57,543 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:57,543 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:57,545 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:57,753 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:57,754 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:57 PM
+ERROR 2025-06-29 14:14:57,754 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:57,754 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:57,758 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:58,067 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:58,070 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:58 PM
+ERROR 2025-06-29 14:14:58,071 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:58,071 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:58,073 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:58,268 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:58,268 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:58 PM
+ERROR 2025-06-29 14:14:58,268 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:58,268 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:58,284 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:58,464 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:58,469 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:58 PM
+ERROR 2025-06-29 14:14:58,490 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:58,490 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:58,500 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:58,778 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:58,778 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:58 PM
+ERROR 2025-06-29 14:14:58,779 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:58,784 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:58,789 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:59,082 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:59,090 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:59 PM
+ERROR 2025-06-29 14:14:59,095 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:59,097 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:59,101 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:59,276 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:59,283 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:59 PM
+ERROR 2025-06-29 14:14:59,284 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:59,292 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:59,313 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:59,468 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:59,471 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:59 PM
+ERROR 2025-06-29 14:14:59,471 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:59,473 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:59,478 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:14:59,794 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:14:59,794 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:14:59 PM
+ERROR 2025-06-29 14:14:59,794 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:14:59,794 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:14:59,798 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:00,119 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:00,121 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:00 PM
+ERROR 2025-06-29 14:15:00,123 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:00,125 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:00,127 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:00,240 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:00,252 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:00 PM
+ERROR 2025-06-29 14:15:00,255 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:00,255 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:00,264 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:00,473 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:00,482 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:00 PM
+ERROR 2025-06-29 14:15:00,484 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:00,486 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:00,497 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:00,749 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:00,750 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:00 PM
+ERROR 2025-06-29 14:15:00,750 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:00,759 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:00,760 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:01,084 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:01,088 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:01 PM
+ERROR 2025-06-29 14:15:01,089 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:01,091 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:01,103 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:01,363 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:01,365 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:01 PM
+ERROR 2025-06-29 14:15:01,367 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:01,370 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:01,376 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:01,549 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:01,552 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:01 PM
+ERROR 2025-06-29 14:15:01,552 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:01,554 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:01,555 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:01,995 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:01,997 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:01 PM
+ERROR 2025-06-29 14:15:01,999 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:02,000 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:02,005 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:02,376 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:02,378 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:02 PM
+ERROR 2025-06-29 14:15:02,379 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:02,381 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:02,383 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:02,782 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:02,782 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:02 PM
+ERROR 2025-06-29 14:15:02,782 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:02,782 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:02,789 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:03,296 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:03,306 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:03 PM
+ERROR 2025-06-29 14:15:03,306 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:03,306 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:03,318 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:03,519 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:03,523 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:03 PM
+ERROR 2025-06-29 14:15:03,524 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:03,525 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:03,534 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:03,778 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:03,782 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:03 PM
+ERROR 2025-06-29 14:15:03,783 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:03,785 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:03,793 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:04,038 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:04,044 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:04 PM
+ERROR 2025-06-29 14:15:04,048 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:04,060 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:04,063 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:04,247 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:04,252 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:04 PM
+ERROR 2025-06-29 14:15:04,254 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:04,255 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:04,265 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:04,454 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:04,458 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:04 PM
+ERROR 2025-06-29 14:15:04,458 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:04,458 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:04,459 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:04,808 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:04,809 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:04 PM
+ERROR 2025-06-29 14:15:04,809 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:04,810 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:04,815 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:05,288 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:05,293 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:05 PM
+ERROR 2025-06-29 14:15:05,295 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:05,299 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:05,314 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:05,904 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:05,904 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:05 PM
+ERROR 2025-06-29 14:15:05,904 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:05,904 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:05,921 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:05,987 views 120036 128794643912384 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:05,987 views 120036 128794643912384 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:05 PM
+ERROR 2025-06-29 14:15:05,993 views 120036 128794643912384 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:05,994 views 120036 128794643912384 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:05,999 basehttp 120036 128794643912384 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:06,021 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:06,021 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:05 PM
+ERROR 2025-06-29 14:15:06,021 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:06,021 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:06,022 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:06,132 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:06,137 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:06 PM
+ERROR 2025-06-29 14:15:06,138 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:06,138 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:06,141 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:06,334 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:06,335 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:06 PM
+ERROR 2025-06-29 14:15:06,335 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:06,336 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:06,337 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:06,505 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:06,509 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:06 PM
+ERROR 2025-06-29 14:15:06,511 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:06,514 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:06,523 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:06,680 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:06,682 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:06 PM
+ERROR 2025-06-29 14:15:06,685 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:06,686 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:06,688 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:06,888 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:06,888 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:06 PM
+ERROR 2025-06-29 14:15:06,888 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:06,888 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:06,889 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:07,113 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:07,113 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:07 PM
+ERROR 2025-06-29 14:15:07,113 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:07,113 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:07,126 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:07,448 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:07,453 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:07 PM
+ERROR 2025-06-29 14:15:07,455 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:07,455 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:07,457 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:07,752 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:07,752 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:07 PM
+ERROR 2025-06-29 14:15:07,753 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:07,753 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:07,758 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:08,078 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:08,078 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:08 PM
+ERROR 2025-06-29 14:15:08,086 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:08,088 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:08,107 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:08,240 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:08,245 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:08 PM
+ERROR 2025-06-29 14:15:08,247 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:08,252 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:08,261 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:08,497 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:08,505 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:08 PM
+ERROR 2025-06-29 14:15:08,508 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:08,511 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:08,518 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:08,947 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:08,949 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:08 PM
+ERROR 2025-06-29 14:15:08,950 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:08,950 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:08,951 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:09,367 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:09,368 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:09 PM
+ERROR 2025-06-29 14:15:09,369 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:09,370 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:09,372 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:09,585 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:09,586 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:09 PM
+ERROR 2025-06-29 14:15:09,586 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:09,588 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:09,589 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:09,855 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:09,856 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:09 PM
+ERROR 2025-06-29 14:15:09,857 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:09,857 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:09,859 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:10,131 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:10,131 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:10 PM
+ERROR 2025-06-29 14:15:10,132 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:10,133 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:10,135 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:10,383 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:10,384 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:10 PM
+ERROR 2025-06-29 14:15:10,385 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:10,386 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:10,389 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:10,759 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:10,759 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:10 PM
+ERROR 2025-06-29 14:15:10,759 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:10,760 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:10,766 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:10,969 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:10,970 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:10 PM
+ERROR 2025-06-29 14:15:10,971 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:10,971 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:10,973 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:11,251 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:11,253 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:11 PM
+ERROR 2025-06-29 14:15:11,254 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:11,255 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:11,257 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:11,495 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:11,496 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:11 PM
+ERROR 2025-06-29 14:15:11,496 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:11,497 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:11,498 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:11,681 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:11,682 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:11 PM
+ERROR 2025-06-29 14:15:11,682 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:11,682 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:11,691 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:11,937 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:11,937 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:11 PM
+ERROR 2025-06-29 14:15:11,937 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:11,938 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:11,940 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:12,162 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:12,162 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:12 PM
+ERROR 2025-06-29 14:15:12,163 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:12,163 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:12,164 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:12,394 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:12,395 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:12 PM
+ERROR 2025-06-29 14:15:12,396 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:12,397 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:12,399 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:12,760 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:12,760 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:12 PM
+ERROR 2025-06-29 14:15:12,761 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:12,761 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:12,762 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:13,040 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:13,040 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:13 PM
+ERROR 2025-06-29 14:15:13,041 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:13,041 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:13,043 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:13,268 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:13,268 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:13 PM
+ERROR 2025-06-29 14:15:13,269 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:13,269 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:13,270 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:13,592 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:13,593 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:13 PM
+ERROR 2025-06-29 14:15:13,593 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:13,593 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:13,594 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:13,833 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:13,834 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:13 PM
+ERROR 2025-06-29 14:15:13,835 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:13,836 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:13,839 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:14,165 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:14,165 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:14 PM
+ERROR 2025-06-29 14:15:14,165 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:14,168 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:14,172 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:14,485 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:14,489 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:14 PM
+ERROR 2025-06-29 14:15:14,490 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:14,490 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:14,493 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:14,964 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:14,965 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:14 PM
+ERROR 2025-06-29 14:15:14,965 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:14,965 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:14,974 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:15,159 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:15,167 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:15 PM
+ERROR 2025-06-29 14:15:15,169 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:15,172 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:15,180 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:15,323 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:15,330 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:15 PM
+ERROR 2025-06-29 14:15:15,333 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:15,335 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:15,337 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:15,514 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:15,517 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:15 PM
+ERROR 2025-06-29 14:15:15,520 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:15,523 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:15,528 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:15,749 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:15,756 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:15 PM
+ERROR 2025-06-29 14:15:15,759 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:15,760 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:15,769 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:16,060 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:16,063 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:16 PM
+ERROR 2025-06-29 14:15:16,064 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:16,068 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:16,072 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:16,369 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:16,370 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:16 PM
+ERROR 2025-06-29 14:15:16,370 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:16,373 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:16,375 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:16,693 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:16,694 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:16 PM
+ERROR 2025-06-29 14:15:16,694 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:16,695 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:16,698 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:16,963 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:16,964 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:16 PM
+ERROR 2025-06-29 14:15:16,965 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:16,967 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:16,970 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:17,377 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:17,380 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:17 PM
+ERROR 2025-06-29 14:15:17,381 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:17,382 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:17,388 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:17,603 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:17,603 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:17 PM
+ERROR 2025-06-29 14:15:17,604 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:17,604 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:17,606 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:17,674 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:17,682 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:17 PM
+ERROR 2025-06-29 14:15:17,685 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:17,686 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:17,694 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:17,858 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:17,858 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:17 PM
+ERROR 2025-06-29 14:15:17,859 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:17,861 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:17,864 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:18,066 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:18,073 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:18 PM
+ERROR 2025-06-29 14:15:18,075 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:18,079 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:18,091 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:18,364 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:18,374 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:18 PM
+ERROR 2025-06-29 14:15:18,375 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:18,375 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:18,378 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:18,849 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:18,855 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:18 PM
+ERROR 2025-06-29 14:15:18,858 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:18,862 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:18,866 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:19,134 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:19,138 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:19 PM
+ERROR 2025-06-29 14:15:19,139 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:19,142 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:19,147 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:19,347 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:19,348 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:19 PM
+ERROR 2025-06-29 14:15:19,350 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:19,352 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:19,353 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:19,501 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:19,508 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:19 PM
+ERROR 2025-06-29 14:15:19,508 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:19,508 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:19,522 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:19,677 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:19,678 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:19 PM
+ERROR 2025-06-29 14:15:19,679 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:19,681 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:19,685 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:19,889 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:19,893 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:19 PM
+ERROR 2025-06-29 14:15:19,898 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:19,908 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:19,924 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:20,061 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:20,064 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:20 PM
+ERROR 2025-06-29 14:15:20,065 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:20,066 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:20,068 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:20,406 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:20,410 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:20 PM
+ERROR 2025-06-29 14:15:20,417 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:20,421 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:20,437 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:20,636 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:20,647 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:20 PM
+ERROR 2025-06-29 14:15:20,648 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:20,654 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:20,658 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:20,950 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:20,950 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:20 PM
+ERROR 2025-06-29 14:15:20,950 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:20,950 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:20,958 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:21,666 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:21,668 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:21 PM
+ERROR 2025-06-29 14:15:21,670 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:21,670 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:21,673 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:22,241 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:22,241 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:22 PM
+ERROR 2025-06-29 14:15:22,241 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:22,250 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:22,252 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:22,698 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:22,698 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:22 PM
+ERROR 2025-06-29 14:15:22,698 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:22,699 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:22,700 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:22,963 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:22,963 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:22 PM
+ERROR 2025-06-29 14:15:22,963 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:22,964 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:22,967 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:23,212 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:23,218 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:23 PM
+ERROR 2025-06-29 14:15:23,219 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:23,219 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:23,220 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:23,337 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:23,346 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:23 PM
+ERROR 2025-06-29 14:15:23,347 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:23,349 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:23,356 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:23,719 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:23,719 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:23 PM
+ERROR 2025-06-29 14:15:23,720 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:23,720 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:23,722 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:23,829 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:23,838 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:23 PM
+ERROR 2025-06-29 14:15:23,840 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:23,845 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:23,859 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:24,025 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:24,030 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:23 PM
+ERROR 2025-06-29 14:15:24,032 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:24,034 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:24,041 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:24,506 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:24,516 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:24 PM
+ERROR 2025-06-29 14:15:24,520 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:24,523 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:24,540 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:24,752 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:24,756 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:24 PM
+ERROR 2025-06-29 14:15:24,756 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:24,756 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:24,763 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:25,070 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:25,077 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:25 PM
+ERROR 2025-06-29 14:15:25,080 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:25,090 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:25,091 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:25,279 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:25,289 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:25 PM
+ERROR 2025-06-29 14:15:25,289 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:25,290 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:25,298 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:25,634 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:25,641 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:25 PM
+ERROR 2025-06-29 14:15:25,645 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:25,648 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:25,651 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:25,804 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:25,812 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:25 PM
+ERROR 2025-06-29 14:15:25,815 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:25,815 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:25,824 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:26,068 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:26,069 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:26 PM
+ERROR 2025-06-29 14:15:26,069 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:26,070 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:26,072 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:26,319 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:26,323 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:26 PM
+ERROR 2025-06-29 14:15:26,327 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:26,330 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:26,334 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:26,472 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:26,478 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:26 PM
+ERROR 2025-06-29 14:15:26,478 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:26,479 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:26,482 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:26,703 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:26,711 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:26 PM
+ERROR 2025-06-29 14:15:26,715 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:26,725 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:26,727 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:26,975 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:26,976 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:26 PM
+ERROR 2025-06-29 14:15:26,976 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:26,977 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:26,979 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:27,291 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:27,295 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:27 PM
+ERROR 2025-06-29 14:15:27,296 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:27,298 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:27,303 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:27,677 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:27,677 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:27 PM
+ERROR 2025-06-29 14:15:27,677 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:27,677 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:27,685 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:28,037 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:28,039 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:28 PM
+ERROR 2025-06-29 14:15:28,041 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:28,042 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:28,044 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:28,470 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:28,472 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:28 PM
+ERROR 2025-06-29 14:15:28,475 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:28,477 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:28,478 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:28,796 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:28,796 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:28 PM
+ERROR 2025-06-29 14:15:28,797 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:28,797 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:28,798 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:29,078 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:29,080 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:29 PM
+ERROR 2025-06-29 14:15:29,081 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:29,081 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:29,083 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:29,305 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:29,308 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:29 PM
+ERROR 2025-06-29 14:15:29,309 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:29,310 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:29,311 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:29,550 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:29,557 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:29 PM
+ERROR 2025-06-29 14:15:29,561 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:29,562 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:29,563 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:29,703 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:29,709 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:29 PM
+ERROR 2025-06-29 14:15:29,709 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:29,710 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:29,711 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:29,905 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:29,905 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:29 PM
+ERROR 2025-06-29 14:15:29,905 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:29,905 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:29,907 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:30,077 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:30,085 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:30 PM
+ERROR 2025-06-29 14:15:30,089 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:30,090 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:30,092 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:15:30,384 views 120036 128794783381184 Generating insights for route from Belvedere to Longcheng Plaza using DRIVING
+INFO 2025-06-29 14:15:30,388 views 120036 128794783381184 Distance: 2.1 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 2:15:30 PM
+ERROR 2025-06-29 14:15:30,391 views 120036 128794783381184 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:15:30,393 views 120036 128794783381184 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:15:30,395 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+WARNING 2025-06-29 14:15:30,568 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:30,571 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:30,906 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:30,908 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:31,290 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:31,291 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:31,647 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:31,648 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:31,938 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:31,940 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:32,178 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:32,179 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:32,513 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:32,515 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:32,842 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:32,842 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:33,126 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:33,127 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:33,414 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:33,417 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:33,855 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:33,857 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:34,305 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:34,307 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:34,656 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:34,661 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:35,035 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:35,036 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:35,363 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:35,364 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:35,667 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:35,672 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:35,948 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:35,951 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:36,279 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:36,281 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:36,555 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:36,556 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:36,780 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:36,783 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:36,955 log 120036 128794783381184 Too Many Requests: /api/route/gemini-insights/
+WARNING 2025-06-29 14:15:36,956 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
+WARNING 2025-06-29 14:15:40,708 log 120036 128794783381184 Too Many Requests: /api/users/token/refresh/
+WARNING 2025-06-29 14:15:40,709 basehttp 120036 128794783381184 "POST /api/users/token/refresh/ HTTP/1.1" 429 55
