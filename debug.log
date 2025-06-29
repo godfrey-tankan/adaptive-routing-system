@@ -612,3 +612,8 @@ INFO 2025-06-29 12:19:07,085 basehttp 71778 129540769707712 "POST /api/route/opt
 INFO 2025-06-29 12:19:08,445 basehttp 71778 129540769707712 "POST /api/route/gemini-insights/ HTTP/1.1" 200 340
 WARNING 2025-06-29 12:19:22,577 log 71778 129540769707712 Not Found: /api/route/optimize/
 WARNING 2025-06-29 12:19:22,578 basehttp 71778 129540769707712 "POST /api/route/optimize/ HTTP/1.1" 404 51
+INFO 2025-06-29 12:24:06,228 autoreload 71778 129541121974400 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 12:24:09,810 autoreload 77417 130790545420416 Watching for file changes with StatReloader
+INFO 2025-06-29 12:32:28,529 autoreload 77417 130790545420416 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 12:32:29,435 autoreload 80653 126904686301312 Watching for file changes with StatReloader
+INFO 2025-06-29 12:32:39,857 basehttp 80653 126904335070912 "POST /api/users/token/refresh/ HTTP/1.1" 200 483

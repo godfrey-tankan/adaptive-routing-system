@@ -132,8 +132,6 @@ class RouteOptimizationView(APIView):
             return None
 
 
-
-
 class GeminiInsightsView(APIView):
     permission_classes = [AllowAny]
 
@@ -153,32 +151,37 @@ class GeminiInsightsView(APIView):
         if not all([start_location, end_location, distance, duration]):
             return Response({"detail": "Missing required route data for insights."}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Construct a detailed prompt for Gemini
+        # Zimbabwe-specific prompt
         prompt = f"""
-        Analyze the following route details for a journey from {start_location} to {end_location} in Harare, Zimbabwe:
+        You are a Zimbabwean transportation expert providing route insights for travel within Zimbabwe, 
+        particularly focusing on Harare and surrounding areas. Analyze this route from {start_location} to {end_location}:
 
+        Route Details:
         - Distance: {distance}
-        - Estimated Duration (with traffic): {duration}
-        - Transport Mode: {transport_mode}
-        - Current Time: {current_time}
+        - Duration: {duration}
+        - Transport: {'Kombi' if transport_mode == 'transit' else transport_mode}
+        - Time: {current_time}
+        - Weather: {weather_info}
+        - Options: {'No highways' if avoid_highways else 'May use highways'}, {'No tolls' if avoid_tolls else 'May use tolls'}
 
-        Additional information:
-        - Traffic/Real-time condition: {traffic_info}
-        - Current Weather at start: {weather_info}
-        - Avoid Highways: {avoid_highways}
-        - Avoid Tolls: {avoid_tolls}
-
-        Based on this information and general knowledge about driving/travel in Harare, provide a concise and helpful AI route insight.
-        Consider aspects like:
-        - Expected journey conditions (e.g., "smooth," "potential delays").
-        - Any specific road names or areas known for issues (e.g., "expect congestion near Mbare market","parking in prohibited areas by council" etc.).
-        - Suggestions for optimal travel times if relevant.
-        - How weather might impact the trip (e.g., "rainy conditions may cause slippery roads").
-        - Any specific advice for the chosen transport mode (e.g., for 'Kombi', "expect multiple stops and shared ride," for 'Walking', "consider comfortable shoes").
-        - General safety tips relevant to the route or time.
-        - Mention if the chosen avoidance options (highways/tolls) might significantly affect duration or distance.
-
-        Keep the insight to 2-3 sentences maximum. Be a zimbabwean resident.
+        Provide specific, localized advice considering:
+        1. For Kombi routes: Mention known ranks, expected fares (USD $1 for Harare, $2-3 for nearby towns), 
+           and peak hours to avoid (7-8am, 4-6pm). Example: "Use Copacabana rank for Mbare routes."
+        
+        2. For driving: Note problem areas like Samora Machel Ave during rush hour, or parking challenges in CBD.
+        
+        3. Walking: Highlight unsafe areas to avoid, especially after dark.
+        
+        4. Weather impacts: Like flooded roads in high-density suburbs during rains.
+        
+        5. Time-specific advice: "Avoid CBD between 4-6pm due to kombi congestion."
+        
+        6. Alternative routes if relevant: "Consider Seke Road instead of Simon Mazorodze if going to Chitungwiza."
+        
+        7. Safety: "Keep valuables hidden at Mbare Musika bus rank."
+        
+        Keep response concise (2-3 sentences) and hyper-localized to Zimbabwean context.
+        Use local terms like "kombi" not "bus", "CBD" not "downtown".
         """
 
         try:
@@ -189,7 +192,6 @@ class GeminiInsightsView(APIView):
         except Exception as e:
             print(f"Error calling Gemini API: {e}")
             return Response({"detail": f"Failed to generate AI insights: {e}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
 class RouteHistoryView(generics.ListAPIView):
     serializer_class = RouteSerializer
