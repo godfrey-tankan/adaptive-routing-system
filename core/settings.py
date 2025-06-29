@@ -207,7 +207,7 @@ REST_AUTH = {
 # trusted origins for CSRF protection
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
-    "http://your-frontend-domain.com",
+    "https://ad-routing.vercel.app/",
     "http://localhost:8080",
 ]
 
@@ -216,7 +216,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://localhost:8080",
-    "https://your-frontend-domain.com"
+    "https://ad-routing.vercel.app"
 ]
 CORS_ALLOW_CREDENTIALS = True # Allow cookies to be sent with cross-origin requests
 
