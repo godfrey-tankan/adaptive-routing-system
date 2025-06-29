@@ -617,3 +617,43 @@ INFO 2025-06-29 12:24:09,810 autoreload 77417 130790545420416 Watching for file 
 INFO 2025-06-29 12:32:28,529 autoreload 77417 130790545420416 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
 INFO 2025-06-29 12:32:29,435 autoreload 80653 126904686301312 Watching for file changes with StatReloader
 INFO 2025-06-29 12:32:39,857 basehttp 80653 126904335070912 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 12:38:31,096 autoreload 80653 126904686301312 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 12:38:32,257 autoreload 83050 135378021683328 Watching for file changes with StatReloader
+INFO 2025-06-29 12:38:54,138 basehttp 83050 135377670108864 "POST /api/route/weather/ HTTP/1.1" 200 489
+INFO 2025-06-29 12:39:40,387 basehttp 83050 135377670108864 "POST /api/route/optimize/ HTTP/1.1" 200 13579
+INFO 2025-06-29 12:39:41,918 basehttp 83050 135377670108864 "POST /api/route/gemini-insights/ HTTP/1.1" 200 482
+INFO 2025-06-29 12:41:20,585 autoreload 83050 135378021683328 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 12:41:23,644 autoreload 84222 139224476278912 Watching for file changes with StatReloader
+INFO 2025-06-29 12:41:52,826 basehttp 84222 139224116360896 "POST /api/route/weather/ HTTP/1.1" 200 489
+INFO 2025-06-29 12:41:55,738 basehttp 84222 139224116360896 "POST /api/route/gemini-insights/ HTTP/1.1" 200 472
+INFO 2025-06-29 12:45:22,231 basehttp 84222 139224116360896 "OPTIONS /api/route/simulate/ HTTP/1.1" 200 0
+WARNING 2025-06-29 12:45:22,249 log 84222 139224116360896 Forbidden (Origin checking failed - http://localhost:8080 does not match any trusted origins.): /api/route/simulate/
+WARNING 2025-06-29 12:45:22,250 basehttp 84222 139224116360896 "POST /api/route/simulate/ HTTP/1.1" 403 2568
+WARNING 2025-06-29 12:46:36,788 log 84222 139224116360896 Forbidden (Origin checking failed - http://localhost:8080 does not match any trusted origins.): /api/route/simulate/
+WARNING 2025-06-29 12:46:36,789 basehttp 84222 139224116360896 "POST /api/route/simulate/ HTTP/1.1" 403 2568
+INFO 2025-06-29 12:47:56,820 autoreload 84222 139224476278912 /home/tnqn/Documents/adaptive-routing-backend/core/settings.py changed, reloading.
+INFO 2025-06-29 12:47:59,817 autoreload 87130 124476793753728 Watching for file changes with StatReloader
+WARNING 2025-06-29 12:48:07,628 log 87130 124476442277568 Forbidden (CSRF cookie not set.): /api/route/simulate/
+WARNING 2025-06-29 12:48:07,630 basehttp 87130 124476442277568 "POST /api/route/simulate/ HTTP/1.1" 403 2869
+INFO 2025-06-29 12:49:08,867 basehttp 87130 124476442277568 "OPTIONS /api/route/simulate/ HTTP/1.1" 200 0
+WARNING 2025-06-29 12:49:08,892 log 87130 124476432836288 Forbidden (CSRF cookie not set.): /api/route/simulate/
+WARNING 2025-06-29 12:49:08,893 basehttp 87130 124476432836288 "POST /api/route/simulate/ HTTP/1.1" 403 2869
+INFO 2025-06-29 12:49:35,917 autoreload 87130 124476793753728 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 12:49:37,023 autoreload 88117 125455297577088 Watching for file changes with StatReloader
+WARNING 2025-06-29 12:49:41,797 log 88117 125454946137792 Not Found: /api/route/simulate/
+WARNING 2025-06-29 12:49:41,798 basehttp 88117 125454946137792 "POST /api/route/simulate/ HTTP/1.1" 404 46
+INFO 2025-06-29 12:50:15,797 autoreload 88117 125455297577088 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 12:50:16,752 autoreload 88530 126801737150592 Watching for file changes with StatReloader
+WARNING 2025-06-29 12:50:21,895 log 88530 126801386927808 Not Found: /api/route/simulate/
+WARNING 2025-06-29 12:50:21,896 basehttp 88530 126801386927808 "POST /api/route/simulate/ HTTP/1.1" 404 46
+WARNING 2025-06-29 12:51:29,242 log 88530 126801386927808 Not Found: /api/route/simulate/
+WARNING 2025-06-29 12:51:29,243 basehttp 88530 126801386927808 "POST /api/route/simulate/ HTTP/1.1" 404 46
+INFO 2025-06-29 12:52:22,882 autoreload 88530 126801737150592 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 12:52:24,000 autoreload 89572 131695115317376 Watching for file changes with StatReloader
+INFO 2025-06-29 12:52:30,046 basehttp 89572 131694762915520 "POST /api/route/simulate/ HTTP/1.1" 200 14457
+INFO 2025-06-29 12:52:44,556 basehttp 89572 131694762915520 "POST /api/route/simulate/ HTTP/1.1" 200 14457
+INFO 2025-06-29 12:53:17,833 autoreload 89572 131695115317376 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 12:53:18,723 autoreload 90179 124152037019776 Watching for file changes with StatReloader
+INFO 2025-06-29 12:53:22,476 basehttp 90179 124151752816320 "POST /api/route/simulate/ HTTP/1.1" 200 14457
+INFO 2025-06-29 12:53:48,770 autoreload 90179 124152037019776 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 12:53:49,709 autoreload 90478 129765699330176 Watching for file changes with StatReloader

@@ -204,7 +204,12 @@ REST_AUTH = {
     'USER_DETAILS_SERIALIZER': 'users.serializers.UserDetailsSerializer', # Custom user details serializer
     'TOKEN_MODEL': None, # Disable default token model as we are using JWT
 }
-
+# trusted origins for CSRF protection
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "http://your-frontend-domain.com",
+    "http://localhost:8080",
+]
 
 # CORS Settings
 CORS_ALLOWED_ORIGINS = [

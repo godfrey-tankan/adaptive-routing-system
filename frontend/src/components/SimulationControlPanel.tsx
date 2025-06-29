@@ -12,7 +12,8 @@ import axios from 'axios';
 import maplibregl, { LngLatBounds } from "maplibre-gl";
 
 import { PlaceSearchInput, GeoPoint } from '@/components/map/PlaceSearchInput';
-
+const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000';
+const token = localStorage.getItem('authToken');
 const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_Maps_API_KEY;
 
 interface SimulationControlPanelProps {
@@ -82,13 +83,23 @@ export const SimulationControlPanel: React.FC<SimulationControlPanelProps> = ({
     ) => {
         try {
             // Call your backend instead of Google directly
-            const response = await axios.post('/api/simulate/', {
-                startPlaceId,
-                endPlaceId,
-                mode,
-                departureTime: 'now',
-                trafficModel: 'best_guess'
-            });
+            const response = await axios.post(
+                `${backendUrl}/route/simulate/`,
+                {
+                    startPlaceId,
+                    endPlaceId,
+                    mode,
+                    departureTime: 'now',
+                    trafficModel: 'best_guess'
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    withCredentials: true // If your backend expects cookies for CSRF
+                }
+            );
 
             const data = response.data;
 

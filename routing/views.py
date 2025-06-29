@@ -166,7 +166,7 @@ class GeminiInsightsView(APIView):
 
         Provide specific, localized advice considering:
         1. For Kombi routes: Mention known ranks, expected fares (USD $1 for Harare, $2-3 for nearby towns), 
-           and peak hours to avoid (7-8am, 4-6pm). Example: "Use Copacabana rank for Mbare routes."
+        and peak hours to avoid (7-8am, 4-6pm). Example: "Use Copacabana rank for Mbare routes."
         
         2. For driving: Note problem areas like Samora Machel Ave during rush hour, or parking challenges in CBD.
         
@@ -180,7 +180,7 @@ class GeminiInsightsView(APIView):
         
         7. Safety: "Keep valuables hidden at Mbare Musika bus rank."
         
-        Keep response concise (2-3 sentences) and hyper-localized to Zimbabwean context.
+        Keep response concise and summarized (1-3 sentences) and hyper-localized to Zimbabwean context.
         Use local terms like "kombi" not "bus", "CBD" not "downtown".
         """
 
@@ -236,9 +236,10 @@ class WeatherView(APIView):
                 status=status.HTTP_502_BAD_GATEWAY
             )
 
-csrf_exempt
+@csrf_exempt
 def simulate_route(request):
     if request.method == 'POST':
+        
         try:
             data = json.loads(request.body)
             start_place_id = data.get('startPlaceId')
@@ -253,13 +254,12 @@ def simulate_route(request):
                 'mode': mode.lower(),
                 'departure_time': 'now',
                 'traffic_model': 'best_guess',
-                'key': os.getenv('GOOGLE_MAPS_API_KEY')
+                'key': os.getenv('Maps_API_KEY')
             }
             
             response = requests.get(url, params=params)
             response.raise_for_status()
             data = response.json()
-            
             if data.get('routes'):
                 return JsonResponse({
                     'route': data['routes'][0],

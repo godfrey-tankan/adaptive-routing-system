@@ -51,10 +51,11 @@ const TRANSPORT_MODE_MAP: Record<string, string> = {
   BICYCLING: 'bicycling'
 };
 
-// Zimbabwe fuel price in USD per liter (average)
+// Zimbabwe-specific constants
 const FUEL_PRICE_PER_LITER = 1.50; // USD
 const AVERAGE_FUEL_CONSUMPTION = 8; // liters per 100km
-const USD_TO_ZWL_RATE = 500; // Current exchange rate (adjust as needed)
+const USD_TO_ZWL_RATE = 29; // Current exchange rate
+const HARARE_CBD_COORDS = [-17.825166, 31.033510]; // Approximate Harare CBD coordinates
 
 export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
   updateMapWithRoute,
@@ -83,7 +84,6 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
     }
   });
 
-  // Calculate fuel cost based on distance
   const calculateFuelCost = (distanceInKm: number): string => {
     const fuelUsed = (distanceInKm * AVERAGE_FUEL_CONSUMPTION) / 100;
     const costInUSD = fuelUsed * FUEL_PRICE_PER_LITER;
@@ -91,14 +91,9 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
     return `ZWL $${costInZWL.toFixed(2)} (USD $${costInUSD.toFixed(2)})`;
   };
 
-  // Calculate bus fare based on distance and locations
   const calculateBusFare = (startCoords: [number, number], endCoords: [number, number]): string => {
-    // Harare CBD coordinates (approximate)
-    const harareCBD = [-17.825166, 31.033510];
-
-    // Function to calculate distance between two points in km
     const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
-      const R = 6371; // Earth's radius in km
+      const R = 6371;
       const dLat = (lat2 - lat1) * Math.PI / 180;
       const dLon = (lon2 - lon1) * Math.PI / 180;
       const a =
@@ -109,19 +104,18 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
       return R * c;
     };
 
-    // Distance from Harare CBD
     const distanceFromCBD = getDistance(
-      harareCBD[0], harareCBD[1],
+      HARARE_CBD_COORDS[0], HARARE_CBD_COORDS[1],
       startCoords[1], startCoords[0]
     );
 
-    // Simple fare calculation based on distance from CBD
+    // Zimbabwe-specific fare calculation
     if (distanceFromCBD < 15) {
-      return "ZWL $1.00 (Standard Harare fare)";
+      return "ZWL $1.00 (Standard Harare kombi fare)";
     } else if (distanceFromCBD < 30) {
-      return "ZWL $2.00 (Nearby towns fare)";
+      return "ZWL $2.00 (Nearby towns like Chitungwiza, Norton)";
     } else {
-      return "ZWL $3.00+ (Long distance fare)";
+      return "ZWL $3.00+ (Long distance to places like Marondera, Chegutu)";
     }
   };
 
@@ -217,7 +211,87 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
     updateMapRoute();
   }, [mapInstance, routeResults, startPoint, endPoint]);
 
-  // ... [keep all other existing useEffect hooks and functions the same until getRoute]
+  useEffect(() => {
+    updateMapWithRoute(
+      startPoint ? startPoint.coordinates : null,
+      endPoint ? endPoint.coordinates : null,
+      null
+    );
+
+    if (mapInstance) {
+      if (startPoint && !endPoint) {
+        mapInstance.flyTo({ center: startPoint.coordinates, zoom: 14, duration: 1000 });
+      } else if (endPoint && !startPoint) {
+        mapInstance.flyTo({ center: endPoint.coordinates, zoom: 14, duration: 1000 });
+      }
+    }
+  }, [startPoint, endPoint, mapInstance, updateMapWithRoute]);
+
+  const fetchWeather = useCallback(async (coords: [number, number]) => {
+    setIsWeatherLoading(true);
+    try {
+      const response = await authAxios.post('/route/weather/', {
+        lat: coords[1],
+        lon: coords[0],
+        user_id: user?.id
+      });
+
+      const data = response.data;
+      return {
+        description: data.weather[0].description,
+        temperature: data.main.temp,
+        humidity: data.main.humidity,
+        windSpeed: data.wind.speed,
+        icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
+      } as WeatherData;
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+      toast({
+        title: "Weather Fetch Failed",
+        description: "Could not retrieve current weather.",
+        variant: "destructive"
+      });
+      return null;
+    } finally {
+      setIsWeatherLoading(false);
+    }
+  }, [user, token]);
+
+  useEffect(() => {
+    if (startPoint) {
+      fetchWeather(startPoint.coordinates).then(setCurrentWeather);
+    } else {
+      setCurrentWeather(null);
+    }
+  }, [startPoint, fetchWeather]);
+
+  const getPlaceCoordinates = async (placeId: string): Promise<[number, number] | null> => {
+    if (!window.google?.maps?.places) {
+      console.error("Google Maps Places API not loaded");
+      return null;
+    }
+
+    return new Promise((resolve) => {
+      const service = new window.google.maps.places.PlacesService(
+        document.createElement('div')
+      );
+
+      service.getDetails(
+        { placeId, fields: ['geometry'] },
+        (place, status) => {
+          if (status === window.google.maps.places.PlacesServiceStatus.OK && place?.geometry?.location) {
+            resolve([
+              place.geometry.location.lng(),
+              place.geometry.location.lat()
+            ]);
+          } else {
+            console.error("Failed to get place details", status);
+            resolve(null);
+          }
+        }
+      );
+    });
+  };
 
   const getRoute = useCallback(async (
     startPlaceId: string,
@@ -300,12 +374,217 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
     }
   }, [user, token]);
 
-  // ... [keep all other existing functions the same]
+  const handleOptimizeRoute = async () => {
+    if (!user || !token) {
+      toast({
+        title: "Authentication Required",
+        description: "Please log in to optimize routes.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (!startPoint || !endPoint) {
+      toast({
+        title: "Missing Information",
+        description: "Please select both a start and an end location using the search inputs.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsPanelLoading(true);
+    setIsLoadingMapAndRoute(true);
+    setRouteResults(null);
+
+    try {
+      const results = await getRoute(
+        startPoint.placeId,
+        endPoint.placeId,
+        routeOptions.transportMode,
+        routeOptions.avoidHighways,
+        routeOptions.avoidTolls
+      );
+
+      if (results) {
+        setRouteResults(results);
+        updateMapWithRoute(startPoint.coordinates, endPoint.coordinates, results.geoJSON);
+        toast({
+          title: "Route Optimized Successfully!",
+          description: "Found the best route for your journey!",
+        });
+
+        if (mapInstance && results.geoJSON) {
+          const bounds = new LngLatBounds();
+          results.geoJSON.coordinates.forEach((coord: [number, number]) => {
+            bounds.extend(coord);
+          });
+          mapInstance.fitBounds(bounds, { padding: 80, duration: 1000 });
+        }
+      } else {
+        updateMapWithRoute(null, null, null);
+      }
+    } catch (error) {
+      console.error("RouteControlPanel: Uncaught error during route optimization:", error);
+      toast({
+        title: "An Unexpected Error Occurred",
+        description: "Please check your network connection and try again.",
+        variant: "destructive"
+      });
+      updateMapWithRoute(null, null, null);
+    } finally {
+      setIsPanelLoading(false);
+      setIsLoadingMapAndRoute(false);
+    }
+  };
+
+  const decodePolyline = (encoded: string): [number, number][] => {
+    const poly = [];
+    let index = 0, len = encoded.length;
+    let lat = 0, lng = 0;
+
+    while (index < len) {
+      let b, shift = 0, result = 0;
+      do {
+        b = encoded.charCodeAt(index++) - 63;
+        result |= (b & 0x1f) << shift;
+        shift += 5;
+      } while (b >= 0x20);
+      let dlat = ((result & 1) ? ~(result >> 1) : (result >> 1));
+      lat += dlat;
+
+      shift = 0;
+      result = 0;
+      do {
+        b = encoded.charCodeAt(index++) - 63;
+        result |= (b & 0x1f) << shift;
+        shift += 5;
+      } while (b >= 0x20);
+      let dlng = ((result & 1) ? ~(result >> 1) : (result >> 1));
+      lng += dlng;
+
+      poly.push([lng / 1E5, lat / 1E5]);
+    }
+    return poly;
+  };
 
   return (
     <div className="h-full flex flex-col">
       <div className="overflow-y-auto flex-1 space-y-4 p-4">
-        {/* ... [keep all existing JSX the same until the Route Summary card] */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center">
+              <Map className="w-5 h-5 mr-2 text-primary" />
+              Plan Your Route
+              {!user && (
+                <span className="ml-2 text-sm text-red-500">(Login required)</span>
+              )}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="from-location">From</Label>
+              <PlaceSearchInput
+                value={startPoint}
+                onSelect={setStartPoint}
+                placeholder="e.g., Avondale"
+                currentMapCenter={mapInstance?.getCenter().toArray() as [number, number] || null}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="to-location">To</Label>
+              <PlaceSearchInput
+                value={endPoint}
+                onSelect={setEndPoint}
+                placeholder="e.g., Harare CBD"
+                currentMapCenter={mapInstance?.getCenter().toArray() as [number, number] || null}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label>Transport Mode</Label>
+              <Select
+                value={routeOptions.transportMode}
+                onValueChange={(value) => setRouteOptions(prev => ({ ...prev, transportMode: value }))}
+                disabled={isPanelLoading}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="DRIVING">🚗 Private Car</SelectItem>
+                  <SelectItem value="TRANSIT">🚌 Kombi (Transit)</SelectItem>
+                  <SelectItem value="WALKING">🚶 Walking</SelectItem>
+                  <SelectItem value="BICYCLING">🚴 Bicycle</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="highways">Avoid Highways</Label>
+                <Switch
+                  id="highways"
+                  checked={routeOptions.avoidHighways}
+                  onCheckedChange={(checked) => setRouteOptions(prev => ({ ...prev, avoidHighways: checked }))}
+                  disabled={isPanelLoading}
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="tolls">Avoid Tolls</Label>
+                <Switch
+                  id="tolls"
+                  checked={routeOptions.avoidTolls}
+                  onCheckedChange={(checked) => setRouteOptions(prev => ({ ...prev, avoidTolls: checked }))}
+                  disabled={isPanelLoading}
+                />
+              </div>
+            </div>
+
+            <Button
+              onClick={handleOptimizeRoute}
+              className="w-full bg-primary hover:bg-primary/90"
+              disabled={isPanelLoading || !startPoint || !endPoint || !user}
+            >
+              {isPanelLoading ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Route className="w-4 h-4 mr-2" />
+              )}
+              {isPanelLoading ? "Optimizing..." : "Optimize Route"}
+            </Button>
+          </CardContent>
+        </Card>
+
+        {currentWeather && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <CloudRain className="w-5 h-5 mr-2 text-blue-500" />
+                Current Weather (Start Point)
+                {isWeatherLoading && <Loader2 className="ml-2 h-4 w-4 animate-spin text-muted-foreground" />}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="flex items-center justify-between">
+              <div className="flex items-center">
+                <img
+                  src={currentWeather.icon}
+                  alt={currentWeather.description}
+                  className="w-12 h-12 mr-2"
+                />
+                <div>
+                  <p className="text-lg font-semibold">{currentWeather.temperature}°C</p>
+                  <p className="text-sm text-muted-foreground capitalize">{currentWeather.description}</p>
+                </div>
+              </div>
+              <div className="text-right">
+                <p className="text-sm">Humidity: {currentWeather.humidity}%</p>
+                <p className="text-sm">Wind: {currentWeather.windSpeed} m/s</p>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {routeResults && (
           <Card>
