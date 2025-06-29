@@ -159,7 +159,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
             toast({
                 title: "Login Successful",
-                description: `Welcome back to ZimSmart Routes!`,
+                description: `Welcome back to Adaptive Routing!`,
             });
             console.log("AuthContext: Login successful for:", email);
             return true;

@@ -34,12 +34,12 @@ const Index = () => {
               <Map className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-montserrat font-bold text-foreground">
-              ZimSmart Routes
+              Adaptive Routing
             </span>
           </div>
           <div className="flex items-center space-x-4">
-            <Link 
-              to="/login" 
+            <Link
+              to="/login"
               className="text-foreground hover:text-primary transition-colors"
             >
               Login
@@ -61,15 +61,15 @@ const Index = () => {
                 <span className="text-primary">Zimbabwe's Roads</span>
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Navigate Zimbabwe's cities with confidence. Get real-time traffic updates, 
-                multi-modal transport options, and AI-powered route optimization designed 
+                Navigate Zimbabwe's cities with confidence. Get real-time traffic updates,
+                multi-modal transport options, and AI-powered route optimization designed
                 specifically for local conditions.
               </p>
             </div>
-            
+
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="bg-primary hover:bg-primary/90 text-white px-8 py-3 text-lg"
                 asChild
               >
@@ -78,9 +78,9 @@ const Index = () => {
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
+              <Button
+                variant="outline"
+                size="lg"
                 className="border-primary text-primary hover:bg-primary/10 px-8 py-3 text-lg"
               >
                 Learn More
@@ -98,7 +98,7 @@ const Index = () => {
       <section className="container mx-auto px-4 py-16">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-montserrat font-bold text-foreground mb-4">
-            Why Choose ZimSmart Routes?
+            Why Choose Adaptive Routing?
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Built specifically for Zimbabwe's unique transportation landscape
@@ -107,8 +107,8 @@ const Index = () => {
 
         <div className="grid md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <Card 
-              key={index} 
+            <Card
+              key={index}
               className="group hover:shadow-lg transition-all duration-300 border-0 bg-white/80 backdrop-blur-sm"
             >
               <CardContent className="p-8 text-center">
@@ -135,7 +135,7 @@ const Index = () => {
               Ready to Navigate Smarter?
             </h2>
             <p className="text-lg text-muted-foreground">
-              Join thousands of Zimbabweans already using ZimSmart Routes for their daily commute
+              Join thousands of Zimbabweans already using Adaptive Routing for their daily commute
             </p>
             <div className="flex items-center justify-center space-x-2 text-secondary mb-8">
               {[...Array(5)].map((_, i) => (
@@ -145,8 +145,8 @@ const Index = () => {
                 4.8/5 from 2,500+ users
               </span>
             </div>
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="bg-primary hover:bg-primary/90 text-white px-12 py-4 text-lg"
               asChild
             >
@@ -165,11 +165,11 @@ const Index = () => {
                 <Map className="w-4 h-4 text-white" />
               </div>
               <span className="font-montserrat font-bold text-foreground">
-                ZimSmart Routes
+                Adaptive Routing
               </span>
             </div>
             <p className="text-muted-foreground text-sm">
-              © 2024 ZimSmart Routes. Built for Zimbabwe's roads.
+              © 2025 Adaptive Routing. Built for Zimbabwe's roads.
             </p>
           </div>
         </div>

@@ -66,7 +66,7 @@ const SignupPage = () => { // Renamed from Signup to SignupPage for consistency
                 <Map className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-montserrat font-bold text-foreground">
-                ZimSmart Routes
+                Adaptive Routing
               </span>
             </div>
 
