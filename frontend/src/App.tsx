@@ -8,6 +8,7 @@ import { Toaster } from './components/ui/toaster';
 import { Loader2 } from 'lucide-react';
 import LoginPage from './pages/Login'; // Import the LoginPage
 import SignupPage from './pages/Signup'; // Import the SignupPage
+import SimulationPage from './pages/SimulationPage';
 
 // Import QueryClient and QueryClientProvider from @tanstack/react-query
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -80,7 +81,7 @@ const App: React.FC = () => {
               path="/dashboard/simulation"
               element={
                 <ProtectedRoute>
-                  <div>Simulation Mode Page</div>
+                  <SimulationPage />
                 </ProtectedRoute>
               }
             />
