@@ -24,6 +24,8 @@ COPY . .
 
 # Collect static files
 RUN python manage.py collectstatic --noinput
+# Apply database migrations
+RUN python manage.py migrate
 
 # Run Gunicorn
 CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000"]

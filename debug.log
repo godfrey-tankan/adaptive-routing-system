@@ -2018,3 +2018,385 @@ INFO 2025-06-29 16:16:47,087 basehttp 165748 134579396540096 "GET /api/route/his
 INFO 2025-06-29 16:16:48,070 basehttp 165748 134579396540096 "GET /api/route/history/ HTTP/1.1" 200 64015
 INFO 2025-06-29 16:16:48,127 basehttp 165748 134579125982912 "GET /api/route/history/ HTTP/1.1" 200 64015
 INFO 2025-06-29 16:16:48,298 basehttp 165748 134579125982912 "GET /api/route/history/ HTTP/1.1" 200 64015
+INFO 2025-06-29 16:18:34,775 basehttp 165748 134579125982912 "GET /api/route/history/ HTTP/1.1" 200 64015
+INFO 2025-06-29 16:20:04,505 basehttp 165748 134579396540096 "OPTIONS /api/routes/13/ HTTP/1.1" 200 0
+WARNING 2025-06-29 16:20:04,580 log 165748 134579396540096 Not Found: /api/routes/13/
+WARNING 2025-06-29 16:20:04,581 basehttp 165748 134579396540096 "DELETE /api/routes/13/ HTTP/1.1" 404 2574
+INFO 2025-06-29 16:21:27,542 basehttp 165748 134579396540096 "GET /api/route/history/ HTTP/1.1" 200 64015
+INFO 2025-06-29 16:21:35,499 basehttp 165748 134579396540096 "OPTIONS /api/route/routes/26/ HTTP/1.1" 200 0
+INFO 2025-06-29 16:21:35,562 basehttp 165748 134579396540096 "DELETE /api/route/routes/26/ HTTP/1.1" 204 0
+INFO 2025-06-29 16:21:42,066 basehttp 165748 134579396540096 "OPTIONS /api/route/routes/16/ HTTP/1.1" 200 0
+INFO 2025-06-29 16:21:42,129 basehttp 165748 134579396540096 "DELETE /api/route/routes/16/ HTTP/1.1" 204 0
+INFO 2025-06-29 16:21:44,771 basehttp 165748 134579396540096 "OPTIONS /api/route/routes/15/ HTTP/1.1" 200 0
+INFO 2025-06-29 16:21:44,830 basehttp 165748 134579396540096 "DELETE /api/route/routes/15/ HTTP/1.1" 204 0
+INFO 2025-06-29 16:22:11,835 basehttp 165748 134579396540096 "GET /api/route/history/ HTTP/1.1" 200 57600
+INFO 2025-06-29 16:22:17,236 basehttp 165748 134579396540096 "GET /api/route/history/ HTTP/1.1" 200 57600
+INFO 2025-06-29 16:24:02,516 views 165748 134579396540096 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:24:02,516 views 165748 134579396540096 Distance: , Duration: , Traffic: Expected travel time with traffic is ., Time: 6/29/2025, 4:24:02 PM
+INFO 2025-06-29 16:24:05,362 views 165748 134579396540096 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:24:05,363 basehttp 165748 134579396540096 "POST /api/route/gemini-insights/ HTTP/1.1" 200 248
+INFO 2025-06-29 16:24:26,122 views 165748 134579396540096 Simulate route request received
+INFO 2025-06-29 16:24:26,123 views 165748 134579396540096 Start Place ID: ChIJkZC0TFZRMBkRmVEl6eAPeXU, End Place ID: ChIJ_fZkuz6zMRkRqwjd-shgQ8w, Mode: driving, Start Name: Mazowe Dam, End Name: Domboshawa
+INFO 2025-06-29 16:24:26,206 views 165748 134579125982912 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:24:26,206 views 165748 134579125982912 Distance: , Duration: , Traffic: Expected travel time with traffic is ., Time: 6/29/2025, 4:24:26 PM
+INFO 2025-06-29 16:24:26,583 services 165748 134579396540096 Resolved place ID 'ChIJkZC0TFZRMBkRmVEl6eAPeXU' to 'Mazowe Dam' at -17.5335274,30.9962356
+INFO 2025-06-29 16:24:27,251 views 165748 134579125982912 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:24:27,252 basehttp 165748 134579125982912 "POST /api/route/gemini-insights/ HTTP/1.1" 200 229
+INFO 2025-06-29 16:24:27,394 services 165748 134579396540096 Resolved place ID 'ChIJ_fZkuz6zMRkRqwjd-shgQ8w' to 'Domboshawa' at -17.61179,31.14324
+INFO 2025-06-29 16:24:27,774 services 165748 134579396540096 Google Maps Directions API response status: N/A
+INFO 2025-06-29 16:24:27,775 views 165748 134579396540096 Simulation Route Created Successfully. Distance: 51.9 km, Duration: 1 hour 5 mins
+INFO 2025-06-29 16:24:28,913 basehttp 165748 134579396540096 "POST /api/route/simulate/ HTTP/1.1" 200 1713
+INFO 2025-06-29 16:25:01,855 views 165748 134579396540096 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:25:01,856 views 165748 134579396540096 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:25:01 PM
+INFO 2025-06-29 16:25:02,194 views 165748 134579125982912 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:25:02,197 views 165748 134579125982912 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:25:02 PM
+INFO 2025-06-29 16:25:02,526 views 165748 134578639468224 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:25:02,527 views 165748 134578639468224 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:25:02 PM
+INFO 2025-06-29 16:25:02,661 views 165748 134578631075520 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:25:02,662 views 165748 134578631075520 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:25:02 PM
+INFO 2025-06-29 16:25:02,865 views 165748 134578622682816 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:25:02,865 views 165748 134578622682816 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:25:02 PM
+INFO 2025-06-29 16:25:02,924 views 165748 134579396540096 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:25:02,925 basehttp 165748 134579396540096 "POST /api/route/gemini-insights/ HTTP/1.1" 200 378
+INFO 2025-06-29 16:25:03,245 views 165748 134579396540096 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:25:03,245 views 165748 134579396540096 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:25:03 PM
+INFO 2025-06-29 16:25:03,579 views 165748 134579125982912 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:25:03,580 basehttp 165748 134579125982912 "POST /api/route/gemini-insights/ HTTP/1.1" 200 315
+INFO 2025-06-29 16:25:04,265 views 165748 134578631075520 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:25:04,267 basehttp 165748 134578631075520 "POST /api/route/gemini-insights/ HTTP/1.1" 200 222
+INFO 2025-06-29 16:25:04,311 views 165748 134578639468224 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:25:04,312 basehttp 165748 134578639468224 "POST /api/route/gemini-insights/ HTTP/1.1" 200 384
+INFO 2025-06-29 16:25:04,368 views 165748 134578622682816 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:25:04,369 basehttp 165748 134578622682816 "POST /api/route/gemini-insights/ HTTP/1.1" 200 272
+INFO 2025-06-29 16:25:04,613 views 165748 134579396540096 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:25:04,614 basehttp 165748 134579396540096 "POST /api/route/gemini-insights/ HTTP/1.1" 200 264
+INFO 2025-06-29 16:25:24,827 basehttp 165748 134579396540096 "OPTIONS /api/route/gemini-insights/ HTTP/1.1" 200 0
+INFO 2025-06-29 16:25:24,841 views 165748 134579396540096 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:25:24,846 views 165748 134579396540096 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:25:24 PM
+INFO 2025-06-29 16:25:25,043 views 165748 134578622682816 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:25:25,043 views 165748 134578622682816 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:25:25 PM
+INFO 2025-06-29 16:25:25,251 views 165748 134578639468224 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:25:25,252 views 165748 134578639468224 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:25:25 PM
+INFO 2025-06-29 16:25:25,440 views 165748 134578631075520 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:25:25,441 views 165748 134578631075520 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:25:25 PM
+INFO 2025-06-29 16:25:25,633 views 165748 134579125982912 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:25:25,633 views 165748 134579125982912 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:25:25 PM
+INFO 2025-06-29 16:25:25,826 views 165748 134578614290112 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:25:25,827 views 165748 134578614290112 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:25:25 PM
+INFO 2025-06-29 16:25:25,907 views 165748 134579396540096 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:25:25,909 basehttp 165748 134579396540096 "POST /api/route/gemini-insights/ HTTP/1.1" 200 311
+INFO 2025-06-29 16:25:26,178 views 165748 134579396540096 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:25:26,179 views 165748 134579396540096 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:25:26 PM
+INFO 2025-06-29 16:25:26,693 views 165748 134578622682816 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:25:26,695 basehttp 165748 134578622682816 "POST /api/route/gemini-insights/ HTTP/1.1" 200 295
+INFO 2025-06-29 16:25:27,020 views 165748 134578639468224 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:25:27,022 basehttp 165748 134578639468224 "POST /api/route/gemini-insights/ HTTP/1.1" 200 378
+INFO 2025-06-29 16:25:27,141 views 165748 134578631075520 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:25:27,145 basehttp 165748 134578631075520 "POST /api/route/gemini-insights/ HTTP/1.1" 200 345
+INFO 2025-06-29 16:25:27,338 views 165748 134578614290112 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:25:27,341 basehttp 165748 134578614290112 "POST /api/route/gemini-insights/ HTTP/1.1" 200 262
+INFO 2025-06-29 16:25:27,368 views 165748 134579125982912 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:25:27,374 basehttp 165748 134579125982912 "POST /api/route/gemini-insights/ HTTP/1.1" 200 417
+INFO 2025-06-29 16:25:27,450 views 165748 134579396540096 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:25:27,453 basehttp 165748 134579396540096 "POST /api/route/gemini-insights/ HTTP/1.1" 200 218
+INFO 2025-06-29 16:26:32,327 views 165748 134579396540096 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:26:32,328 views 165748 134579396540096 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:26:32 PM
+INFO 2025-06-29 16:26:33,445 views 165748 134579396540096 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:26:33,446 basehttp 165748 134579396540096 "POST /api/route/gemini-insights/ HTTP/1.1" 200 245
+INFO 2025-06-29 16:27:03,867 views 165748 134579396540096 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:03,867 views 165748 134579396540096 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:03 PM
+INFO 2025-06-29 16:27:04,114 views 165748 134579125982912 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:04,117 views 165748 134579125982912 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:04 PM
+INFO 2025-06-29 16:27:04,579 views 165748 134578614290112 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:04,581 views 165748 134578614290112 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:04 PM
+INFO 2025-06-29 16:27:04,826 views 165748 134578631075520 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:04,827 views 165748 134578631075520 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:04 PM
+INFO 2025-06-29 16:27:05,049 views 165748 134578639468224 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:05,050 views 165748 134578639468224 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:05 PM
+INFO 2025-06-29 16:27:05,088 views 165748 134579396540096 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:05,089 basehttp 165748 134579396540096 "POST /api/route/gemini-insights/ HTTP/1.1" 200 239
+INFO 2025-06-29 16:27:05,276 views 165748 134579396540096 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:05,276 views 165748 134579396540096 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:05 PM
+INFO 2025-06-29 16:27:06,048 views 165748 134579125982912 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:06,049 basehttp 165748 134579125982912 "POST /api/route/gemini-insights/ HTTP/1.1" 200 362
+INFO 2025-06-29 16:27:06,322 views 165748 134578614290112 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:06,323 basehttp 165748 134578614290112 "POST /api/route/gemini-insights/ HTTP/1.1" 200 367
+INFO 2025-06-29 16:27:06,552 views 165748 134578631075520 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:06,553 basehttp 165748 134578631075520 "POST /api/route/gemini-insights/ HTTP/1.1" 200 252
+INFO 2025-06-29 16:27:06,803 views 165748 134578639468224 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:06,807 basehttp 165748 134578639468224 "POST /api/route/gemini-insights/ HTTP/1.1" 200 289
+INFO 2025-06-29 16:27:07,069 views 165748 134579396540096 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:07,070 basehttp 165748 134579396540096 "POST /api/route/gemini-insights/ HTTP/1.1" 200 327
+INFO 2025-06-29 16:27:27,253 views 165748 134579396540096 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:27,253 views 165748 134579396540096 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:27 PM
+INFO 2025-06-29 16:27:27,443 views 165748 134578639468224 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:27,443 views 165748 134578639468224 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:27 PM
+INFO 2025-06-29 16:27:27,642 views 165748 134578631075520 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:27,647 views 165748 134578631075520 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:27 PM
+INFO 2025-06-29 16:27:27,839 views 165748 134578614290112 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:27,839 views 165748 134578614290112 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:27 PM
+INFO 2025-06-29 16:27:28,024 views 165748 134579125982912 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:28,025 views 165748 134579125982912 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:28 PM
+INFO 2025-06-29 16:27:28,288 views 165748 134579396540096 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:28,289 basehttp 165748 134579396540096 "POST /api/route/gemini-insights/ HTTP/1.1" 200 239
+INFO 2025-06-29 16:27:28,303 views 165748 134578622682816 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:28,304 views 165748 134578622682816 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:28 PM
+INFO 2025-06-29 16:27:29,327 views 165748 134578639468224 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:29,331 basehttp 165748 134578639468224 "POST /api/route/gemini-insights/ HTTP/1.1" 200 313
+INFO 2025-06-29 16:27:29,398 views 165748 134578631075520 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:29,403 basehttp 165748 134578631075520 "POST /api/route/gemini-insights/ HTTP/1.1" 200 305
+INFO 2025-06-29 16:27:29,885 views 165748 134578614290112 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:29,887 basehttp 165748 134578614290112 "POST /api/route/gemini-insights/ HTTP/1.1" 200 319
+INFO 2025-06-29 16:27:29,945 views 165748 134578622682816 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:29,946 basehttp 165748 134578622682816 "POST /api/route/gemini-insights/ HTTP/1.1" 200 299
+INFO 2025-06-29 16:27:29,994 views 165748 134579125982912 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:29,995 basehttp 165748 134579125982912 "POST /api/route/gemini-insights/ HTTP/1.1" 200 394
+INFO 2025-06-29 16:27:50,171 views 165748 134579125982912 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:50,174 views 165748 134579125982912 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:50 PM
+INFO 2025-06-29 16:27:50,386 views 165748 134578622682816 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:50,387 views 165748 134578622682816 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:50 PM
+INFO 2025-06-29 16:27:50,607 views 165748 134578614290112 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:50,607 views 165748 134578614290112 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:50 PM
+INFO 2025-06-29 16:27:50,791 views 165748 134578631075520 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:50,791 views 165748 134578631075520 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:50 PM
+INFO 2025-06-29 16:27:50,991 views 165748 134578639468224 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:50,992 views 165748 134578639468224 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:50 PM
+INFO 2025-06-29 16:27:51,201 views 165748 134579396540096 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:51,202 views 165748 134579396540096 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:51 PM
+INFO 2025-06-29 16:27:51,323 views 165748 134579125982912 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:51,336 basehttp 165748 134579125982912 "POST /api/route/gemini-insights/ HTTP/1.1" 200 282
+INFO 2025-06-29 16:27:51,473 views 165748 134579125982912 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:27:51,474 views 165748 134579125982912 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:27:51 PM
+ERROR 2025-06-29 16:27:51,888 views 165748 134578639468224 Gemini API error in AI insights generation: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 8
+}
+]
+Traceback (most recent call last):
+  File "/home/tnqn/Documents/adaptive-routing-backend/routing/views.py", line 68, in _get_ai_insights_for_route
+    response = model.generate_content(prompt)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/generativeai/generative_models.py", line 258, in generate_content
+    response = self._client.generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/ai/generativelanguage_v1beta/services/generative_service/client.py", line 812, in generate_content
+    response = rpc(
+               ^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/gapic_v1/method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+           ^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/retry/retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 147, in retry_target
+    result = target()
+             ^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 8
+}
+]
+INFO 2025-06-29 16:27:51,920 views 165748 134578639468224 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:51,921 basehttp 165748 134578639468224 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 16:27:52,002 views 165748 134578622682816 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:52,003 basehttp 165748 134578622682816 "POST /api/route/gemini-insights/ HTTP/1.1" 200 296
+ERROR 2025-06-29 16:27:52,042 views 165748 134579396540096 Gemini API error in AI insights generation: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 8
+}
+]
+Traceback (most recent call last):
+  File "/home/tnqn/Documents/adaptive-routing-backend/routing/views.py", line 68, in _get_ai_insights_for_route
+    response = model.generate_content(prompt)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/generativeai/generative_models.py", line 258, in generate_content
+    response = self._client.generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/ai/generativelanguage_v1beta/services/generative_service/client.py", line 812, in generate_content
+    response = rpc(
+               ^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/gapic_v1/method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+           ^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/retry/retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 147, in retry_target
+    result = target()
+             ^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 8
+}
+]
+INFO 2025-06-29 16:27:52,052 views 165748 134579396540096 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:52,053 basehttp 165748 134579396540096 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+ERROR 2025-06-29 16:27:52,300 views 165748 134579125982912 Gemini API error in AI insights generation: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 7
+}
+]
+Traceback (most recent call last):
+  File "/home/tnqn/Documents/adaptive-routing-backend/routing/views.py", line 68, in _get_ai_insights_for_route
+    response = model.generate_content(prompt)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/generativeai/generative_models.py", line 258, in generate_content
+    response = self._client.generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/ai/generativelanguage_v1beta/services/generative_service/client.py", line 812, in generate_content
+    response = rpc(
+               ^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/gapic_v1/method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+           ^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/retry/retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 147, in retry_target
+    result = target()
+             ^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/google/api_core/grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 7
+}
+]
+INFO 2025-06-29 16:27:52,305 views 165748 134579125982912 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:52,306 basehttp 165748 134579125982912 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 16:27:52,363 views 165748 134578614290112 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:52,368 basehttp 165748 134578614290112 "POST /api/route/gemini-insights/ HTTP/1.1" 200 266
+INFO 2025-06-29 16:27:52,499 views 165748 134578631075520 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:27:52,505 basehttp 165748 134578631075520 "POST /api/route/gemini-insights/ HTTP/1.1" 200 306
+INFO 2025-06-29 16:28:13,795 views 165748 134578631075520 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:28:13,823 views 165748 134578631075520 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:28:13 PM
+INFO 2025-06-29 16:28:15,490 views 165748 134578631075520 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:28:15,823 basehttp 165748 134578631075520 "POST /api/route/gemini-insights/ HTTP/1.1" 200 244
+INFO 2025-06-29 16:28:16,653 views 165748 134578631075520 Generating insights for route from Mazowe Dam to Domboshawa using DRIVING
+INFO 2025-06-29 16:28:16,654 views 165748 134578631075520 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:28:15 PM
+INFO 2025-06-29 16:28:18,049 views 165748 134578631075520 Insights Generated Successfully, sending response...
+INFO 2025-06-29 16:28:18,155 basehttp 165748 134578631075520 "POST /api/route/gemini-insights/ HTTP/1.1" 200 255

@@ -31,8 +31,7 @@ const AIChatCard: React.FC<AIChatCardProps> = memo(({ routeDetails, startPoint, 
             setAiInsights("Please calculate a route first to get AI insights.");
             return;
         }
-        setIsGenerating(true);
-        setAiInsights("Generating insights..."); // Show immediate feedback
+        // Show immediate feedback
 
         try {
             // This URL should point to your Django backend endpoint

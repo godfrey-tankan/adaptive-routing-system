@@ -1,5 +1,5 @@
 // src/components/RouteHistoryPanel.tsx
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react'; // Import useMemo
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Loader2, Trash2, MapPin, Clock, Gauge, CarFront, Bot, AlertCircle } from 'lucide-react';
@@ -36,13 +36,16 @@ export const RouteHistoryPanel: React.FC<RouteHistoryPanelProps> = ({ onViewRout
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const authAxios = axios.create({
-        baseURL: API_BASE_URL,
-        headers: {
-            'Authorization': token ? `Bearer ${token}` : '',
-            'Content-Type': 'application/json'
-        }
-    });
+    // Use useMemo to ensure authAxios instance is stable
+    const authAxios = useMemo(() => {
+        return axios.create({
+            baseURL: API_BASE_URL,
+            headers: {
+                'Authorization': token ? `Bearer ${token}` : '',
+                'Content-Type': 'application/json'
+            }
+        });
+    }, [token, API_BASE_URL]); // Recreate authAxios only if token or base URL changes
 
     const decodePolyline = useCallback((encoded: string): [number, number][] => {
         const poly = [];
@@ -87,6 +90,7 @@ export const RouteHistoryPanel: React.FC<RouteHistoryPanelProps> = ({ onViewRout
             // Ensure origin/destination coordinates are valid before setting
             const fetchedRoutes: SavedRoute[] = response.data.map((route: SavedRoute) => ({
                 ...route,
+                // Defensive checks for origin/destination structure
                 origin: route.origin && route.origin.coordinates && route.origin.coordinates.length === 2
                     ? route.origin
                     : { coordinates: [0, 0], type: 'Point' }, // Default or handle missing
@@ -110,18 +114,20 @@ export const RouteHistoryPanel: React.FC<RouteHistoryPanelProps> = ({ onViewRout
         } finally {
             setIsLoading(false);
         }
-    }, [user, authAxios]);
+    }, [user, authAxios]); // authAxios is now stable due to useMemo
 
     useEffect(() => {
+        // This effect runs only when fetchRoutes (and thus its dependencies: user, authAxios) changes.
+        // Since authAxios is now memoized, this will only run when the 'user' object or the token changes.
         fetchRoutes();
-    }, [fetchRoutes]); // Refetch when fetchRoutes callback changes (which happens when `user` changes)
+    }, [fetchRoutes]);
 
     const handleDeleteRoute = useCallback(async (routeId: number) => {
         if (!window.confirm("Are you sure you want to delete this route?")) {
             return;
         }
         try {
-            await authAxios.delete(`/routes/${routeId}/`);
+            await authAxios.delete(`/route/routes/${routeId}/`);
             setRoutes(prevRoutes => prevRoutes.filter(route => route.id !== routeId));
             toast({
                 title: "Route Deleted",
@@ -285,6 +291,7 @@ export const RouteHistoryPanel: React.FC<RouteHistoryPanelProps> = ({ onViewRout
                                                 <Bot className="h-4 w-4 mr-2" />
                                                 AI Insights:
                                             </div>
+                                            {/* AI insights are stored as string in Django JSONField, so parse if needed for display */}
                                             <p className="text-xs text-foreground whitespace-pre-wrap">{route.ai_insights}</p>
                                         </div>
                                     )}
