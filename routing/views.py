@@ -1,18 +1,18 @@
+# routing/views.py
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.gis.geos import Point
 from .models import Route
 from .serializers import RouteSerializer, RouteRequestSerializer
 from .services import GoogleMapsService
-from ai_services.services import GeminiService
+# from ai_services.services import GeminiService # If you have a separate service for AI, use that
 from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 import os
 import google.generativeai as genai
-from rest_framework.permissions import AllowAny # Consider stricter permissions in production
 import requests
 from django.conf import settings
 from dotenv import load_dotenv
@@ -21,10 +21,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
 from datetime import datetime # Import datetime for current time in AI prompt
-
-logger = logging.getLogger(__name__)
-
-load_dotenv(override=True) # Load environment variables from .env
+from rest_framework.generics import RetrieveDestroyAPIView # New import for Delete functionality
 
 logger = logging.getLogger(__name__)
 
@@ -35,15 +32,16 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 if not os.getenv("GEMINI_API_KEY"):
     logger.warning("GEMINI_API_KEY environment variable is not set. AI insights may fail.")
 
-def _get_ai_insights_for_route(start_location_name, end_location_name, transport_mode, distance_value, duration_value):
-    """Get AI insights using Gemini."""
+def _get_ai_insights_for_route(start_location_name, end_location_name, transport_mode, distance_value: float, duration_value: float):
+    """
+    Get AI insights using Gemini.
+    This function expects distance_value in meters (float/int) and duration_value in seconds (float/int).
+    """
     try:
         model = genai.GenerativeModel('gemini-2.0-flash')
-        new_distance = float(distance_value.split()[0] if isinstance(distance_value, str) else distance_value)
-        new_duration = float(duration_value.split()[0] if isinstance(duration_value, str) else duration_value)
 
-        distance_km = f"{(new_distance / 1000):.1f} km" if new_distance else "unknown distance"
-        duration_mins = f"{round(new_duration / 60)} minutes" if duration_value else "unknown duration"
+        distance_km = f"{(distance_value / 1000):.1f} km" if isinstance(distance_value, (int, float)) and distance_value is not None else "unknown distance"
+        duration_mins = f"{round(duration_value / 60)} minutes" if isinstance(duration_value, (int, float)) and duration_value is not None else "unknown duration"
 
         prompt = f"""
         You are a Zimbabwean transportation expert providing route insights for travel within Zimbabwe, 
@@ -65,13 +63,12 @@ def _get_ai_insights_for_route(start_location_name, end_location_name, transport
             5. Time-specific: E.g., "Avoid CBD 4-6pm due to kombi congestion."
             6. Suggest alternatives if relevant.
             7. Safety: E.g., "Keep valuables hidden at Mbare Musika."
-            skip the introduction and focus on the insights., skip any introduction and focus on the insights.
             Use local terms like "kombi" not "bus", "CBD" not "downtown". Go straight to the point.
         """
         response = model.generate_content(prompt)
         return response.text.strip()
     except Exception as e:
-        logger.error(f"Gemini API error in AI insights generation: {str(e)}")
+        logger.error(f"Gemini API error in AI insights generation: {str(e)}", exc_info=True) # Added exc_info
         return "Could not generate AI insights for this route at the moment."
 
 class RouteOptimizationView(APIView):
@@ -85,6 +82,7 @@ class RouteOptimizationView(APIView):
 
         try:
             logger.info("Route optimization request received")
+            
             origin_lat, origin_lng = map(float, serializer.validated_data['origin'].split(','))
             destination_lat, destination_lng = map(float, serializer.validated_data['destination'].split(','))
             
@@ -113,11 +111,12 @@ class RouteOptimizationView(APIView):
             logger.info("Routes successfully retrieved")
             
             primary_route = routes[0]
+            
             ai_insights = _get_ai_insights_for_route(
                 start_location_name=request.data.get('origin_name', f"{origin_point.y},{origin_point.x}"),
                 end_location_name=request.data.get('destination_name', f"{destination_point.y},{destination_point.x}"),
                 transport_mode=mode,
-                distance_value=primary_route.get('distance_value', 0),
+                distance_value=primary_route.get('distance_value', 0), 
                 duration_value=primary_route.get('duration_value', 0)
             )
             
@@ -141,7 +140,7 @@ class RouteOptimizationView(APIView):
                 'primary_route': primary_route,
                 'ai_insights': ai_insights,
                 'alternatives': routes[1:],
-                'saved_route_id': route.id
+                'saved_route_id': route.id 
             }, status=status.HTTP_200_OK)
             
             
@@ -183,19 +182,35 @@ class GeminiInsightsView(APIView):
 
         logger.info(f"Generating insights for route from {start_location} to {end_location} using {transport_mode}")
         logger.info(f"Distance: {distance}, Duration: {duration}, Traffic: {traffic_info}, Time: {current_time}")
+        parsed_distance_value = 0.0
+        if isinstance(distance, str) and 'km' in distance:
+            try:
+                parsed_distance_value = float(distance.replace(' km', '')) * 1000 # Convert km to meters
+            except ValueError:
+                logger.warning(f"Could not parse distance string to float: {distance}")
+        elif isinstance(distance, (int, float)):
+             parsed_distance_value = float(distance)
+
+
+        parsed_duration_value = 0.0
+        if isinstance(duration, str) and 'mins' in duration:
+            try:
+                parsed_duration_value = float(duration.replace(' mins', '')) * 60 # Convert minutes to seconds
+            except ValueError:
+                logger.warning(f"Could not parse duration string to float: {duration}")
+        elif isinstance(duration, (int, float)):
+            parsed_duration_value = float(duration)
         
-        # Call the shared AI insights helper
         insights = _get_ai_insights_for_route(
             start_location_name=start_location,
             end_location_name=end_location,
             transport_mode=transport_mode,
-            distance_value=distance, # Pass as string
-            duration_value=duration # Pass as string
+            distance_value=parsed_distance_value, # Pass as numerical value
+            duration_value=parsed_duration_value # Pass as numerical value
         )
         logger.info(f"Insights Generated Successfully, sending response...")
         return Response({"insights": insights}, status=status.HTTP_200_OK)
         
-
 class RouteHistoryView(generics.ListAPIView):
     serializer_class = RouteSerializer
     permission_classes = [IsAuthenticated]
@@ -206,6 +221,14 @@ class RouteHistoryView(generics.ListAPIView):
     def get_queryset(self):
         return Route.objects.filter(user=self.request.user)
 
+class RouteDetailView(RetrieveDestroyAPIView): # New view for Retrieve and Delete
+    queryset = Route.objects.all()
+    serializer_class = RouteSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # Ensure users can only retrieve/delete their own routes
+        return self.queryset.filter(user=self.request.user)
 
 class WeatherView(APIView):
     permission_classes = [IsAuthenticated]
@@ -221,7 +244,6 @@ class WeatherView(APIView):
             )
 
         try:
-            # Ensure OPENWEATHER_API_KEY is correctly loaded from .env
             openweathermap_api_key = os.getenv('OPENWEATHER_API_KEY')
             if not openweathermap_api_key:
                 logger.error("OPENWEATHER_API_KEY environment variable is not set for WeatherView.")
@@ -232,7 +254,7 @@ class WeatherView(APIView):
                 params={
                     'lat': lat,
                     'lon': lon,
-                    'appid': openweathermap_api_key, # Use the correct env var
+                    'appid': openweathermap_api_key,
                     'units': 'metric'
                 }
             )
@@ -269,7 +291,6 @@ def simulate_route(request):
 
             map_service = GoogleMapsService()
             
-            # Resolve place IDs to coordinates
             origin_point = map_service.get_place_details_by_id(start_place_id)
             destination_point = map_service.get_place_details_by_id(end_place_id)
 
@@ -292,23 +313,20 @@ def simulate_route(request):
                 
                 # Log actual distance and duration values
                 logger.info(f"Simulation Route Created Successfully. Distance: {primary_route_data.get('distance')}, Duration: {primary_route_data.get('duration')}")
-
                 # Generate AI insights
                 ai_insights = _get_ai_insights_for_route(
                     start_location_name=start_location_name,
                     end_location_name=end_location_name,
                     transport_mode=mode,
-                    distance_value=primary_route_data.get('distance_value', 0), # Pass raw values to AI helper
+                    distance_value=primary_route_data.get('distance_value', 0), 
                     duration_value=primary_route_data.get('duration_value', 0)
                 )
 
-                # Construct response to match frontend expectations
                 return JsonResponse({
                     'route': {
                         'overview_polyline': {'points': primary_route_data.get('polyline')},
                         'distance': {'value': primary_route_data.get('distance_value', 0)},
                         'duration': {'value': primary_route_data.get('duration_value', 0)},
-                        # Add any other fields your frontend expects in the 'route' object
                     },
                     'ai_insights': ai_insights,
                     'status': 'success'
@@ -337,4 +355,3 @@ def simulate_route(request):
         'error': 'Method not allowed',
         'status': 'error'
     }, status=status.HTTP_405_METHOD_NOT_ALLOWED)
-

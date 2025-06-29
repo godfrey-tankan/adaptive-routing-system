@@ -1,5 +1,5 @@
 // src/App.tsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Dashboard from './pages/Dashboard';
@@ -9,7 +9,7 @@ import { Loader2 } from 'lucide-react';
 import LoginPage from './pages/Login'; // Import the LoginPage
 import SignupPage from './pages/Signup'; // Import the SignupPage
 import SimulationPage from './pages/SimulationPage';
-
+import { RouteHistoryPanel } from './components/RouteHistoryPanel';
 // Import QueryClient and QueryClientProvider from @tanstack/react-query
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -46,12 +46,12 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 };
 
 const App: React.FC = () => {
-  console.log("App: Root component rendering."); // Debug
+  const handleViewRouteOnMapStable = useCallback((geoJSON: any, start: [number, number], end: [number, number]) => {
+    console.log("Viewing route on map (placeholder):", geoJSON, start, end);
+  }, []);
   return (
-    // QueryClientProvider must wrap any component that uses @tanstack/react-query hooks.
-    // It's usually placed at the highest level of your application.
     <QueryClientProvider client={queryClient}>
-      <AuthProvider> {/* AuthProvider still wraps Router to provide context */}
+      <AuthProvider>
         <Router>
           <Routes> {/* All Route components MUST be children of Routes */}
             {/* Public routes (accessible to anyone) */}
@@ -61,7 +61,7 @@ const App: React.FC = () => {
 
             {/* Protected routes (require authentication) */}
             <Route
-              path="/dashboard/*" // Use /* to catch nested dashboard routes
+              path="/dashboard/*"
               element={
                 <ProtectedRoute>
                   <Dashboard />
@@ -73,7 +73,7 @@ const App: React.FC = () => {
               path="/dashboard/saved"
               element={
                 <ProtectedRoute>
-                  <div>Saved Routes Page</div>
+                  <RouteHistoryPanel onViewRouteOnMap={handleViewRouteOnMapStable} />
                 </ProtectedRoute>
               }
             />
@@ -95,7 +95,7 @@ const App: React.FC = () => {
             />
           </Routes>
         </Router>
-        <Toaster /> {/* Shadcn Toaster for notifications */}
+        <Toaster />
       </AuthProvider>
     </QueryClientProvider>
   );

@@ -191,7 +191,7 @@ const SignupPage = () => { // Renamed from Signup to SignupPage for consistency
               Seamless Journeys
             </h2>
             <p className="text-lg opacity-90">
-              Join ZimSmart and unlock smart route planning, real-time insights, and a smoother travel experience across Zimbabwe.
+              Join Smart Adaptive Routing and unlock smart route planning, real-time insights, and a smoother travel experience across Zimbabwe.
             </p>
             <div className="text-6xl">🛣️</div>
           </div>

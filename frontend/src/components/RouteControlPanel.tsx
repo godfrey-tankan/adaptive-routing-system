@@ -13,6 +13,7 @@ import maplibregl, { LngLatBounds } from "maplibre-gl";
 import { PlaceSearchInput, GeoPoint } from '@/components/map/PlaceSearchInput';
 import AIChatCard from './AIChatCard';
 import { useAuth } from '@/context/AuthContext';
+import { Feature, LineString } from 'geojson'; // Import GeoJSON types for strictness
 
 const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -31,7 +32,7 @@ interface WeatherData {
 }
 
 interface RouteResults {
-  geoJSON: any;
+  geoJSON: Feature<LineString>; // More specific type for GeoJSON
   distance: string;       // Formatted distance string (e.g., "7.9 km")
   distanceInMeters: number; // Raw distance in meters for calculations
   duration: string;       // Formatted duration string (e.g., "13 mins")
@@ -43,6 +44,7 @@ interface RouteResults {
   avoidTolls: boolean;
   transportMode: string;
   aiInsights?: string;
+  savedRouteId?: number; // Added to store the ID of the saved route
 }
 
 const TRANSPORT_MODE_MAP: Record<string, string> = {
@@ -105,15 +107,11 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
       return R * c;
     };
 
-    // Note: HARARE_CBD_COORDS is [lat, lng], startCoords/endCoords are [lng, lat]
-    // So, use HARARE_CBD_COORDS[0] for lat, HARARE_CBD_COORDS[1] for lng.
-    // And startCoords[1] for lat, startCoords[0] for lng.
     const distanceFromCBD = getDistance(
       HARARE_CBD_COORDS[0], HARARE_CBD_COORDS[1],
-      startCoords[1], startCoords[0] // Corrected: startCoords are [lng, lat]
+      startCoords[1], startCoords[0]
     );
 
-    // Zimbabwe-specific fare calculation
     if (distanceFromCBD < 15) {
       return "$1.00 (Standard Harare kombi fare)";
     } else if (distanceFromCBD < 30) {
@@ -123,17 +121,14 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
     }
   };
 
-  // Effect for updating map layers (route line, start/end markers)
   useEffect(() => {
     const updateMapRouteLayers = () => {
       if (!mapInstance) return;
 
-      // Remove existing route layer
       if (mapInstance.getLayer('route')) {
         mapInstance.removeLayer('route');
         mapInstance.removeSource('route');
       }
-      // Remove existing start/end point layers
       if (mapInstance.getLayer('start-point')) {
         mapInstance.removeLayer('start-point');
         mapInstance.removeSource('start-point');
@@ -143,7 +138,6 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
         mapInstance.removeSource('end-point');
       }
 
-      // Add new route layer if geoJSON is available
       if (routeResults?.geoJSON) {
         mapInstance.addSource('route', {
           type: 'geojson',
@@ -165,7 +159,6 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
           }
         });
 
-        // Add start and end point markers if coordinates are available
         if (startPoint && endPoint) {
           mapInstance.addSource('start-point', {
             type: 'geojson',
@@ -216,10 +209,8 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
       }
     };
 
-    // Call the update function when relevant dependencies change
     updateMapRouteLayers();
 
-    // Cleanup function to remove layers when component unmounts or dependencies change
     return () => {
       if (mapInstance) {
         if (mapInstance.getLayer('route')) { mapInstance.removeLayer('route'); }
@@ -230,33 +221,24 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
         if (mapInstance.getSource('end-point')) { mapInstance.removeSource('end-point'); }
       }
     };
-  }, [mapInstance, routeResults, startPoint, endPoint]); // Dependencies for this effect
+  }, [mapInstance, routeResults, startPoint, endPoint]);
 
-  // Effect for updating map view (flying to points) - separate from layer management
   useEffect(() => {
-    // This prop update is likely redundant if the map layers are handled in the effect above
-    // updateMapWithRoute(
-    //   startPoint ? startPoint.coordinates : null,
-    //   endPoint ? endPoint.coordinates : null,
-    //   null // No geoJSON passed here, as it's handled by the other effect
-    // );
-
     if (mapInstance) {
       if (startPoint && !endPoint) {
         mapInstance.flyTo({ center: startPoint.coordinates, zoom: 14, duration: 1000 });
       } else if (endPoint && !startPoint) {
         mapInstance.flyTo({ center: endPoint.coordinates, zoom: 14, duration: 1000 });
       }
-      // If both are set and a route is calculated, fit bounds in handleOptimizeRoute
     }
-  }, [startPoint, endPoint, mapInstance]); // Dependencies for this effect
+  }, [startPoint, endPoint, mapInstance]);
 
   const fetchWeather = useCallback(async (coords: [number, number]) => {
     setIsWeatherLoading(true);
     try {
       const response = await authAxios.post('/route/weather/', {
-        lat: coords[1], // Latitude
-        lon: coords[0], // Longitude
+        lat: coords[1],
+        lon: coords[0],
         user_id: user?.id
       });
 
@@ -279,7 +261,7 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
     } finally {
       setIsWeatherLoading(false);
     }
-  }, [user, token]); // Dependencies for fetchWeather
+  }, [user, token]);
 
   useEffect(() => {
     if (startPoint) {
@@ -287,10 +269,8 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
     } else {
       setCurrentWeather(null);
     }
-  }, [startPoint, fetchWeather]); // Dependencies for this effect
+  }, [startPoint, fetchWeather]);
 
-  // This utility function is already present in your SimulationControlPanel.
-  // It's good to keep it consistent or import it from a shared utility file.
   const decodePolyline = (encoded: string): [number, number][] => {
     const poly = [];
     let index = 0, len = encoded.length;
@@ -327,70 +307,63 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
     profile: string,
     avoidHighways: boolean,
     avoidTolls: boolean,
-    startPointName: string, // Added for AI insights context
-    endPointName: string     // Added for AI insights context
+    startPointName: string,
+    endPointName: string
   ) => {
     setIsPanelLoading(true);
 
     try {
-      // No need to getPlaceCoordinates here, the backend route/optimize endpoint handles it
-      // as it expects lat,lng strings. It will then use GoogleMapsService's get_place_details_by_id
-      // to resolve them internally if needed for the AI prompt or other logging.
-      // Make sure your backend's RouteOptimizationView expects origin/destination as lat,lng strings
-      // or place_ids, based on your API design. Currently it expects lat,lng.
-      // So, we need to send coords, not placeId here.
-
-      // We need coordinates for the 'origin' and 'destination' fields.
-      // Assuming startPoint and endPoint in the component state already have coordinates.
       if (!startPoint || !endPoint) {
         throw new Error("Start or end point coordinates missing from state.");
       }
-      const origin = `${startPoint.coordinates[1]},${startPoint.coordinates[0]}`; // lat,lng
-      const destination = `${endPoint.coordinates[1]},${endPoint.coordinates[0]}`; // lat,lng
+      const origin = `${startPoint.coordinates[1]},${startPoint.coordinates[0]}`;
+      const destination = `${endPoint.coordinates[1]},${endPoint.coordinates[0]}`;
 
       const backendTransportMode = profile.toLowerCase();
 
-      // Backend expects origin/destination as lat,lng strings.
-      // Also pass place names for richer AI insights on backend.
       const response = await authAxios.post('/route/optimize/', {
         origin,
         destination,
-        origin_name: startPointName, // Pass location names
-        destination_name: endPointName, // Pass location names
+        origin_name: startPointName,
+        destination_name: endPointName,
         mode: backendTransportMode,
         avoid_highways: avoidHighways,
         avoid_tolls: avoidTolls
       });
 
-      // Backend response.data contains:
-      // { primary_route: { distance_value, duration_value, polyline, ... }, ai_insights: "...", alternatives: [...] }
       const backendPrimaryRouteData = response.data.primary_route;
       const backendAiInsights = response.data.ai_insights;
-      const backendAlternatives = response.data.alternatives; // This is an array
+      const backendAlternatives = response.data.alternatives;
+      const savedRouteId = response.data.saved_route_id; // Capture the saved route ID
 
       if (backendPrimaryRouteData) {
         const decodedPath = decodePolyline(backendPrimaryRouteData.polyline);
         const distanceInMeters = backendPrimaryRouteData.distance_value;
         const durationInSeconds = backendPrimaryRouteData.duration_value;
 
-        const geoJSONLineString = {
-          type: 'LineString',
-          coordinates: decodedPath,
+        const finalGeoJSON: Feature<LineString> = {
+          type: 'Feature',
+          geometry: {
+            type: 'LineString',
+            coordinates: decodedPath,
+          },
+          properties: {}
         };
 
         return {
-          geoJSON: geoJSONLineString,
-          distance: backendPrimaryRouteData.distance || `${(distanceInMeters / 1000).toFixed(1)} km`, // Use backend's formatted string or format raw
-          distanceInMeters, // Store raw value
-          duration: backendPrimaryRouteData.duration || `${Math.round(durationInSeconds / 60)} mins`, // Use backend's formatted string or format raw
-          durationInSeconds, // Store raw value
-          fuelCost: profile === 'DRIVING' ? calculateFuelCost(distanceInMeters / 1000) : 'N/A', // Use distanceInKm
+          geoJSON: finalGeoJSON,
+          distance: backendPrimaryRouteData.distance || `${(distanceInMeters / 1000).toFixed(1)} km`,
+          distanceInMeters,
+          duration: backendPrimaryRouteData.duration || `${Math.round(durationInSeconds / 60)} mins`,
+          durationInSeconds,
+          fuelCost: profile === 'DRIVING' ? calculateFuelCost(distanceInMeters / 1000) : 'N/A',
           busFare: profile === 'TRANSIT' ? calculateBusFare(startPoint.coordinates, endPoint.coordinates) : 'N/A',
-          alternatives: backendAlternatives ? backendAlternatives.length : 0, // Count of alternatives
+          alternatives: backendAlternatives ? backendAlternatives.length : 0,
           avoidHighways,
           avoidTolls,
           transportMode: profile,
-          aiInsights: backendAiInsights // Correctly assign the fetched AI insights
+          aiInsights: backendAiInsights,
+          savedRouteId: savedRouteId // Assign the captured ID
         };
       }
       return null;
@@ -419,7 +392,7 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
     } finally {
       setIsPanelLoading(false);
     }
-  }, [user, token, startPoint, endPoint]); // Added startPoint, endPoint to dependencies as their coordinates are used
+  }, [user, token, startPoint, endPoint]);
 
   const handleOptimizeRoute = async () => {
     if (!user || !token) {
@@ -442,7 +415,7 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
 
     setIsPanelLoading(true);
     setIsLoadingMapAndRoute(true);
-    setRouteResults(null); // Clear previous results
+    setRouteResults(null);
 
     try {
       const results = await getRoute(
@@ -451,27 +424,27 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
         routeOptions.transportMode,
         routeOptions.avoidHighways,
         routeOptions.avoidTolls,
-        startPoint.name, // Pass start point name
-        endPoint.name    // Pass end point name
+        startPoint.name,
+        endPoint.name
       );
 
       if (results) {
         setRouteResults(results);
         updateMapWithRoute(startPoint.coordinates, endPoint.coordinates, results.geoJSON);
         toast({
-          title: "Route Optimized Successfully!",
-          description: "Found the best route for your journey!",
+          title: "Route Optimized & Saved!", // Updated toast
+          description: `Found the best route for your journey! (ID: ${results.savedRouteId})`,
         });
 
-        if (mapInstance && results.geoJSON) {
+        if (mapInstance && results.geoJSON && results.geoJSON.geometry.coordinates) {
           const bounds = new LngLatBounds();
-          results.geoJSON.coordinates.forEach((coord: [number, number]) => {
+          results.geoJSON.geometry.coordinates.forEach((coord: [number, number]) => {
             bounds.extend(coord);
           });
           mapInstance.fitBounds(bounds, { padding: 80, duration: 1000 });
         }
       } else {
-        updateMapWithRoute(null, null, null); // Clear map if no results
+        updateMapWithRoute(null, null, null);
       }
     } catch (error) {
       console.error("RouteControlPanel: Uncaught error during route optimization:", error);
@@ -480,7 +453,7 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
         description: "Please check your network connection and try again.",
         variant: "destructive"
       });
-      updateMapWithRoute(null, null, null); // Clear map on unexpected error
+      updateMapWithRoute(null, null, null);
     } finally {
       setIsPanelLoading(false);
       setIsLoadingMapAndRoute(false);
@@ -533,7 +506,6 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="DRIVING">🚗 Private Car</SelectItem>
-                  {/* Re-enabled TRANSIT as it's a valid mode for AI insights */}
                   <SelectItem value="TRANSIT">🚌 Kombi (Transit)</SelectItem>
                   <SelectItem value="WALKING">🚶 Walking</SelectItem>
                   <SelectItem value="BICYCLING">🚴 Bicycle</SelectItem>
@@ -657,22 +629,29 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
               <Separator />
 
               <div className="flex space-x-2">
-                <Button variant="outline" className="flex-1">
+                <Button
+                  variant="outline"
+                  className="flex-1"
+                  disabled={!!routeResults.savedRouteId} // Disable if already saved
+                  onClick={() => toast({
+                    title: "Route Already Saved",
+                    description: `This route has been saved with ID: ${routeResults.savedRouteId}`,
+                    variant: "info"
+                  })}
+                >
                   <Star className="w-4 h-4 mr-2" />
-                  Save Route
+                  {routeResults.savedRouteId ? `Saved (ID: ${routeResults.savedRouteId})` : "Save Route"}
                 </Button>
-                {/* Re-enabled Start Navigation button if needed, or remove if not desired */}
                 {/* <Button className="flex-1 bg-secondary hover:bg-secondary/90">
-                   <Save className="w-4 h-4 mr-2" />
-                   Start Navigation
-                 </Button> */}
+                  <Save className="w-4 h-4 mr-2" />
+                  Start Navigation
+                </Button> */}
               </div>
             </CardContent>
           </Card>
         )}
 
         <AIChatCard
-
           routeDetails={routeResults}
           startPoint={startPoint}
           endPoint={endPoint}

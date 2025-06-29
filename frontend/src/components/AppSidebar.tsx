@@ -48,7 +48,7 @@ export function AppSidebar() {
             </div>
             {!collapsed && (
               <span className="font-montserrat font-bold text-lg text-foreground">
-                ZimSmart
+                Smart Adaptive Routing
               </span>
             )}
           </div>
