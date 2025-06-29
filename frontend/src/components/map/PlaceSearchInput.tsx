@@ -21,11 +21,8 @@ interface PlaceSearchInputProps {
     onSelect: (point: GeoPoint | null) => void;
     placeholder?: string;
     className?: string;
-    currentMapCenter?: [number, number] | null; // For biasing results
+    currentMapCenter?: [number, number] | null;
 }
-
-// Ensure the Google Maps API script has loaded.
-// This type declaration helps TypeScript recognize `google.maps`
 declare global {
     interface Window {
         google: typeof import('@googlemaps/google-maps-services-js').google.maps;
@@ -43,26 +40,17 @@ export const PlaceSearchInput: React.FC<PlaceSearchInputProps> = ({
     const [inputValue, setInputValue] = useState(value ? value.name : '');
     const [searchResults, setSearchResults] = useState<GeoPoint[]>([]);
     const [isLoading, setIsLoading] = useState(false);
-
     const debouncedSearchTerm = useDebounce(inputValue, 500);
-
-    // Ref to store the AutocompleteService instance
     const autocompleteServiceRef = useRef<google.maps.places.AutocompleteService | null>(null);
     const placesServiceRef = useRef<google.maps.places.PlacesService | null>(null); // For fetching place details
 
-    // Initialize Google Maps services once the script is loaded
     useEffect(() => {
-        // A small delay to ensure the `google.maps` object is fully ready.
-        // In many cases, simply checking `window.google` is enough, but a slight delay
-        // can help if the script loads asynchronously.
         const checkGoogleMaps = () => {
             if (window.google && window.google.maps && window.google.maps.places) {
                 if (!autocompleteServiceRef.current) {
                     autocompleteServiceRef.current = new window.google.maps.places.AutocompleteService();
                 }
                 if (!placesServiceRef.current) {
-                    // PlacesService requires a map or a HTMLDivElement. We can create a dummy div.
-                    // For just place details, a dummy div is sufficient and doesn't need to be in the DOM.
                     placesServiceRef.current = new window.google.maps.places.PlacesService(document.createElement('div'));
                 }
                 console.log("PlaceSearchInput: Google Maps Places services initialized.");
@@ -87,11 +75,13 @@ export const PlaceSearchInput: React.FC<PlaceSearchInputProps> = ({
         const fetchPlaces = () => {
             console.log("PlaceSearchInput: Debounced search term changed:", debouncedSearchTerm);
 
-            if (!debouncedSearchTerm) {
+            if (!debouncedSearchTerm || debouncedSearchTerm.length < 4) {
+                console.log("PlaceSearchInput: Search term is empty or too short, clearing results.");
                 setSearchResults([]);
                 setIsLoading(false);
                 return;
             }
+
 
             if (!autocompleteServiceRef.current || !placesServiceRef.current) {
                 console.warn("PlaceSearchInput: Google Maps services not ready. Cannot search yet.");
