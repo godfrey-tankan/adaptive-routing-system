@@ -1609,3 +1609,168 @@ WARNING 2025-06-29 14:15:40,709 basehttp 120036 128794783381184 "POST /api/users
 INFO 2025-06-29 14:51:08,199 autoreload 135198 126927996739712 Watching for file changes with StatReloader
 INFO 2025-06-29 14:51:11,672 autoreload 135198 126927996739712 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
 INFO 2025-06-29 14:51:12,557 autoreload 135254 132270741794944 Watching for file changes with StatReloader
+INFO 2025-06-29 14:52:47,236 basehttp 135254 132270390245056 "OPTIONS /api/users/login/ HTTP/1.1" 200 0
+INFO 2025-06-29 14:52:48,159 basehttp 135254 132270390245056 "POST /api/users/login/ HTTP/1.1" 200 483
+INFO 2025-06-29 14:53:08,405 views 135254 132270390245056 Weather request received for lat: -18.975755, lon: 32.6691331
+INFO 2025-06-29 14:53:09,248 views 135254 132270390245056 Weather Status Updated...
+INFO 2025-06-29 14:53:09,251 basehttp 135254 132270390245056 "POST /api/route/weather/ HTTP/1.1" 200 489
+INFO 2025-06-29 14:54:03,155 views 135254 132270390245056 Route optimization request received
+INFO 2025-06-29 14:54:03,156 views 135254 132270390245056 Origin: POINT (32.6691331 -18.975755), Destination: POINT (30.93021409999999 -17.8833297)
+INFO 2025-06-29 14:54:03,156 views 135254 132270390245056 Transport mode: driving
+INFO 2025-06-29 14:54:04,024 services 135254 132270390245056 Google Maps Directions API response status: N/A
+INFO 2025-06-29 14:54:04,024 views 135254 132270390245056 Found 2 routes
+INFO 2025-06-29 14:54:04,024 views 135254 132270390245056 Routes successfully retrieved
+INFO 2025-06-29 14:54:07,142 views 135254 132270390245056 Route saved with ID: 18
+INFO 2025-06-29 14:54:07,145 basehttp 135254 132270390245056 "POST /api/route/optimize/ HTTP/1.1" 200 55567
+INFO 2025-06-29 14:54:07,430 views 135254 132270390245056 Generating insights for route from Mutare to Mvumba Crescent using DRIVING
+INFO 2025-06-29 14:54:07,430 views 135254 132270390245056 Distance: NaN km, Duration: NaN mins, Traffic: Expected travel time with traffic is NaN mins., Time: 6/29/2025, 2:54:07 PM
+ERROR 2025-06-29 14:54:07,430 views 135254 132270390245056 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:54:07,431 views 135254 132270390245056 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:54:07,432 basehttp 135254 132270390245056 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:55:16,307 views 135254 132270390245056 Generating insights for route from Mutare to Mvumba Crescent using DRIVING
+INFO 2025-06-29 14:55:16,307 views 135254 132270390245056 Distance: , Duration: , Traffic: Expected travel time with traffic is ., Time: 6/29/2025, 2:55:16 PM
+INFO 2025-06-29 14:55:17,806 views 135254 132270390245056 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:55:17,807 basehttp 135254 132270390245056 "POST /api/route/gemini-insights/ HTTP/1.1" 200 411
+INFO 2025-06-29 14:55:23,728 basehttp 135254 132270390245056 "OPTIONS /api/route/simulate/ HTTP/1.1" 200 0
+INFO 2025-06-29 14:55:23,737 views 135254 132270390245056 Simulate route request received
+INFO 2025-06-29 14:55:23,738 views 135254 132270390245056 Start Place ID: ChIJT9VVXmnqLBkR89CJC70pwgw, End Place ID: EiFNdnVtYmEgQ3Jlc2NlbnQsIEhhcmFyZSwgWmltYmFid2UiLiosChQKEgkf92iAMqcxGREBCWVfA98exxIUChIJNdvdG-6kMRkRL08T5Zs7FKU, Mode: driving, Start Name: Mutare, End Name: Mvumba Crescent
+INFO 2025-06-29 14:55:25,017 services 135254 132270390245056 Resolved place ID 'ChIJT9VVXmnqLBkR89CJC70pwgw' to 'Mutare' at -18.975755,32.6691331
+INFO 2025-06-29 14:55:25,253 services 135254 132270390245056 Resolved place ID 'EiFNdnVtYmEgQ3Jlc2NlbnQsIEhhcmFyZSwgWmltYmFid2UiLiosChQKEgkf92iAMqcxGREBCWVfA98exxIUChIJNdvdG-6kMRkRL08T5Zs7FKU' to 'Mvumba Crescent' at -17.8833297,30.93021409999999
+INFO 2025-06-29 14:55:25,947 services 135254 132270390245056 Google Maps Directions API response status: N/A
+INFO 2025-06-29 14:55:25,947 views 135254 132270390245056 Simulation Route Created Successfully. Distance: 278 km, Duration: 4 hours 31 mins
+INFO 2025-06-29 14:55:27,284 basehttp 135254 132270390245056 "POST /api/route/simulate/ HTTP/1.1" 200 2001
+INFO 2025-06-29 14:55:38,481 views 135254 132270390245056 Generating insights for route from Mutare to Mvumba Crescent using DRIVING
+INFO 2025-06-29 14:55:38,481 views 135254 132270390245056 Distance: 278.2 km, Duration: 271 mins, Traffic: Expected travel time with traffic is 271 mins., Time: 6/29/2025, 2:55:38 PM
+ERROR 2025-06-29 14:55:38,481 views 135254 132270390245056 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:55:38,482 views 135254 132270390245056 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:55:38,483 basehttp 135254 132270390245056 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:55:38,744 views 135254 132270390245056 Generating insights for route from Mutare to Mvumba Crescent using DRIVING
+INFO 2025-06-29 14:55:38,745 views 135254 132270390245056 Distance: 278.2 km, Duration: 271 mins, Traffic: Expected travel time with traffic is 271 mins., Time: 6/29/2025, 2:55:38 PM
+ERROR 2025-06-29 14:55:38,746 views 135254 132270390245056 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:55:38,748 views 135254 132270390245056 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:55:38,750 basehttp 135254 132270390245056 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:55:59,168 views 135254 132270390245056 Generating insights for route from Mutare to Mvumba Crescent using DRIVING
+INFO 2025-06-29 14:55:59,169 views 135254 132270390245056 Distance: 278.2 km, Duration: 271 mins, Traffic: Expected travel time with traffic is 271 mins., Time: 6/29/2025, 2:55:59 PM
+ERROR 2025-06-29 14:55:59,170 views 135254 132270390245056 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:55:59,172 views 135254 132270390245056 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:55:59,173 basehttp 135254 132270390245056 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:55:59,340 views 135254 132270390245056 Generating insights for route from Mutare to Mvumba Crescent using DRIVING
+INFO 2025-06-29 14:55:59,340 views 135254 132270390245056 Distance: 278.2 km, Duration: 271 mins, Traffic: Expected travel time with traffic is 271 mins., Time: 6/29/2025, 2:55:59 PM
+ERROR 2025-06-29 14:55:59,341 views 135254 132270390245056 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:55:59,342 views 135254 132270390245056 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:55:59,345 basehttp 135254 132270390245056 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:56:19,789 views 135254 132270390245056 Generating insights for route from Mutare to Mvumba Crescent using DRIVING
+INFO 2025-06-29 14:56:19,791 views 135254 132270390245056 Distance: 278.2 km, Duration: 271 mins, Traffic: Expected travel time with traffic is 271 mins., Time: 6/29/2025, 2:56:19 PM
+ERROR 2025-06-29 14:56:19,792 views 135254 132270390245056 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:56:19,794 views 135254 132270390245056 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:56:19,795 basehttp 135254 132270390245056 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:56:20,035 views 135254 132270390245056 Generating insights for route from Mutare to Mvumba Crescent using DRIVING
+INFO 2025-06-29 14:56:20,035 views 135254 132270390245056 Distance: 278.2 km, Duration: 271 mins, Traffic: Expected travel time with traffic is 271 mins., Time: 6/29/2025, 2:56:20 PM
+ERROR 2025-06-29 14:56:20,035 views 135254 132270390245056 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:56:20,036 views 135254 132270390245056 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:56:20,036 basehttp 135254 132270390245056 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:56:40,255 views 135254 132270390245056 Generating insights for route from Mutare to Mvumba Crescent using DRIVING
+INFO 2025-06-29 14:56:40,257 views 135254 132270390245056 Distance: 278.2 km, Duration: 271 mins, Traffic: Expected travel time with traffic is 271 mins., Time: 6/29/2025, 2:56:40 PM
+ERROR 2025-06-29 14:56:40,258 views 135254 132270390245056 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:56:40,259 views 135254 132270390245056 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:56:40,266 basehttp 135254 132270390245056 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 14:56:40,488 views 135254 132270390245056 Generating insights for route from Mutare to Mvumba Crescent using DRIVING
+INFO 2025-06-29 14:56:40,491 views 135254 132270390245056 Distance: 278.2 km, Duration: 271 mins, Traffic: Expected travel time with traffic is 271 mins., Time: 6/29/2025, 2:56:40 PM
+ERROR 2025-06-29 14:56:40,492 views 135254 132270390245056 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 14:56:40,494 views 135254 132270390245056 Insights Generated Successfully, sending response...
+INFO 2025-06-29 14:56:40,497 basehttp 135254 132270390245056 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 15:02:28,125 basehttp 135254 132270390245056 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 15:02:46,790 views 135254 132270390245056 Weather request received for lat: -17.8067527, lon: 31.0406769
+INFO 2025-06-29 15:02:47,410 views 135254 132270390245056 Weather Status Updated...
+INFO 2025-06-29 15:02:47,411 basehttp 135254 132270390245056 "POST /api/route/weather/ HTTP/1.1" 200 512
+INFO 2025-06-29 15:02:59,701 views 135254 132270390245056 Route optimization request received
+INFO 2025-06-29 15:02:59,702 views 135254 132270390245056 Origin: POINT (31.0406769 -17.8067527), Destination: POINT (31.0492259 -17.8216288)
+INFO 2025-06-29 15:02:59,702 views 135254 132270390245056 Transport mode: driving
+INFO 2025-06-29 15:03:01,020 services 135254 132270390245056 Google Maps Directions API response status: N/A
+INFO 2025-06-29 15:03:01,020 views 135254 132270390245056 Found 2 routes
+INFO 2025-06-29 15:03:01,020 views 135254 132270390245056 Routes successfully retrieved
+INFO 2025-06-29 15:03:04,221 views 135254 132270390245056 Route saved with ID: 19
+INFO 2025-06-29 15:03:04,222 basehttp 135254 132270390245056 "POST /api/route/optimize/ HTTP/1.1" 200 1848
+INFO 2025-06-29 15:03:04,477 views 135254 132270390245056 Generating insights for route from Belgravia to Harare CBD using DRIVING
+INFO 2025-06-29 15:03:04,477 views 135254 132270390245056 Distance: 2.3 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 3:03:04 PM
+ERROR 2025-06-29 15:03:04,477 views 135254 132270390245056 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 15:03:04,477 views 135254 132270390245056 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:03:04,478 basehttp 135254 132270390245056 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 15:06:36,125 views 135254 132270390245056 Generating insights for route from Belgravia to Harare CBD using DRIVING
+INFO 2025-06-29 15:06:36,127 views 135254 132270390245056 Distance: 2.3 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 6/29/2025, 3:06:36 PM
+ERROR 2025-06-29 15:06:36,127 views 135254 132270390245056 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 15:06:36,128 views 135254 132270390245056 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:06:36,131 basehttp 135254 132270390245056 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 15:06:47,097 views 135254 132270390245056 Route optimization request received
+INFO 2025-06-29 15:06:47,098 views 135254 132270390245056 Origin: POINT (31.0406769 -17.8067527), Destination: POINT (31.0492259 -17.8216288)
+INFO 2025-06-29 15:06:47,098 views 135254 132270390245056 Transport mode: driving
+INFO 2025-06-29 15:06:47,575 services 135254 132270390245056 Google Maps Directions API response status: N/A
+INFO 2025-06-29 15:06:47,581 views 135254 132270390245056 Found 3 routes
+INFO 2025-06-29 15:06:47,582 views 135254 132270390245056 Routes successfully retrieved
+INFO 2025-06-29 15:06:50,348 views 135254 132270390245056 Route saved with ID: 20
+INFO 2025-06-29 15:06:50,350 basehttp 135254 132270390245056 "POST /api/route/optimize/ HTTP/1.1" 200 2859
+INFO 2025-06-29 15:06:50,599 views 135254 132270390245056 Generating insights for route from Belgravia to Harare CBD using DRIVING
+INFO 2025-06-29 15:06:50,599 views 135254 132270390245056 Distance: 2.3 km, Duration: 5 mins, Traffic: Expected travel time with traffic is 5 mins., Time: 6/29/2025, 3:06:50 PM
+ERROR 2025-06-29 15:06:50,599 views 135254 132270390245056 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 15:06:50,600 views 135254 132270390245056 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:06:50,602 basehttp 135254 132270390245056 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 15:07:16,629 views 135254 132270390245056 Route optimization request received
+INFO 2025-06-29 15:07:16,630 views 135254 132270390245056 Origin: POINT (31.0406769 -17.8067527), Destination: POINT (31.0492259 -17.8216288)
+INFO 2025-06-29 15:07:16,630 views 135254 132270390245056 Transport mode: driving
+INFO 2025-06-29 15:07:17,106 services 135254 132270390245056 Google Maps Directions API response status: N/A
+INFO 2025-06-29 15:07:17,109 views 135254 132270390245056 Found 3 routes
+INFO 2025-06-29 15:07:17,113 views 135254 132270390245056 Routes successfully retrieved
+INFO 2025-06-29 15:07:17,990 views 135254 132270390245056 Route saved with ID: 21
+INFO 2025-06-29 15:07:17,991 basehttp 135254 132270390245056 "POST /api/route/optimize/ HTTP/1.1" 200 2798
+INFO 2025-06-29 15:07:18,242 views 135254 132270390245056 Generating insights for route from Belgravia to Harare CBD using DRIVING
+INFO 2025-06-29 15:07:18,242 views 135254 132270390245056 Distance: 2.3 km, Duration: 5 mins, Traffic: Expected travel time with traffic is 5 mins., Time: 6/29/2025, 3:07:18 PM
+ERROR 2025-06-29 15:07:18,242 views 135254 132270390245056 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 15:07:18,243 views 135254 132270390245056 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:07:18,245 basehttp 135254 132270390245056 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 15:07:34,407 views 135254 132270390245056 Weather request received for lat: -17.8067527, lon: 31.0406769
+INFO 2025-06-29 15:07:35,051 views 135254 132270390245056 Weather Status Updated...
+INFO 2025-06-29 15:07:35,056 basehttp 135254 132270390245056 "POST /api/route/weather/ HTTP/1.1" 200 512
+INFO 2025-06-29 15:07:35,327 views 135254 132270390245056 Generating insights for route from Belgravia to Harare CBD using DRIVING
+INFO 2025-06-29 15:07:35,331 views 135254 132270390245056 Distance: 2.3 km, Duration: 5 mins, Traffic: Expected travel time with traffic is 5 mins., Time: 6/29/2025, 3:07:35 PM
+ERROR 2025-06-29 15:07:35,338 views 135254 132270390245056 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 15:07:35,338 views 135254 132270390245056 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:07:35,344 basehttp 135254 132270390245056 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 15:07:58,957 views 135254 132270390245056 Generating insights for route from Belgravia to Harare CBD using DRIVING
+INFO 2025-06-29 15:07:58,959 views 135254 132270390245056 Distance: 2.3 km, Duration: 5 mins, Traffic: Expected travel time with traffic is 5 mins., Time: 6/29/2025, 3:07:58 PM
+ERROR 2025-06-29 15:07:58,962 views 135254 132270390245056 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 15:07:58,962 views 135254 132270390245056 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:07:58,964 basehttp 135254 132270390245056 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 15:08:08,409 views 135254 132270390245056 Route optimization request received
+INFO 2025-06-29 15:08:08,409 views 135254 132270390245056 Origin: POINT (31.0406769 -17.8067527), Destination: POINT (31.0492259 -17.8216288)
+INFO 2025-06-29 15:08:08,409 views 135254 132270390245056 Transport mode: driving
+INFO 2025-06-29 15:08:08,878 services 135254 132270390245056 Google Maps Directions API response status: N/A
+INFO 2025-06-29 15:08:08,878 views 135254 132270390245056 Found 3 routes
+INFO 2025-06-29 15:08:08,878 views 135254 132270390245056 Routes successfully retrieved
+INFO 2025-06-29 15:08:10,107 views 135254 132270390245056 Route saved with ID: 22
+INFO 2025-06-29 15:08:10,108 basehttp 135254 132270390245056 "POST /api/route/optimize/ HTTP/1.1" 200 2782
+INFO 2025-06-29 15:08:10,381 views 135254 132270390245056 Generating insights for route from Belgravia to Harare CBD using DRIVING
+INFO 2025-06-29 15:08:10,382 views 135254 132270390245056 Distance: 2.3 km, Duration: 5 mins, Traffic: Expected travel time with traffic is 5 mins., Time: 6/29/2025, 3:08:10 PM
+ERROR 2025-06-29 15:08:10,382 views 135254 132270390245056 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 15:08:10,382 views 135254 132270390245056 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:08:10,383 basehttp 135254 132270390245056 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 15:15:12,404 autoreload 135254 132270741794944 /home/tnqn/Documents/adaptive-routing-backend/core/settings.py changed, reloading.
+INFO 2025-06-29 15:15:17,011 autoreload 144649 126217062277248 Watching for file changes with StatReloader
+INFO 2025-06-29 15:16:02,681 autoreload 144649 126217062277248 /home/tnqn/Documents/adaptive-routing-backend/core/settings.py changed, reloading.
+INFO 2025-06-29 15:16:03,538 autoreload 145003 140307796705408 Watching for file changes with StatReloader
+INFO 2025-06-29 15:17:17,976 views 145003 140307445315264 Generating insights for route from Belgravia to Harare CBD using DRIVING
+INFO 2025-06-29 15:17:17,977 views 145003 140307445315264 Distance: 2.3 km, Duration: 5 mins, Traffic: Expected travel time with traffic is 5 mins., Time: 6/29/2025, 3:17:17 PM
+ERROR 2025-06-29 15:17:17,978 views 145003 140307445315264 Gemini API error in AI insights generation: unsupported operand type(s) for /: 'str' and 'int'
+INFO 2025-06-29 15:17:17,978 views 145003 140307445315264 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:17:17,981 basehttp 145003 140307445315264 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 15:19:37,100 autoreload 145003 140307796705408 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 15:19:37,962 autoreload 146341 128964038652032 Watching for file changes with StatReloader
+INFO 2025-06-29 15:19:44,953 views 146341 128963688003264 Generating insights for route from Belgravia to Harare CBD using DRIVING
+INFO 2025-06-29 15:19:44,953 views 146341 128963688003264 Distance: 2.3 km, Duration: 5 mins, Traffic: Expected travel time with traffic is 5 mins., Time: 6/29/2025, 3:19:44 PM
+ERROR 2025-06-29 15:19:44,954 views 146341 128963688003264 Gemini API error in AI insights generation: invalid literal for int() with base 10: '2.3 km'
+INFO 2025-06-29 15:19:44,954 views 146341 128963688003264 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:19:44,955 basehttp 146341 128963688003264 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 15:20:04,676 autoreload 146341 128964038652032 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 15:20:05,863 autoreload 146659 134770710327424 Watching for file changes with StatReloader
+INFO 2025-06-29 15:27:23,345 basehttp 146659 134770359006912 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 15:27:34,878 autoreload 146659 134770710327424 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 15:27:35,835 autoreload 149407 136632322785408 Watching for file changes with StatReloader

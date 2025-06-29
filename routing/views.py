@@ -39,10 +39,12 @@ def _get_ai_insights_for_route(start_location_name, end_location_name, transport
     """Get AI insights using Gemini."""
     try:
         model = genai.GenerativeModel('gemini-2.0-flash')
+        new_distance = int(distance_value.split()[0] if isinstance(distance_value, str) else distance_value)
+        new_duration = int(duration_value.split()[0] if isinstance(duration_value, str) else duration_value)
 
-        distance_km = f"{(distance_value / 1000):.1f} km" if distance_value else "unknown distance"
-        duration_mins = f"{round(duration_value / 60)} minutes" if duration_value else "unknown duration"
-
+        distance_km = f"{(new_distance / 1000):.1f} km" if new_distance else "unknown distance"
+        duration_mins = f"{round(new_duration / 60)} minutes" if duration_value else "unknown duration"
+    
         prompt = f"""
         You are a Zimbabwean transportation expert providing route insights for travel within Zimbabwe, 
         particularly focusing on Harare and surrounding areas. Analyze this route from {start_location_name} to {end_location_name}:
@@ -187,16 +189,6 @@ class GeminiInsightsView(APIView):
             start_location_name=start_location,
             end_location_name=end_location,
             transport_mode=transport_mode,
-            # Assuming distance and duration are formatted strings like "7.9 km", "13 mins"
-            # _get_ai_insights_for_route expects raw values (meters, seconds).
-            # If GeminiInsightsView's prompt is fixed to take formatted strings,
-            # then pass distance/duration as they are received.
-            # Otherwise, parse them back to numbers.
-            # For simplicity, let's keep the _get_ai_insights_for_route expecting values
-            # so GeminiInsightsView needs to parse them if its input is formatted.
-            # For now, let's assume `_get_ai_insights_for_route` uses string inputs directly
-            # or you'll parse them here from `distance`/`duration` strings.
-            # The prompt in _get_ai_insights_for_route is updated to receive string inputs.
             distance_value=distance, # Pass as string
             duration_value=duration # Pass as string
         )

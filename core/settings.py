@@ -220,7 +220,13 @@ CORS_ALLOWED_ORIGINS = [
     "https://ad-routing.vercel.app",
     "https://adaptive-routing-system.onrender.com"
 ]
-CORS_ALLOW_CREDENTIALS = True # Allow cookies to be sent with cross-origin requests
+CORS_ALLOW_CREDENTIALS = True 
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'adaptive-routing-system.onrender.com',
+]
 
 # Google Maps and Gemini API keys
 Maps_API_KEY = os.getenv('Maps_API_KEY')

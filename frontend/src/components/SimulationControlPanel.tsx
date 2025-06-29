@@ -574,6 +574,7 @@ export const SimulationControlPanel: React.FC<SimulationControlPanelProps> = ({
                 startPoint={startPoint}
                 endPoint={endPoint}
                 aiInsights={simulationInsights}
+                parentComponentName="SimulationRouteControlPanel" // Pass parent component name for throttling
             />
         </div>
     );

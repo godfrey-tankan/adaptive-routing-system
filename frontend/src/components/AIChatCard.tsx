@@ -19,9 +19,10 @@ interface AIChatCardProps {
     startPoint: GeoPoint | null;
     endPoint: GeoPoint | null;
     weather: WeatherData | null;
+    parentComponentName?: string;
 }
 
-const AIChatCard: React.FC<AIChatCardProps> = memo(({ routeDetails, startPoint, endPoint, weather }) => {
+const AIChatCard: React.FC<AIChatCardProps> = memo(({ routeDetails, startPoint, endPoint, weather, parentComponentName }) => {
     const [aiInsights, setAiInsights] = useState<string | null>(null);
     const [isGenerating, setIsGenerating] = useState(false);
     const lastResquestTime = localStorage.getItem('lastRequestTime');
@@ -36,7 +37,7 @@ const AIChatCard: React.FC<AIChatCardProps> = memo(({ routeDetails, startPoint, 
         try {
             // This URL should point to your Django backend endpoint
             // Ensure lastRequestTime is a valid ISO string; parse it safely
-            if (lastResquestTime) {
+            if (lastResquestTime && parentComponentName === "SimulationRouteControlPanel") {
                 const lastTime = Date.parse(lastResquestTime);
                 if (!isNaN(lastTime) && Date.now() - lastTime < 20000) {
                     setAiInsights("Please wait at least 20 seconds before requesting new insights.");
