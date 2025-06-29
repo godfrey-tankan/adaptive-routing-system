@@ -40,7 +40,6 @@ const AIChatCard: React.FC<AIChatCardProps> = memo(({ routeDetails, startPoint, 
             if (lastResquestTime && parentComponentName === "SimulationRouteControlPanel") {
                 const lastTime = Date.parse(lastResquestTime);
                 if (!isNaN(lastTime) && Date.now() - lastTime < 20000) {
-                    setAiInsights("Please wait at least 20 seconds before requesting new insights.");
                     setIsGenerating(false);
                     return; // Prevent too frequent requests
                 }

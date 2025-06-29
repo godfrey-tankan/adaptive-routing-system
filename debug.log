@@ -1774,3 +1774,74 @@ INFO 2025-06-29 15:20:05,863 autoreload 146659 134770710327424 Watching for file
 INFO 2025-06-29 15:27:23,345 basehttp 146659 134770359006912 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
 INFO 2025-06-29 15:27:34,878 autoreload 146659 134770710327424 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
 INFO 2025-06-29 15:27:35,835 autoreload 149407 136632322785408 Watching for file changes with StatReloader
+INFO 2025-06-29 15:28:06,848 views 149407 136631969380032 Weather request received for lat: -17.8067527, lon: 31.0406769
+INFO 2025-06-29 15:28:07,500 views 149407 136631969380032 Weather Status Updated...
+INFO 2025-06-29 15:28:07,502 basehttp 149407 136631969380032 "POST /api/route/weather/ HTTP/1.1" 200 490
+INFO 2025-06-29 15:28:19,803 views 149407 136631969380032 Route optimization request received
+INFO 2025-06-29 15:28:19,807 views 149407 136631969380032 Origin: POINT (31.0406769 -17.8067527), Destination: POINT (31.0492259 -17.8216288)
+INFO 2025-06-29 15:28:19,808 views 149407 136631969380032 Transport mode: driving
+INFO 2025-06-29 15:28:20,308 services 149407 136631969380032 Google Maps Directions API response status: N/A
+INFO 2025-06-29 15:28:20,308 views 149407 136631969380032 Found 3 routes
+INFO 2025-06-29 15:28:20,308 views 149407 136631969380032 Routes successfully retrieved
+INFO 2025-06-29 15:28:23,176 views 149407 136631969380032 Route saved with ID: 23
+INFO 2025-06-29 15:28:23,179 basehttp 149407 136631969380032 "POST /api/route/optimize/ HTTP/1.1" 200 2811
+INFO 2025-06-29 15:28:23,475 views 149407 136631969380032 Generating insights for route from Belgravia to Harare CBD using DRIVING
+INFO 2025-06-29 15:28:23,476 views 149407 136631969380032 Distance: 2.3 km, Duration: 5 mins, Traffic: Expected travel time with traffic is 5 mins., Time: 6/29/2025, 3:28:23 PM
+ERROR 2025-06-29 15:28:23,476 views 149407 136631969380032 Gemini API error in AI insights generation: invalid literal for int() with base 10: '2.3'
+INFO 2025-06-29 15:28:23,476 views 149407 136631969380032 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:28:23,485 basehttp 149407 136631969380032 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 15:28:58,060 autoreload 149407 136632322785408 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 15:29:00,916 autoreload 150188 131150511128704 Watching for file changes with StatReloader
+INFO 2025-06-29 15:29:10,904 views 150188 131150159804096 Generating insights for route from Belgravia to Harare CBD using DRIVING
+INFO 2025-06-29 15:29:10,904 views 150188 131150159804096 Distance: 2.3 km, Duration: 5 mins, Traffic: Expected travel time with traffic is 5 mins., Time: 6/29/2025, 3:29:10 PM
+INFO 2025-06-29 15:29:12,892 views 150188 131150159804096 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:29:12,894 basehttp 150188 131150159804096 "POST /api/route/gemini-insights/ HTTP/1.1" 200 253
+INFO 2025-06-29 15:29:39,419 basehttp 150188 131150159804096 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 15:30:21,066 views 150188 131150159804096 Generating insights for route from Vainona to Borrowdale Village Walk using DRIVING
+INFO 2025-06-29 15:30:21,066 views 150188 131150159804096 Distance: , Duration: , Traffic: Expected travel time with traffic is ., Time: 6/29/2025, 3:30:21 PM
+ERROR 2025-06-29 15:30:21,067 views 150188 131150159804096 Gemini API error in AI insights generation: list index out of range
+INFO 2025-06-29 15:30:21,067 views 150188 131150159804096 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:30:21,071 basehttp 150188 131150159804096 "POST /api/route/gemini-insights/ HTTP/1.1" 200 75
+INFO 2025-06-29 15:30:27,566 views 150188 131150159804096 Simulate route request received
+INFO 2025-06-29 15:30:27,567 views 150188 131150159804096 Start Place ID: ChIJuVtMd-GvMRkR7fAJzJ3aaas, End Place ID: ChIJPzA0JhuwMRkR_gy89V5yvZ0, Mode: driving, Start Name: Vainona, End Name: Borrowdale Village Walk
+INFO 2025-06-29 15:30:28,027 services 150188 131150159804096 Resolved place ID 'ChIJuVtMd-GvMRkR7fAJzJ3aaas' to 'Vainona' at -17.7619123,31.080053
+INFO 2025-06-29 15:30:28,882 services 150188 131150159804096 Resolved place ID 'ChIJPzA0JhuwMRkR_gy89V5yvZ0' to 'Borrowdale Village Walk' at -17.7619664,31.0869742
+INFO 2025-06-29 15:30:29,168 services 150188 131150159804096 Google Maps Directions API response status: N/A
+INFO 2025-06-29 15:30:29,168 views 150188 131150159804096 Simulation Route Created Successfully. Distance: 0.8 km, Duration: 2 mins
+INFO 2025-06-29 15:30:30,111 basehttp 150188 131150159804096 "POST /api/route/simulate/ HTTP/1.1" 200 440
+INFO 2025-06-29 15:30:41,786 views 150188 131150159804096 Generating insights for route from Vainona to Borrowdale Village Walk using DRIVING
+INFO 2025-06-29 15:30:41,786 views 150188 131150159804096 Distance: 0.8 km, Duration: 2 mins, Traffic: Expected travel time with traffic is 2 mins., Time: 6/29/2025, 3:30:41 PM
+INFO 2025-06-29 15:30:42,056 views 150188 131150022428352 Generating insights for route from Vainona to Borrowdale Village Walk using DRIVING
+INFO 2025-06-29 15:30:42,057 views 150188 131150022428352 Distance: 0.8 km, Duration: 2 mins, Traffic: Expected travel time with traffic is 2 mins., Time: 6/29/2025, 3:30:42 PM
+INFO 2025-06-29 15:30:42,481 views 150188 131150014035648 Generating insights for route from Vainona to Borrowdale Village Walk using DRIVING
+INFO 2025-06-29 15:30:42,483 views 150188 131150014035648 Distance: 0.8 km, Duration: 2 mins, Traffic: Expected travel time with traffic is 2 mins., Time: 6/29/2025, 3:30:42 PM
+INFO 2025-06-29 15:30:42,763 views 150188 131150005642944 Generating insights for route from Vainona to Borrowdale Village Walk using DRIVING
+INFO 2025-06-29 15:30:42,767 views 150188 131150005642944 Distance: 0.8 km, Duration: 2 mins, Traffic: Expected travel time with traffic is 2 mins., Time: 6/29/2025, 3:30:42 PM
+INFO 2025-06-29 15:30:42,959 views 150188 131149997250240 Generating insights for route from Vainona to Borrowdale Village Walk using DRIVING
+INFO 2025-06-29 15:30:42,960 views 150188 131149997250240 Distance: 0.8 km, Duration: 2 mins, Traffic: Expected travel time with traffic is 2 mins., Time: 6/29/2025, 3:30:42 PM
+INFO 2025-06-29 15:30:43,165 views 150188 131149309408960 Generating insights for route from Vainona to Borrowdale Village Walk using DRIVING
+INFO 2025-06-29 15:30:43,166 views 150188 131149309408960 Distance: 0.8 km, Duration: 2 mins, Traffic: Expected travel time with traffic is 2 mins., Time: 6/29/2025, 3:30:43 PM
+INFO 2025-06-29 15:30:43,620 views 150188 131150022428352 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:30:43,621 basehttp 150188 131150022428352 "POST /api/route/gemini-insights/ HTTP/1.1" 200 265
+INFO 2025-06-29 15:30:43,631 views 150188 131150022428352 Generating insights for route from Vainona to Borrowdale Village Walk using DRIVING
+INFO 2025-06-29 15:30:43,634 views 150188 131150022428352 Distance: 0.8 km, Duration: 2 mins, Traffic: Expected travel time with traffic is 2 mins., Time: 6/29/2025, 3:30:43 PM
+INFO 2025-06-29 15:30:43,982 views 150188 131150014035648 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:30:43,984 basehttp 150188 131150014035648 "POST /api/route/gemini-insights/ HTTP/1.1" 200 241
+INFO 2025-06-29 15:30:43,999 views 150188 131150014035648 Generating insights for route from Vainona to Borrowdale Village Walk using DRIVING
+INFO 2025-06-29 15:30:44,001 views 150188 131150014035648 Distance: 0.8 km, Duration: 2 mins, Traffic: Expected travel time with traffic is 2 mins., Time: 6/29/2025, 3:30:43 PM
+INFO 2025-06-29 15:30:44,430 views 150188 131150005642944 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:30:44,432 basehttp 150188 131150005642944 "POST /api/route/gemini-insights/ HTTP/1.1" 200 216
+INFO 2025-06-29 15:30:44,451 views 150188 131150005642944 Generating insights for route from Vainona to Borrowdale Village Walk using DRIVING
+INFO 2025-06-29 15:30:44,454 views 150188 131150005642944 Distance: 0.8 km, Duration: 2 mins, Traffic: Expected travel time with traffic is 2 mins., Time: 6/29/2025, 3:30:43 PM
+INFO 2025-06-29 15:30:44,588 views 150188 131149997250240 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:30:44,590 basehttp 150188 131149997250240 "POST /api/route/gemini-insights/ HTTP/1.1" 200 169
+INFO 2025-06-29 15:30:44,926 views 150188 131150022428352 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:30:44,928 basehttp 150188 131150022428352 "POST /api/route/gemini-insights/ HTTP/1.1" 200 171
+INFO 2025-06-29 15:30:44,980 views 150188 131149309408960 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:30:44,983 basehttp 150188 131149309408960 "POST /api/route/gemini-insights/ HTTP/1.1" 200 337
+INFO 2025-06-29 15:30:45,544 views 150188 131150014035648 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:30:45,545 basehttp 150188 131150014035648 "POST /api/route/gemini-insights/ HTTP/1.1" 200 292
+INFO 2025-06-29 15:30:45,843 views 150188 131150005642944 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:30:45,844 basehttp 150188 131150005642944 "POST /api/route/gemini-insights/ HTTP/1.1" 200 215
+INFO 2025-06-29 15:30:49,151 views 150188 131150159804096 Insights Generated Successfully, sending response...
+INFO 2025-06-29 15:30:49,154 basehttp 150188 131150159804096 "POST /api/route/gemini-insights/ HTTP/1.1" 200 207

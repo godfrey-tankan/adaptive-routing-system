@@ -39,12 +39,12 @@ def _get_ai_insights_for_route(start_location_name, end_location_name, transport
     """Get AI insights using Gemini."""
     try:
         model = genai.GenerativeModel('gemini-2.0-flash')
-        new_distance = int(distance_value.split()[0] if isinstance(distance_value, str) else distance_value)
-        new_duration = int(duration_value.split()[0] if isinstance(duration_value, str) else duration_value)
+        new_distance = float(distance_value.split()[0] if isinstance(distance_value, str) else distance_value)
+        new_duration = float(duration_value.split()[0] if isinstance(duration_value, str) else duration_value)
 
         distance_km = f"{(new_distance / 1000):.1f} km" if new_distance else "unknown distance"
         duration_mins = f"{round(new_duration / 60)} minutes" if duration_value else "unknown duration"
-    
+
         prompt = f"""
         You are a Zimbabwean transportation expert providing route insights for travel within Zimbabwe, 
         particularly focusing on Harare and surrounding areas. Analyze this route from {start_location_name} to {end_location_name}:
