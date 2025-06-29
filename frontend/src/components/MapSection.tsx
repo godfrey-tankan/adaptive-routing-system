@@ -1,16 +1,12 @@
 // src/components/MapSection.tsx
 import React, { useState, useRef, useEffect, memo } from "react";
-// Ensure you are importing from 'react-map-gl/maplibre'
 import Map, { Source, Layer, Marker, NavigationControl, MapRef, ScaleControl, GeolocateControl } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
-import maplibregl, { LngLatBounds } from "maplibre-gl"; // Keep maplibregl for types and LngLatBounds
-import type { AnyLayer } from 'maplibre-gl'; // Keep for types
-import { MapPin, Loader2 } from "lucide-react";
+import maplibregl, { LngLatBounds } from "maplibre-gl";
+import type { AnyLayer } from 'maplibre-gl';
+import { MapPin, Loader2, CarFront } from "lucide-react"; // Added CarFront icon
 
-// IMPORTANT: Use import.meta.env for your API key
 const MAPTILER_API_KEY = import.meta.env.VITE_MAPTILER_API_KEY;
-
-// MapTiler Streets style for the base map
 const DEFAULT_MAP_STYLE = `https://api.maptiler.com/maps/streets/style.json?key=${MAPTILER_API_KEY}`;
 
 interface MapSectionProps {
@@ -18,8 +14,9 @@ interface MapSectionProps {
   startMarker: [number, number] | null;
   endMarker: [number, number] | null;
   isLoading: boolean;
-  // NEW PROP: Callback to pass the map instance up
   onMapInstanceReady?: (map: maplibregl.Map) => void;
+  // NEW PROP: For the simulated vehicle position [longitude, latitude]
+  simulatedVehiclePosition?: [number, number] | null;
 }
 
 const routeLayerStyle: AnyLayer = {
@@ -37,7 +34,7 @@ const routeLayerStyle: AnyLayer = {
 };
 
 export const MapSection: React.FC<MapSectionProps> = memo(
-  ({ routeGeoJSON, startMarker, endMarker, isLoading, onMapInstanceReady }) => { // Include onMapInstanceReady
+  ({ routeGeoJSON, startMarker, endMarker, isLoading, onMapInstanceReady, simulatedVehiclePosition }) => {
     const mapRef = useRef<MapRef | null>(null);
     const [viewState, setViewState] = useState({
       longitude: 31.0531, // Default to Harare, Zimbabwe
@@ -48,12 +45,10 @@ export const MapSection: React.FC<MapSectionProps> = memo(
     useEffect(() => {
       const mapInstance = mapRef.current?.getMap();
 
-      // Pass map instance to parent once it's available
       if (mapInstance && onMapInstanceReady) {
         onMapInstanceReady(mapInstance);
       }
 
-      // Logic to fit map to route or markers (optimized)
       if (mapInstance) {
         if (routeGeoJSON) {
           const bounds = new LngLatBounds();
@@ -71,20 +66,33 @@ export const MapSection: React.FC<MapSectionProps> = memo(
           bounds.extend(endMarker);
           mapInstance.fitBounds(bounds, { padding: 80, duration: 1000 });
         } else if (startMarker) {
-          // If only start marker, fly to it
           mapInstance.flyTo({ center: startMarker, zoom: 14, duration: 1000 });
         } else if (endMarker) {
-          // If only end marker, fly to it (less common, but good to have)
           mapInstance.flyTo({ center: endMarker, zoom: 14, duration: 1000 });
         }
       }
-    }, [routeGeoJSON, startMarker, endMarker, onMapInstanceReady]); // Add onMapInstanceReady to dependencies
+    }, [routeGeoJSON, startMarker, endMarker, onMapInstanceReady]);
+
+    // Effect to keep the simulated vehicle in view (optional, could be refined)
+    useEffect(() => {
+      if (mapRef.current && simulatedVehiclePosition) {
+        // Only pan the map if the vehicle goes out of current view
+        const mapInstance = mapRef.current.getMap();
+        const currentBounds = mapInstance.getBounds();
+        const currentLngLat = new maplibregl.LngLat(simulatedVehiclePosition[0], simulatedVehiclePosition[1]);
+
+        if (!currentBounds.contains(currentLngLat)) {
+          mapInstance.flyTo({ center: simulatedVehiclePosition, speed: 0.8, curve: 1, easing: (t) => t });
+        }
+      }
+    }, [simulatedVehiclePosition]);
+
 
     const onMapLoad = () => {
       console.log("MapGL: Map loaded successfully.");
     };
 
-    const onMapError = (e: any) => { // Use any for error to capture full object
+    const onMapError = (e: any) => {
       console.error("MapGL: Error loading map:", e);
     };
 
@@ -131,6 +139,13 @@ export const MapSection: React.FC<MapSectionProps> = memo(
           {endMarker && (
             <Marker longitude={endMarker[0]} latitude={endMarker[1]} anchor="bottom">
               <MapPin className="text-red-500 w-8 h-8" fill="currentColor" />
+            </Marker>
+          )}
+
+          {/* NEW: Simulated Vehicle Marker */}
+          {simulatedVehiclePosition && (
+            <Marker longitude={simulatedVehiclePosition[0]} latitude={simulatedVehiclePosition[1]} anchor="center">
+              <CarFront className="w-8 h-8 text-blue-600 drop-shadow-md" /> {/* Blue car icon */}
             </Marker>
           )}
         </Map>

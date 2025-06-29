@@ -12,7 +12,7 @@ import axios from 'axios';
 import maplibregl, { LngLatBounds } from "maplibre-gl";
 
 import { PlaceSearchInput, GeoPoint } from '@/components/map/PlaceSearchInput';
-import AIChatCard from './AIChatCard'; // Import the new AI Chat Card
+import AIChatCard from './AIChatCard';
 
 const Maps_API_KEY = import.meta.env.VITE_Maps_API_KEY;
 const OPENWEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
@@ -25,9 +25,9 @@ interface RouteControlPanelProps {
 
 interface WeatherData {
   description: string;
-  temperature: number; // in Celsius
-  humidity: number; // in %
-  windSpeed: number; // in m/s
+  temperature: number;
+  humidity: number;
+  windSpeed: number;
   icon: string;
 }
 
@@ -38,13 +38,11 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
 }) => {
   const [startPoint, setStartPoint] = useState<GeoPoint | null>(null);
   const [endPoint, setEndPoint] = useState<GeoPoint | null>(null);
-
   const [routeOptions, setRouteOptions] = useState({
-    transportMode: 'DRIVING', // Google Directions API uses uppercase modes
+    transportMode: 'DRIVING',
     avoidHighways: false,
     avoidTolls: false
   });
-
   const [routeResults, setRouteResults] = useState<any>(null);
   const [isPanelLoading, setIsPanelLoading] = useState(false);
   const [currentWeather, setCurrentWeather] = useState<WeatherData | null>(null);
@@ -54,7 +52,7 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
     updateMapWithRoute(
       startPoint ? startPoint.coordinates : null,
       endPoint ? endPoint.coordinates : null,
-      null // Clear route when points change
+      null
     );
 
     if (mapInstance) {
@@ -87,7 +85,11 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
       } as WeatherData;
     } catch (error) {
       console.error("Error fetching weather data:", error);
-      toast({ title: "Weather Fetch Failed", description: "Could not retrieve current weather.", variant: "destructive" });
+      toast({
+        title: "Weather Fetch Failed",
+        description: "Could not retrieve current weather.",
+        variant: "destructive"
+      });
       return null;
     } finally {
       setIsWeatherLoading(false);
@@ -96,9 +98,7 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
 
   useEffect(() => {
     if (startPoint) {
-      fetchWeather(startPoint.coordinates).then(weather => {
-        setCurrentWeather(weather);
-      });
+      fetchWeather(startPoint.coordinates).then(setCurrentWeather);
     } else {
       setCurrentWeather(null);
     }
@@ -113,30 +113,33 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
   ) => {
     if (!Maps_API_KEY) {
       console.error("Google Maps API Key is missing for Directions API.");
-      toast({ title: "API Key Missing", description: "Google Maps API Key not configured for directions.", variant: "destructive" });
+      toast({
+        title: "API Key Missing",
+        description: "Google Maps API Key not configured for directions.",
+        variant: "destructive"
+      });
       return null;
     }
 
-    const googleMode = profile; // DRIVING, WALKING, BICYCLING, TRANSIT
-
+    const googleMode = profile;
     let url = `https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${startPlaceId}&destination=place_id:${endPlaceId}&mode=${googleMode}&key=${Maps_API_KEY}`;
+    const avoidParams = [];
 
-    if (avoidHighways) {
-      url += `&avoid=highways`;
-    }
-    if (avoidTolls) {
-      url += `&avoid=tolls`;
+    if (avoidHighways) avoidParams.push('highways');
+    if (avoidTolls) avoidParams.push('tolls');
+
+    if (avoidParams.length > 0) {
+      url += `&avoid=${avoidParams.join('|')}`;
     }
 
     if (googleMode === 'DRIVING') {
-      url += `&departure_time=now&traffic_model=best_guess`; // Real-time traffic
+      url += `&departure_time=now&traffic_model=best_guess`;
     }
 
     console.log("RouteControlPanel: Google Directions API URL:", url);
     try {
       const response = await axios.get(url);
       const data = response.data;
-      console.log("RouteControlPanel: Google Directions API full response:", data);
 
       if (data.routes && data.routes.length > 0) {
         const route = data.routes[0];
@@ -148,18 +151,18 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
           coordinates: decodedPath,
         };
 
-        const durationInTraffic = route.legs[0]?.duration_in_traffic?.value || route.legs[0]?.duration?.value; // In seconds
-        const distance = route.legs[0]?.distance?.value || 0; // In meters
+        const durationInTraffic = route.legs[0]?.duration_in_traffic?.value || route.legs[0]?.duration?.value;
+        const distance = route.legs[0]?.distance?.value || 0;
 
         return {
           geoJSON: geoJSONLineString,
           distance: `${(distance / 1000).toFixed(1)} km`,
           duration: `${Math.round(durationInTraffic / 60)} mins`,
-          fuelCost: "ZWL $XX.XX", // Placeholder, requires external calculation
+          fuelCost: "ZWL $XX.XX",
           alternatives: data.routes.length > 1 ? data.routes.length - 1 : 0,
-          avoidHighways: avoidHighways, // Pass options to AI Card
-          avoidTolls: avoidTolls,
-          transportMode: transportMode
+          avoidHighways,
+          avoidTolls,
+          transportMode: profile
         };
       }
       console.warn("RouteControlPanel: No routes found in Google Directions API response.");
@@ -187,7 +190,7 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
 
     setIsPanelLoading(true);
     setIsLoadingMapAndRoute(true);
-    setRouteResults(null); // Clear previous results
+    setRouteResults(null);
 
     try {
       const results = await getRoute(
@@ -217,7 +220,7 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
         updateMapWithRoute(null, null, null);
       }
     } catch (error) {
-      console.error("RouteControlPanel: Uncaught error during route optimization process:", error);
+      console.error("RouteControlPanel: Uncaught error during route optimization:", error);
       toast({
         title: "An Unexpected Error Occurred",
         description: "Please check your network connection and try again.",
@@ -230,9 +233,8 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
     }
   };
 
-  // Helper function to decode Google Encoded Polylines
   const decodePolyline = (encoded: string): [number, number][] => {
-    let poly = [];
+    const poly = [];
     let index = 0, len = encoded.length;
     let lat = 0, lng = 0;
 
@@ -256,7 +258,7 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
       let dlng = ((result & 1) ? ~(result >> 1) : (result >> 1));
       lng += dlng;
 
-      poly.push([lng / 1E5, lat / 1E5]); // [longitude, latitude]
+      poly.push([lng / 1E5, lat / 1E5]);
     }
     return poly;
   };
@@ -303,7 +305,7 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="DRIVING">🚗 Private Car</SelectItem>
-                <SelectItem value="TRANSIT">🚌 Kombi (Transit Profile)</SelectItem>
+                <SelectItem value="TRANSIT">🚌 Kombi (Transit)</SelectItem>
                 <SelectItem value="WALKING">🚶 Walking</SelectItem>
                 <SelectItem value="BICYCLING">🚴 Bicycle</SelectItem>
               </SelectContent>
@@ -357,7 +359,11 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
           </CardHeader>
           <CardContent className="flex items-center justify-between">
             <div className="flex items-center">
-              <img src={currentWeather.icon} alt={currentWeather.description} className="w-12 h-12 mr-2" />
+              <img
+                src={currentWeather.icon}
+                alt={currentWeather.description}
+                className="w-12 h-12 mr-2"
+              />
               <div>
                 <p className="text-lg font-semibold">{currentWeather.temperature}°C</p>
                 <p className="text-sm text-muted-foreground capitalize">{currentWeather.description}</p>

@@ -1,5 +1,5 @@
 // src/components/map/PlaceSearchInput.tsx
-import React, { useState, useEffect, useRef, useCallback } from 'react'; // Added useCallback
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Input } from '@/components/ui/input';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -7,15 +7,12 @@ import { Check, Search, XCircle, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useDebounce } from '@/hooks/use-debounce';
 import { toast } from '@/hooks/use-toast';
-// Import Google Maps types for TypeScript
-import type { } from '@types/google.maps';
 
-// Define a type for a geographic point
 export type GeoPoint = {
-    name: string; // The primary name of the place
-    coordinates: [number, number]; // [longitude, latitude]
-    address: string; // Full address
-    placeId: string; // Google Place ID
+    name: string;
+    coordinates: [number, number];
+    address: string;
+    placeId: string;
 };
 
 interface PlaceSearchInputProps {
@@ -28,14 +25,15 @@ interface PlaceSearchInputProps {
 
 declare global {
     interface Window {
-        google: typeof import('@googlemaps/google-maps-services-js').google.maps;
+        google: any;
     }
 }
 
-// Component function for use with React.memo
-const minLettersForSearch = 4;
+const MIN_LETTERS_FOR_SEARCH = 4;
+const DEBOUNCE_TIME = 800;
+const MAX_PREDICTIONS = 5;
 
-export const PlaceSearchInput: React.FC<PlaceSearchInputProps> = ({
+const PlaceSearchInputComponent: React.FC<PlaceSearchInputProps> = ({
     value,
     onSelect,
     placeholder = 'Search for a location...',
@@ -46,173 +44,269 @@ export const PlaceSearchInput: React.FC<PlaceSearchInputProps> = ({
     const [inputValue, setInputValue] = useState(value ? value.name : '');
     const [searchResults, setSearchResults] = useState<GeoPoint[]>([]);
     const [isLoading, setIsLoading] = useState(false);
-    const debouncedSearchTerm = useDebounce(inputValue, 500);
+    const [serviceStatus, setServiceStatus] = useState<'idle' | 'initializing' | 'ready' | 'error'>('idle');
+    const debouncedSearchTerm = useDebounce(inputValue, DEBOUNCE_TIME);
 
-    // New state for "4 new letters" logic
-    const [lastSearchInputLength, setLastSearchInputLength] = useState(0);
+    const autocompleteServiceRef = useRef<any>(null);
+    const placesServiceRef = useRef<any>(null);
+    const lastRequestIdRef = useRef(0);
+    const isMountedRef = useRef(true);
 
-    const autocompleteServiceRef = useRef<google.maps.places.AutocompleteService | null>(null);
-    const placesServiceRef = useRef<google.maps.places.PlacesService | null>(null);
+    // Debug log function
+    const debugLog = (message: string, data?: any) => {
+        console.log(`[PlaceSearchInput] ${message}`, data || '');
+    };
 
-    // Effect to initialize Google Maps services
+    // Initialize Google Maps services
     useEffect(() => {
-        const checkGoogleMaps = () => {
-            if (window.google && window.google.maps && window.google.maps.places) {
-                if (!autocompleteServiceRef.current) {
-                    autocompleteServiceRef.current = new window.google.maps.places.AutocompleteService();
+        isMountedRef.current = true;
+        setServiceStatus('initializing');
+        debugLog('Component mounted, initializing services');
+
+        const initServices = () => {
+            if (!isMountedRef.current) return;
+
+            if (window.google?.maps?.places) {
+                try {
+                    debugLog('Google Maps API detected, initializing services');
+
+                    // Try to use AutocompleteService (legacy)
+                    if (window.google.maps.places.AutocompleteService) {
+                        autocompleteServiceRef.current = new window.google.maps.places.AutocompleteService();
+                        debugLog('AutocompleteService initialized');
+                    }
+
+                    placesServiceRef.current = new window.google.maps.places.PlacesService(
+                        document.createElement('div')
+                    );
+                    debugLog('PlacesService initialized');
+
+                    setServiceStatus('ready');
+                } catch (error) {
+                    debugLog('Error initializing services', error);
+                    setServiceStatus('error');
+                    toast({
+                        title: "Map Service Error",
+                        description: "Failed to initialize map services",
+                        variant: "destructive"
+                    });
                 }
-                if (!placesServiceRef.current) {
-                    placesServiceRef.current = new window.google.maps.places.PlacesService(document.createElement('div'));
-                }
-                console.log("PlaceSearchInput: Google Maps Places services initialized.");
             } else {
-                console.warn("PlaceSearchInput: Google Maps JavaScript API or Places library not loaded yet. Retrying in 100ms...");
-                setTimeout(checkGoogleMaps, 100);
+                debugLog('Google Maps API not loaded yet, retrying...');
+                setTimeout(initServices, 300);
             }
         };
 
-        checkGoogleMaps();
+        initServices();
+
+        return () => {
+            debugLog('Component unmounting');
+            isMountedRef.current = false;
+        };
     }, []);
 
-    // Effect to synchronize inputValue with the external 'value' prop
+    // Sync input value with external value
     useEffect(() => {
-        if (value) {
-            if (value.name !== inputValue) {
-                setInputValue(value.name);
-                setLastSearchInputLength(value.name.length);
-            }
-        } else if (inputValue !== '') {
+        if (value && value.name !== inputValue) {
+            debugLog('External value changed, updating input', value);
+            setInputValue(value.name);
+        } else if (!value && inputValue !== '') {
+            debugLog('External value cleared, resetting input');
             setInputValue('');
-            setLastSearchInputLength(0); // Reset length when input is cleared
         }
-    }, [value]); // Only depend on 'value' to react to external changes
+    }, [value]);
 
+    // Main search effect
     useEffect(() => {
-        const fetchPlaces = async () => { // Made async for potential future async operations if needed
-            console.log("PlaceSearchInput: Debounced search term changed:", debouncedSearchTerm);
+        if (!isMountedRef.current || serviceStatus !== 'ready') {
+            debugLog('Skipping search - component not ready', {
+                mounted: isMountedRef.current,
+                serviceStatus
+            });
+            return;
+        }
 
-            const currentInputLength = debouncedSearchTerm.length;
+        const currentInput = debouncedSearchTerm.trim();
+        const currentInputLength = currentInput.length;
 
-            if (!debouncedSearchTerm || currentInputLength < minLettersForSearch) {
-                console.log("PlaceSearchInput: Search term is empty or too short, clearing results.");
-                setSearchResults([]);
-                setIsLoading(false);
-                setLastSearchInputLength(0); // Reset length when input is cleared
-                return;
-            }
+        debugLog('Debounced search term changed', {
+            term: currentInput,
+            length: currentInputLength
+        });
 
-            if (!autocompleteServiceRef.current || !placesServiceRef.current) {
-                console.warn("PlaceSearchInput: Google Maps services not ready. Cannot search yet.");
-                setIsLoading(false);
-                return;
-            }
+        // Skip if search term is too short
+        if (currentInputLength < MIN_LETTERS_FOR_SEARCH) {
+            debugLog('Search term too short, clearing results');
+            if (searchResults.length > 0) setSearchResults([]);
+            return;
+        }
 
-            setIsLoading(true);
+        const requestId = ++lastRequestIdRef.current;
+        setIsLoading(true);
+        debugLog('Starting search request', { requestId });
+
+        const requestConfig: any = {
+            input: currentInput,
+            componentRestrictions: { country: 'zw' },
+            types: ['geocode', 'establishment'],
+        };
+
+        if (currentMapCenter) {
+            requestConfig.locationBias = {
+                center: new window.google.maps.LatLng(currentMapCenter[1], currentMapCenter[0]),
+                radius: 50000,
+            };
+            debugLog('Added location bias to request', requestConfig.locationBias);
+        }
+
+        // Get predictions
+        const getPredictions = () => {
+            return new Promise<any[]>((resolve) => {
+                debugLog('Getting place predictions');
+
+                if (autocompleteServiceRef.current?.getPlacePredictions) {
+                    autocompleteServiceRef.current.getPlacePredictions(
+                        requestConfig,
+                        (predictions: any[], status: string) => {
+                            debugLog('Received place predictions', {
+                                status,
+                                count: predictions?.length || 0
+                            });
+
+                            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                                resolve(predictions || []);
+                            } else {
+                                debugLog('Prediction error', status);
+                                toast({
+                                    title: "Search Error",
+                                    description: `Failed to get predictions: ${status}`,
+                                    variant: "destructive"
+                                });
+                                resolve([]);
+                            }
+                        }
+                    );
+                } else {
+                    debugLog('AutocompleteService not available');
+                    resolve([]);
+                }
+            });
+        };
+
+        // Process predictions
+        const processPredictions = async () => {
             try {
-                const request: google.maps.places.AutocompletionRequest = {
-                    input: debouncedSearchTerm,
-                    componentRestrictions: { country: 'zw' },
-                    types: ['geocode', 'establishment'],
-                };
+                const predictions = await getPredictions();
 
-                if (currentMapCenter) {
-                    if (currentMapCenter[0] !== undefined && currentMapCenter[1] !== undefined) {
-                        request.locationBias = {
-                            center: new window.google.maps.LatLng(currentMapCenter[1], currentMapCenter[0]),
-                            radius: 50000,
-                        };
-                        console.log("PlaceSearchInput: Adding location bias:", request.locationBias);
-                    } else {
-                        console.warn("PlaceSearchInput: currentMapCenter is invalid, not applying location bias.");
-                    }
+                // Skip if request is outdated
+                if (requestId !== lastRequestIdRef.current || !isMountedRef.current) {
+                    debugLog('Skipping outdated request', { requestId });
+                    return;
                 }
 
-                console.log("PlaceSearchInput: Calling getPlacePredictions with request:", request);
-                autocompleteServiceRef.current.getPlacePredictions(request, (predictions, status) => {
-                    console.log("PlaceSearchInput: getPlacePredictions callback - Status:", status, "Predictions:", predictions);
+                // Limit predictions to reduce requests
+                const limitedPredictions = predictions.slice(0, MAX_PREDICTIONS);
+                debugLog('Processing predictions', {
+                    total: predictions.length,
+                    limited: limitedPredictions.length
+                });
 
-                    if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions && predictions.length > 0) {
-                        // Crucially, update lastSearchInputLength ONLY on a successful API response
-                        setLastSearchInputLength(currentInputLength);
+                if (limitedPredictions.length === 0) {
+                    debugLog('No predictions to process');
+                    setSearchResults([]);
+                    setIsLoading(false);
+                    return;
+                }
 
-                        const detailedResultsPromises = predictions.map((prediction) => {
-                            return new Promise<GeoPoint | null>((resolve) => {
-                                if (placesServiceRef.current) {
-                                    placesServiceRef.current.getDetails(
-                                        {
-                                            placeId: prediction.place_id,
-                                            fields: ['geometry', 'name', 'formatted_address'],
-                                        },
-                                        (place, detailsStatus) => {
-                                            if (detailsStatus === window.google.maps.places.PlacesServiceStatus.OK && place && place.geometry && place.geometry.location) {
-                                                resolve({
-                                                    name: place.name || prediction.description,
-                                                    coordinates: [place.geometry.location.lng(), place.geometry.location.lat()],
-                                                    address: place.formatted_address || prediction.description,
-                                                    placeId: prediction.place_id,
-                                                });
-                                            } else {
-                                                console.warn(`Could not get full details for ${prediction.description} (status: ${detailsStatus}). Using prediction info.`);
-                                                resolve({
-                                                    name: prediction.description,
-                                                    coordinates: [0, 0],
-                                                    address: prediction.description,
-                                                    placeId: prediction.place_id,
-                                                });
-                                            }
-                                        }
-                                    );
+                // Fetch details for each prediction
+                const detailsPromises = limitedPredictions.map(prediction => {
+                    return new Promise<GeoPoint | null>((resolve) => {
+                        debugLog('Fetching place details', { placeId: prediction.place_id });
+
+                        placesServiceRef.current?.getDetails(
+                            {
+                                placeId: prediction.place_id,
+                                fields: ['geometry', 'name', 'formatted_address']
+                            },
+                            (place: any, status: string) => {
+                                if (status === window.google.maps.places.PlacesServiceStatus.OK && place?.geometry?.location) {
+                                    debugLog('Successfully fetched place details', {
+                                        name: place.name,
+                                        placeId: prediction.place_id
+                                    });
+
+                                    resolve({
+                                        name: place.name || prediction.description,
+                                        coordinates: [
+                                            place.geometry.location.lng(),
+                                            place.geometry.location.lat()
+                                        ],
+                                        address: place.formatted_address || prediction.description,
+                                        placeId: prediction.place_id,
+                                    });
                                 } else {
-                                    console.error("PlaceSearchInput: PlacesService is not available when trying to get details.");
+                                    debugLog('Failed to fetch place details', {
+                                        status,
+                                        placeId: prediction.place_id
+                                    });
                                     resolve(null);
                                 }
-                            });
-                        });
-
-                        Promise.all(detailedResultsPromises).then((results) => {
-                            setSearchResults(results.filter(Boolean) as GeoPoint[]);
-                            setIsLoading(false);
-                        });
-                    } else if (status === window.google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
-                        console.log("PlaceSearchInput: No results found for query.");
-                        setSearchResults([]);
-                        setIsLoading(false);
-                        setLastSearchInputLength(currentInputLength); // Still update length to avoid re-triggering immediately on next key
-                    } else {
-                        console.error("PlaceSearchInput: Error fetching Google Places predictions:", status);
-                        toast({ title: "Search Error", description: `Failed to fetch place suggestions: ${status}.`, variant: "destructive" });
-                        setSearchResults([]);
-                        setIsLoading(false);
-                        setLastSearchInputLength(currentInputLength); // Still update length to avoid re-triggering immediately on next key
-                    }
+                            }
+                        );
+                    });
                 });
-            } catch (error) {
-                console.error("PlaceSearchInput: An unhandled error occurred with Google Places API request:", error);
-                toast({ title: "Search Error", description: "An unexpected error occurred while searching for places.", variant: "destructive" });
-                setSearchResults([]);
+
+                const results = await Promise.all(detailsPromises);
+                const validResults = results.filter(Boolean) as GeoPoint[];
+
+                debugLog('Processed place details', {
+                    requested: limitedPredictions.length,
+                    valid: validResults.length
+                });
+
+                // Skip if request is outdated
+                if (requestId !== lastRequestIdRef.current || !isMountedRef.current) {
+                    debugLog('Skipping outdated results', { requestId });
+                    return;
+                }
+
+                setSearchResults(validResults);
                 setIsLoading(false);
+
+            } catch (error) {
+                debugLog('Error in search process', error);
+
+                if (requestId === lastRequestIdRef.current && isMountedRef.current) {
+                    setIsLoading(false);
+                    setSearchResults([]);
+                    toast({
+                        title: "Search Error",
+                        description: "An error occurred during search",
+                        variant: "destructive"
+                    });
+                }
             }
         };
 
-        fetchPlaces();
-    }, [debouncedSearchTerm, currentMapCenter, lastSearchInputLength]); // ADD lastSearchInputLength to dependencies
+        processPredictions();
 
-    // Memoize handleSelect and handleClear to prevent new function references on every render,
-    // which helps if they were passed down as props to memoized children (though not directly here)
+    }, [debouncedSearchTerm, currentMapCenter, serviceStatus]);
+
     const handleSelect = useCallback((selectedPoint: GeoPoint) => {
+        debugLog('Place selected', selectedPoint);
         setInputValue(selectedPoint.name);
         onSelect(selectedPoint);
         setOpen(false);
-        setLastSearchInputLength(selectedPoint.name.length); // Update length when a selection is made
     }, [onSelect]);
 
     const handleClear = useCallback((e: React.MouseEvent) => {
         e.stopPropagation();
+        debugLog('Clearing search');
         setInputValue('');
         setSearchResults([]);
         onSelect(null);
         setOpen(false);
-        setLastSearchInputLength(0); // Reset length when input is cleared
+        lastRequestIdRef.current++; // Cancel any pending requests
     }, [onSelect]);
 
     return (
@@ -244,14 +338,21 @@ export const PlaceSearchInput: React.FC<PlaceSearchInputProps> = ({
                         className="sr-only"
                     />
                     <CommandList>
-                        {isLoading ? (
+                        {serviceStatus !== 'ready' ? (
+                            <div className="py-6 text-center text-sm text-muted-foreground flex items-center justify-center">
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                {serviceStatus === 'error'
+                                    ? "Map service unavailable"
+                                    : "Initializing map services..."}
+                            </div>
+                        ) : isLoading ? (
                             <div className="py-6 text-center text-sm text-muted-foreground flex items-center justify-center">
                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Searching...
                             </div>
-                        ) : searchResults.length === 0 && debouncedSearchTerm && debouncedSearchTerm.length >= minLettersForSearch ? (
-                            <CommandEmpty>No results found for "{debouncedSearchTerm}".</CommandEmpty>
-                        ) : searchResults.length === 0 && (!debouncedSearchTerm || debouncedSearchTerm.length < minLettersForSearch) ? (
-                            <CommandEmpty>Start typing to search for a place (min {minLettersForSearch} letters).</CommandEmpty>
+                        ) : searchResults.length === 0 && inputValue.length >= MIN_LETTERS_FOR_SEARCH ? (
+                            <CommandEmpty>No results found for "{inputValue}"</CommandEmpty>
+                        ) : searchResults.length === 0 ? (
+                            <CommandEmpty>Type at least {MIN_LETTERS_FOR_SEARCH} characters to search</CommandEmpty>
                         ) : (
                             <CommandGroup>
                                 {searchResults.map((point) => (
@@ -286,5 +387,4 @@ export const PlaceSearchInput: React.FC<PlaceSearchInputProps> = ({
     );
 };
 
-// Export the memoized component
-export const MemoizedPlaceSearchInput = React.memo(PlaceSearchInput);
+export const PlaceSearchInput = React.memo(PlaceSearchInputComponent);
