@@ -24,7 +24,7 @@ interface AIChatCardProps {
 const AIChatCard: React.FC<AIChatCardProps> = memo(({ routeDetails, startPoint, endPoint, weather }) => {
     const [aiInsights, setAiInsights] = useState<string | null>(null);
     const [isGenerating, setIsGenerating] = useState(false);
-
+    const lastResquestTime = localStorage.getItem('lastRequestTime');
     const generateAIInsights = useCallback(async () => {
         if (!routeDetails || !startPoint || !endPoint) {
             setAiInsights("Please calculate a route first to get AI insights.");
@@ -35,6 +35,15 @@ const AIChatCard: React.FC<AIChatCardProps> = memo(({ routeDetails, startPoint, 
 
         try {
             // This URL should point to your Django backend endpoint
+            // Ensure lastRequestTime is a valid ISO string; parse it safely
+            if (lastResquestTime) {
+                const lastTime = Date.parse(lastResquestTime);
+                if (!isNaN(lastTime) && Date.now() - lastTime < 20000) {
+                    setAiInsights("Please wait at least 20 seconds before requesting new insights.");
+                    setIsGenerating(false);
+                    return; // Prevent too frequent requests
+                }
+            }
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/route/gemini-insights/`, {
                 start_location: startPoint.name,
                 end_location: endPoint.name,
@@ -48,6 +57,7 @@ const AIChatCard: React.FC<AIChatCardProps> = memo(({ routeDetails, startPoint, 
                 transport_mode: routeDetails.transportMode,
                 current_time: new Date().toLocaleString(),
             });
+            localStorage.setItem('lastRequestTime', new Date().toISOString());
 
             if (response.data && response.data.insights) {
                 setAiInsights(response.data.insights);

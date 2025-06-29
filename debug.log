@@ -1606,3 +1606,6 @@ WARNING 2025-06-29 14:15:36,955 log 120036 128794783381184 Too Many Requests: /a
 WARNING 2025-06-29 14:15:36,956 basehttp 120036 128794783381184 "POST /api/route/gemini-insights/ HTTP/1.1" 429 55
 WARNING 2025-06-29 14:15:40,708 log 120036 128794783381184 Too Many Requests: /api/users/token/refresh/
 WARNING 2025-06-29 14:15:40,709 basehttp 120036 128794783381184 "POST /api/users/token/refresh/ HTTP/1.1" 429 55
+INFO 2025-06-29 14:51:08,199 autoreload 135198 126927996739712 Watching for file changes with StatReloader
+INFO 2025-06-29 14:51:11,672 autoreload 135198 126927996739712 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 14:51:12,557 autoreload 135254 132270741794944 Watching for file changes with StatReloader
