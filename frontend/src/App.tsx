@@ -29,7 +29,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <Loader2 className="h-16 w-16 animate-spin text-primary" />
-        <p className="ml-4 text-lg text-gray-600">Checking authentication...</p>
+        <p className="ml-4 text-lg text-gray-600"></p>
       </div>
     );
   }

@@ -23,7 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users/', include('users.urls')), # User authentication and management
-    path('api/routing/', include('routing.urls')), # Routing API endpoints
+    path('api/route/', include('routing.urls')), # Routing API endpoints
     path('api/ai/', include('ai_services.urls')), # Placeholder for AI services if direct exposure is needed
 ]
 

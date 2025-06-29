@@ -35,7 +35,7 @@ const AIChatCard: React.FC<AIChatCardProps> = memo(({ routeDetails, startPoint, 
 
         try {
             // This URL should point to your Django backend endpoint
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/gemini-insights/`, {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/route/gemini-insights/`, {
                 start_location: startPoint.name,
                 end_location: endPoint.name,
                 distance: routeDetails.distance,

@@ -3,12 +3,15 @@ import logging
 from django.conf import settings
 from django.contrib.gis.geos import Point
 from .utils import anonymize_location # Now this import is valid!
-
+import os
 logger = logging.getLogger(__name__)
+from dotenv import load_dotenv
+
+load_dotenv(override=True) 
 
 class GoogleMapsService:
     def __init__(self):
-        self.client = googlemaps.Client(key=settings.Maps_API_KEY)
+        self.client = googlemaps.Client(key=os.getenv("Maps_API_KEY"))
     
     def get_route(self, origin: Point, destination: Point, mode='driving', avoid=None):
         """Get optimized route from Google Maps API"""

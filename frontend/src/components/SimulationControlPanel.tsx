@@ -80,44 +80,53 @@ export const SimulationControlPanel: React.FC<SimulationControlPanelProps> = ({
         endPlaceId: string,
         mode: string,
     ) => {
-        if (!GOOGLE_MAPS_API_KEY) {
-            toast({ title: "API Key Missing", description: "Google Maps API Key not configured for directions.", variant: "destructive" });
-            return null;
-        }
-
-        let url = `https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${startPlaceId}&destination=place_id:${endPlaceId}&mode=${mode}&key=${GOOGLE_MAPS_API_KEY}&departure_time=now&traffic_model=best_guess`;
-
         try {
-            const response = await axios.get(url);
+            // Call your backend instead of Google directly
+            const response = await axios.post('/api/simulate/', {
+                startPlaceId,
+                endPlaceId,
+                mode,
+                departureTime: 'now',
+                trafficModel: 'best_guess'
+            });
+
             const data = response.data;
 
-            if (data.routes && data.routes.length > 0) {
-                const route = data.routes[0];
-                const overviewPolyline = route.overview_polyline.points;
-                const decodedPath = decodePolyline(overviewPolyline);
+            if (data.route) {
+                const route = data.route;
+                const decodedPath = decodePolyline(route.overview_polyline.points);
+
+                const geoJSONFeature = {
+                    type: 'Feature',
+                    geometry: {
+                        type: 'LineString',
+                        coordinates: decodedPath,
+                    },
+                    properties: {}
+                };
 
                 return {
-                    geoJSON: {
-                        type: 'Feature',
-                        geometry: {
-                            type: 'LineString',
-                            coordinates: decodedPath,
-                        },
-                        properties: {}
-                    },
-                    distance: route.legs[0]?.distance?.value || 0, // meters
-                    duration: route.legs[0]?.duration_in_traffic?.value || route.legs[0]?.duration?.value || 0, // seconds
+                    geoJSON: geoJSONFeature,
+                    distance: route.distance.value || 0,
+                    duration: route.duration_in_traffic?.value || route.duration?.value || 0,
+                    rawCoordinates: decodedPath
                 };
             }
+
             toast({ title: "No Route Found", description: "Could not find a route between the selected locations.", variant: "destructive" });
             return null;
         } catch (error: any) {
-            console.error("Error fetching Google route:", error.response?.data || error.message);
-            toast({ title: "Route Calculation Failed", description: `Could not calculate route: ${error.response?.data?.error_message || error.message}.`, variant: "destructive" });
+            console.error("Error fetching route:", error);
+            toast({
+                title: "Route Calculation Failed",
+                description: error.response?.data?.message || "Could not calculate route.",
+                variant: "destructive"
+            });
             return null;
         }
-    }, [GOOGLE_MAPS_API_KEY, decodePolyline, toast]);
+    }, [decodePolyline, toast]);
 
+    // Update the handleCalculateRoute function
     const handleCalculateRoute = async () => {
         if (!startPoint || !endPoint) {
             toast({
@@ -129,10 +138,10 @@ export const SimulationControlPanel: React.FC<SimulationControlPanelProps> = ({
         }
 
         setIsCalculatingRoute(true);
-        setIsMapLoading(true); // Indicate map loading
-        setCalculatedRouteData(null); // Clear previous route data
-        onRouteCalculated(null, null, null); // Clear map route/markers
-        onSimulatedPositionUpdate(null); // Clear simulated position
+        setIsMapLoading(true);
+        setCalculatedRouteData(null);
+        onRouteCalculated(null, null, null);
+        onSimulatedPositionUpdate(null);
 
         try {
             const routeData = await getRoute(
@@ -144,15 +153,14 @@ export const SimulationControlPanel: React.FC<SimulationControlPanelProps> = ({
             if (routeData) {
                 setCalculatedRouteData(routeData);
                 onRouteCalculated(routeData.geoJSON, startPoint.coordinates, endPoint.coordinates);
-                routeCoordinates.current = routeData.geoJSON.geometry.coordinates; // Store coordinates for animation
-                onSimulatedPositionUpdate(routeCoordinates.current[0]); // Place vehicle at start
+                routeCoordinates.current = routeData.rawCoordinates; // Use the raw coordinates
+                onSimulatedPositionUpdate(routeCoordinates.current[0]);
 
                 toast({
                     title: "Route Loaded",
                     description: `Route ready for simulation! Distance: ${(routeData.distance / 1000).toFixed(1)} km, Duration: ${Math.round(routeData.duration / 60)} min.`,
                 });
 
-                // Fit map to the route after calculation
                 if (mapInstance && routeData.geoJSON) {
                     const bounds = new LngLatBounds();
                     routeData.geoJSON.geometry.coordinates.forEach((coord: [number, number]) => {
@@ -167,7 +175,7 @@ export const SimulationControlPanel: React.FC<SimulationControlPanelProps> = ({
         }
     };
 
-    // Simulation Animation Loop
+    // Update the animateVehicle function to use rawCoordinates
     const animateVehicle = useCallback((timestamp: DOMHighResTimeStamp) => {
         if (!isPlaying || !calculatedRouteData || !routeCoordinates.current || calculatedRouteData.duration === 0) {
             animationFrameId.current = null;
@@ -178,14 +186,13 @@ export const SimulationControlPanel: React.FC<SimulationControlPanelProps> = ({
             simulationStartTime.current = timestamp;
         }
 
-        const elapsedRealTime = timestamp - simulationStartTime.current; // Milliseconds
-        const simulatedDuration = calculatedRouteData.duration * 1000; // Convert route duration to milliseconds
-        const currentSimulatedTime = (elapsedRealTime * simulationSpeed[0]); // Scale by speed
+        const elapsedRealTime = timestamp - simulationStartTime.current;
+        const simulatedDuration = calculatedRouteData.duration * 1000;
+        const currentSimulatedTime = (elapsedRealTime * simulationSpeed[0]);
 
-        // Check if simulation is complete
         if (currentSimulatedTime >= simulatedDuration) {
             setCurrentSimulationTime(simulatedDuration);
-            onSimulatedPositionUpdate(routeCoordinates.current[routeCoordinates.current.length - 1]); // End at final point
+            onSimulatedPositionUpdate(routeCoordinates.current[routeCoordinates.current.length - 1]);
             setIsPlaying(false);
             animationFrameId.current = null;
             return;
@@ -193,11 +200,9 @@ export const SimulationControlPanel: React.FC<SimulationControlPanelProps> = ({
 
         setCurrentSimulationTime(currentSimulatedTime);
 
-        // Find the current position on the route based on simulated time
         const progressRatio = currentSimulatedTime / simulatedDuration;
         const totalSegments = routeCoordinates.current.length - 1;
         const currentSegmentIndex = Math.min(Math.floor(progressRatio * totalSegments), totalSegments - 1);
-
         const segmentProgress = (progressRatio * totalSegments) - currentSegmentIndex;
 
         const startCoord = routeCoordinates.current[currentSegmentIndex];
@@ -212,6 +217,96 @@ export const SimulationControlPanel: React.FC<SimulationControlPanelProps> = ({
         animationFrameId.current = requestAnimationFrame(animateVehicle);
     }, [isPlaying, calculatedRouteData, simulationSpeed, onSimulatedPositionUpdate]);
 
+    // Update the handleCalculateRoute function
+    // const handleCalculateRoute = async () => {
+    //     if (!startPoint || !endPoint) {
+    //         toast({
+    //             title: "Missing Information",
+    //             description: "Please select both a start and an end location.",
+    //             variant: "destructive",
+    //         });
+    //         return;
+    //     }
+
+    //     setIsCalculatingRoute(true);
+    //     setIsMapLoading(true);
+    //     setCalculatedRouteData(null);
+    //     onRouteCalculated(null, null, null);
+    //     onSimulatedPositionUpdate(null);
+
+    //     try {
+    //         const routeData = await getRoute(
+    //             startPoint.placeId,
+    //             endPoint.placeId,
+    //             transportMode
+    //         );
+
+    //         if (routeData) {
+    //             setCalculatedRouteData(routeData);
+    //             onRouteCalculated(routeData.geoJSON, startPoint.coordinates, endPoint.coordinates);
+    //             routeCoordinates.current = routeData.rawCoordinates; // Use the raw coordinates
+    //             onSimulatedPositionUpdate(routeCoordinates.current[0]);
+
+    //             toast({
+    //                 title: "Route Loaded",
+    //                 description: `Route ready for simulation! Distance: ${(routeData.distance / 1000).toFixed(1)} km, Duration: ${Math.round(routeData.duration / 60)} min.`,
+    //             });
+
+    //             if (mapInstance && routeData.geoJSON) {
+    //                 const bounds = new LngLatBounds();
+    //                 routeData.geoJSON.geometry.coordinates.forEach((coord: [number, number]) => {
+    //                     bounds.extend(coord);
+    //                 });
+    //                 mapInstance.fitBounds(bounds, { padding: 80, duration: 1000 });
+    //             }
+    //         }
+    //     } finally {
+    //         setIsCalculatingRoute(false);
+    //         setIsMapLoading(false);
+    //     }
+    // };
+
+    // Update the animateVehicle function to use rawCoordinates
+    // const animateVehicle = useCallback((timestamp: DOMHighResTimeStamp) => {
+    //     if (!isPlaying || !calculatedRouteData || !routeCoordinates.current || calculatedRouteData.duration === 0) {
+    //         animationFrameId.current = null;
+    //         return;
+    //     }
+
+    //     if (simulationStartTime.current === 0) {
+    //         simulationStartTime.current = timestamp;
+    //     }
+
+    //     const elapsedRealTime = timestamp - simulationStartTime.current;
+    //     const simulatedDuration = calculatedRouteData.duration * 1000;
+    //     const currentSimulatedTime = (elapsedRealTime * simulationSpeed[0]);
+
+    //     if (currentSimulatedTime >= simulatedDuration) {
+    //         setCurrentSimulationTime(simulatedDuration);
+    //         onSimulatedPositionUpdate(routeCoordinates.current[routeCoordinates.current.length - 1]);
+    //         setIsPlaying(false);
+    //         animationFrameId.current = null;
+    //         return;
+    //     }
+
+    //     setCurrentSimulationTime(currentSimulatedTime);
+
+    //     const progressRatio = currentSimulatedTime / simulatedDuration;
+    //     const totalSegments = routeCoordinates.current.length - 1;
+    //     const currentSegmentIndex = Math.min(Math.floor(progressRatio * totalSegments), totalSegments - 1);
+    //     const segmentProgress = (progressRatio * totalSegments) - currentSegmentIndex;
+
+    //     const startCoord = routeCoordinates.current[currentSegmentIndex];
+    //     const endCoord = routeCoordinates.current[currentSegmentIndex + 1];
+
+    //     if (startCoord && endCoord) {
+    //         const interpolatedLng = startCoord[0] + (endCoord[0] - startCoord[0]) * segmentProgress;
+    //         const interpolatedLat = startCoord[1] + (endCoord[1] - startCoord[1]) * segmentProgress;
+    //         onSimulatedPositionUpdate([interpolatedLng, interpolatedLat]);
+    //     }
+
+    //     animationFrameId.current = requestAnimationFrame(animateVehicle);
+    // }, [isPlaying, calculatedRouteData, simulationSpeed, onSimulatedPositionUpdate]);
     // Effect to start/stop animation loop
     useEffect(() => {
         if (isPlaying && calculatedRouteData && routeCoordinates.current) {

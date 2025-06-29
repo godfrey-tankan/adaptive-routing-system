@@ -218,7 +218,7 @@ CORS_ALLOW_CREDENTIALS = True # Allow cookies to be sent with cross-origin reque
 # Google Maps and Gemini API keys
 Maps_API_KEY = os.getenv('Maps_API_KEY')
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
-
+OPENWEATHER_API_KEY = os.getenv('OPENWEATHER_API_KEY')
 # Custom User Model
 AUTH_USER_MODEL = 'users.CustomUser'
 

@@ -10,12 +10,11 @@ import { Map, Route, Star, ArrowRight, Loader2, Save, CloudRain } from "lucide-r
 import { toast } from "@/hooks/use-toast";
 import axios from 'axios';
 import maplibregl, { LngLatBounds } from "maplibre-gl";
-
 import { PlaceSearchInput, GeoPoint } from '@/components/map/PlaceSearchInput';
 import AIChatCard from './AIChatCard';
+import { useAuth } from '@/context/AuthContext';
 
-const Maps_API_KEY = import.meta.env.VITE_Maps_API_KEY;
-const OPENWEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 interface RouteControlPanelProps {
   updateMapWithRoute: (start: [number, number] | null, end: [number, number] | null, geoJSON: any | null) => void;
@@ -31,11 +30,32 @@ interface WeatherData {
   icon: string;
 }
 
+interface RouteResults {
+  geoJSON: any;
+  distance: string;
+  duration: string;
+  fuelCost: string;
+  alternatives: number;
+  avoidHighways: boolean;
+  avoidTolls: boolean;
+  transportMode: string;
+  aiInsights?: string;
+}
+
+const TRANSPORT_MODE_MAP: Record<string, string> = {
+  DRIVING: 'driving',
+  TRANSIT: 'transit',
+  WALKING: 'walking',
+  BICYCLING: 'bicycling'
+};
+
 export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
   updateMapWithRoute,
   setIsLoadingMapAndRoute,
   mapInstance,
 }) => {
+  const { user } = useAuth();
+  const token = localStorage.getItem('authToken');
   const [startPoint, setStartPoint] = useState<GeoPoint | null>(null);
   const [endPoint, setEndPoint] = useState<GeoPoint | null>(null);
   const [routeOptions, setRouteOptions] = useState({
@@ -43,10 +63,114 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
     avoidHighways: false,
     avoidTolls: false
   });
-  const [routeResults, setRouteResults] = useState<any>(null);
+  const [routeResults, setRouteResults] = useState<RouteResults | null>(null);
   const [isPanelLoading, setIsPanelLoading] = useState(false);
   const [currentWeather, setCurrentWeather] = useState<WeatherData | null>(null);
   const [isWeatherLoading, setIsWeatherLoading] = useState(false);
+
+  const authAxios = axios.create({
+    baseURL: API_BASE_URL,
+    headers: {
+      'Authorization': token ? `Bearer ${token}` : '',
+      'Content-Type': 'application/json'
+    }
+  });
+
+  useEffect(() => {
+    const updateMapRoute = () => {
+      if (!mapInstance) return;
+
+      // Remove existing route layer if it exists
+      if (mapInstance.getLayer('route')) {
+        mapInstance.removeLayer('route');
+        mapInstance.removeSource('route');
+      }
+
+      if (routeResults?.geoJSON) {
+        mapInstance.addSource('route', {
+          type: 'geojson',
+          data: routeResults.geoJSON
+        });
+
+        mapInstance.addLayer({
+          id: 'route',
+          type: 'line',
+          source: 'route',
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          paint: {
+            'line-color': '#3b82f6', // Blue color
+            'line-width': 4,
+            'line-opacity': 0.75
+          }
+        });
+
+        // Add markers for start and end points
+        if (startPoint && endPoint) {
+          if (mapInstance.getLayer('start-point')) {
+            mapInstance.removeLayer('start-point');
+            mapInstance.removeSource('start-point');
+          }
+          if (mapInstance.getLayer('end-point')) {
+            mapInstance.removeLayer('end-point');
+            mapInstance.removeSource('end-point');
+          }
+
+          // Add start point marker
+          mapInstance.addSource('start-point', {
+            type: 'geojson',
+            data: {
+              type: 'Feature',
+              geometry: {
+                type: 'Point',
+                coordinates: startPoint.coordinates
+              }
+            }
+          });
+
+          mapInstance.addLayer({
+            id: 'start-point',
+            type: 'circle',
+            source: 'start-point',
+            paint: {
+              'circle-radius': 8,
+              'circle-color': '#4ade80', // Green color
+              'circle-stroke-width': 2,
+              'circle-stroke-color': '#ffffff'
+            }
+          });
+
+          // Add end point marker
+          mapInstance.addSource('end-point', {
+            type: 'geojson',
+            data: {
+              type: 'Feature',
+              geometry: {
+                type: 'Point',
+                coordinates: endPoint.coordinates
+              }
+            }
+          });
+
+          mapInstance.addLayer({
+            id: 'end-point',
+            type: 'circle',
+            source: 'end-point',
+            paint: {
+              'circle-radius': 8,
+              'circle-color': '#ef4444', // Red color
+              'circle-stroke-width': 2,
+              'circle-stroke-color': '#ffffff'
+            }
+          });
+        }
+      }
+    };
+
+    updateMapRoute();
+  }, [mapInstance, routeResults, startPoint, endPoint]);
 
   useEffect(() => {
     updateMapWithRoute(
@@ -65,16 +189,14 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
   }, [startPoint, endPoint, mapInstance, updateMapWithRoute]);
 
   const fetchWeather = useCallback(async (coords: [number, number]) => {
-    if (!OPENWEATHER_API_KEY) {
-      console.warn("OpenWeatherMap API Key is missing. Cannot fetch weather data.");
-      return null;
-    }
-
     setIsWeatherLoading(true);
     try {
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${coords[1]}&lon=${coords[0]}&appid=${OPENWEATHER_API_KEY}&units=metric`
-      );
+      const response = await authAxios.post('/route/weather/', {
+        lat: coords[1],
+        lon: coords[0],
+        user_id: user?.id
+      });
+
       const data = response.data;
       return {
         description: data.weather[0].description,
@@ -94,7 +216,7 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
     } finally {
       setIsWeatherLoading(false);
     }
-  }, [OPENWEATHER_API_KEY]);
+  }, [user, token]);
 
   useEffect(() => {
     if (startPoint) {
@@ -104,6 +226,34 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
     }
   }, [startPoint, fetchWeather]);
 
+  const getPlaceCoordinates = async (placeId: string): Promise<[number, number] | null> => {
+    if (!window.google?.maps?.places) {
+      console.error("Google Maps Places API not loaded");
+      return null;
+    }
+
+    return new Promise((resolve) => {
+      const service = new window.google.maps.places.PlacesService(
+        document.createElement('div')
+      );
+
+      service.getDetails(
+        { placeId, fields: ['geometry'] },
+        (place, status) => {
+          if (status === window.google.maps.places.PlacesServiceStatus.OK && place?.geometry?.location) {
+            resolve([
+              place.geometry.location.lng(),
+              place.geometry.location.lat()
+            ]);
+          } else {
+            console.error("Failed to get place details", status);
+            resolve(null);
+          }
+        }
+      );
+    });
+  };
+
   const getRoute = useCallback(async (
     startPlaceId: string,
     endPlaceId: string,
@@ -111,74 +261,88 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
     avoidHighways: boolean,
     avoidTolls: boolean
   ) => {
-    if (!Maps_API_KEY) {
-      console.error("Google Maps API Key is missing for Directions API.");
-      toast({
-        title: "API Key Missing",
-        description: "Google Maps API Key not configured for directions.",
-        variant: "destructive"
-      });
-      return null;
-    }
+    setIsPanelLoading(true);
 
-    const googleMode = profile;
-    let url = `https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${startPlaceId}&destination=place_id:${endPlaceId}&mode=${googleMode}&key=${Maps_API_KEY}`;
-    const avoidParams = [];
-
-    if (avoidHighways) avoidParams.push('highways');
-    if (avoidTolls) avoidParams.push('tolls');
-
-    if (avoidParams.length > 0) {
-      url += `&avoid=${avoidParams.join('|')}`;
-    }
-
-    if (googleMode === 'DRIVING') {
-      url += `&departure_time=now&traffic_model=best_guess`;
-    }
-
-    console.log("RouteControlPanel: Google Directions API URL:", url);
     try {
-      const response = await axios.get(url);
-      const data = response.data;
+      const startCoords = await getPlaceCoordinates(startPlaceId);
+      const endCoords = await getPlaceCoordinates(endPlaceId);
 
-      if (data.routes && data.routes.length > 0) {
-        const route = data.routes[0];
-        const overviewPolyline = route.overview_polyline.points;
+      if (!startCoords || !endCoords) {
+        throw new Error("Could not get coordinates for places");
+      }
 
-        const decodedPath = decodePolyline(overviewPolyline);
+      const origin = `${startCoords[1]},${startCoords[0]}`;
+      const destination = `${endCoords[1]},${endCoords[0]}`;
+      const backendTransportMode = profile.toLowerCase();
+
+      const response = await authAxios.post('/route/optimize/', {
+        origin,
+        destination,
+        mode: backendTransportMode,
+        avoid_highways: avoidHighways,
+        avoid_tolls: avoidTolls
+      });
+
+      const data = response.data.primary_route;
+
+      if (data) {
+        const decodedPath = decodePolyline(data.polyline);
         const geoJSONLineString = {
           type: 'LineString',
           coordinates: decodedPath,
         };
 
-        const durationInTraffic = route.legs[0]?.duration_in_traffic?.value || route.legs[0]?.duration?.value;
-        const distance = route.legs[0]?.distance?.value || 0;
-
         return {
           geoJSON: geoJSONLineString,
-          distance: `${(distance / 1000).toFixed(1)} km`,
-          duration: `${Math.round(durationInTraffic / 60)} mins`,
+          distance: `${(data.distance / 1000).toFixed(1)} km`,
+          duration: `${Math.round(data.duration / 60)} mins`,
           fuelCost: "ZWL $XX.XX",
-          alternatives: data.routes.length > 1 ? data.routes.length - 1 : 0,
+          alternatives: data.alternatives || 0,
           avoidHighways,
           avoidTolls,
-          transportMode: profile
+          transportMode: profile,
+          aiInsights: response.data.ai_insights
         };
       }
-      console.warn("RouteControlPanel: No routes found in Google Directions API response.");
       return null;
     } catch (error: any) {
-      console.error("RouteControlPanel: Error fetching Google route:", error.response?.data || error.message);
-      toast({
-        title: "Route Calculation Failed",
-        description: `Could not calculate route: ${error.response?.data?.error_message || error.message}. Check locations.`,
-        variant: "destructive"
-      });
+      console.error("Error fetching route:", error.response?.data || error.message);
+
+      if (error.response?.status === 401) {
+        toast({
+          title: "Authentication Required",
+          description: "Please log in to use route optimization.",
+          variant: "destructive"
+        });
+      } else if (error.response?.status === 500) {
+        toast({
+          title: "Server Error",
+          description: "The route optimization service encountered an error.",
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: "Route Calculation Failed",
+          description: error.response?.data?.error || "Could not calculate route. Please try again.",
+          variant: "destructive"
+        });
+      }
       return null;
+    } finally {
+      setIsPanelLoading(false);
     }
-  }, [Maps_API_KEY, toast]);
+  }, [user, token]);
 
   const handleOptimizeRoute = async () => {
+    if (!user || !token) {
+      toast({
+        title: "Authentication Required",
+        description: "Please log in to optimize routes.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     if (!startPoint || !endPoint) {
       toast({
         title: "Missing Information",
@@ -264,178 +428,184 @@ export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
   };
 
   return (
-    <div className="space-y-4">
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center">
-            <Map className="w-5 h-5 mr-2 text-primary" />
-            Plan Your Route
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="from-location">From</Label>
-            <PlaceSearchInput
-              value={startPoint}
-              onSelect={setStartPoint}
-              placeholder="e.g., Avondale"
-              currentMapCenter={mapInstance?.getCenter().toArray() as [number, number] || null}
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="to-location">To</Label>
-            <PlaceSearchInput
-              value={endPoint}
-              onSelect={setEndPoint}
-              placeholder="e.g., Harare CBD"
-              currentMapCenter={mapInstance?.getCenter().toArray() as [number, number] || null}
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label>Transport Mode</Label>
-            <Select
-              value={routeOptions.transportMode}
-              onValueChange={(value) => setRouteOptions(prev => ({ ...prev, transportMode: value }))}
-              disabled={isPanelLoading}
-            >
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="DRIVING">🚗 Private Car</SelectItem>
-                <SelectItem value="TRANSIT">🚌 Kombi (Transit)</SelectItem>
-                <SelectItem value="WALKING">🚶 Walking</SelectItem>
-                <SelectItem value="BICYCLING">🚴 Bicycle</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <Label htmlFor="highways">Avoid Highways</Label>
-              <Switch
-                id="highways"
-                checked={routeOptions.avoidHighways}
-                onCheckedChange={(checked) => setRouteOptions(prev => ({ ...prev, avoidHighways: checked }))}
-                disabled={isPanelLoading}
-              />
-            </div>
-            <div className="flex items-center justify-between">
-              <Label htmlFor="tolls">Avoid Tolls</Label>
-              <Switch
-                id="tolls"
-                checked={routeOptions.avoidTolls}
-                onCheckedChange={(checked) => setRouteOptions(prev => ({ ...prev, avoidTolls: checked }))}
-                disabled={isPanelLoading}
-              />
-            </div>
-          </div>
-
-          <Button
-            onClick={handleOptimizeRoute}
-            className="w-full bg-primary hover:bg-primary/90"
-            disabled={isPanelLoading || !startPoint || !endPoint}
-          >
-            {isPanelLoading ? (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            ) : (
-              <Route className="w-4 h-4 mr-2" />
-            )}
-            {isPanelLoading ? "Optimizing..." : "Optimize Route"}
-          </Button>
-        </CardContent>
-      </Card>
-
-      {currentWeather && (
+    <div className="h-full flex flex-col">
+      <div className="overflow-y-auto flex-1 space-y-4 p-4">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center">
-              <CloudRain className="w-5 h-5 mr-2 text-blue-500" />
-              Current Weather (Start Point)
-              {isWeatherLoading && <Loader2 className="ml-2 h-4 w-4 animate-spin text-muted-foreground" />}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="flex items-center justify-between">
-            <div className="flex items-center">
-              <img
-                src={currentWeather.icon}
-                alt={currentWeather.description}
-                className="w-12 h-12 mr-2"
-              />
-              <div>
-                <p className="text-lg font-semibold">{currentWeather.temperature}°C</p>
-                <p className="text-sm text-muted-foreground capitalize">{currentWeather.description}</p>
-              </div>
-            </div>
-            <div className="text-right">
-              <p className="text-sm">Humidity: {currentWeather.humidity}%</p>
-              <p className="text-sm">Wind: {currentWeather.windSpeed} m/s</p>
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
-      {routeResults && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <ArrowRight className="w-5 h-5 mr-2 text-secondary" />
-              Route Summary
+              <Map className="w-5 h-5 mr-2 text-primary" />
+              Plan Your Route
+              {!user && (
+                <span className="ml-2 text-sm text-red-500">(Login required)</span>
+              )}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="text-center p-3 bg-primary/5 rounded-lg">
-                <div className="text-lg font-montserrat font-bold text-primary">
-                  {routeResults.distance}
-                </div>
-                <div className="text-sm text-muted-foreground">Distance</div>
+            <div className="space-y-2">
+              <Label htmlFor="from-location">From</Label>
+              <PlaceSearchInput
+                value={startPoint}
+                onSelect={setStartPoint}
+                placeholder="e.g., Avondale"
+                currentMapCenter={mapInstance?.getCenter().toArray() as [number, number] || null}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="to-location">To</Label>
+              <PlaceSearchInput
+                value={endPoint}
+                onSelect={setEndPoint}
+                placeholder="e.g., Harare CBD"
+                currentMapCenter={mapInstance?.getCenter().toArray() as [number, number] || null}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label>Transport Mode</Label>
+              <Select
+                value={routeOptions.transportMode}
+                onValueChange={(value) => setRouteOptions(prev => ({ ...prev, transportMode: value }))}
+                disabled={isPanelLoading}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="DRIVING">🚗 Private Car</SelectItem>
+                  <SelectItem value="TRANSIT">🚌 Kombi (Transit)</SelectItem>
+                  <SelectItem value="WALKING">🚶 Walking</SelectItem>
+                  <SelectItem value="BICYCLING">🚴 Bicycle</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="highways">Avoid Highways</Label>
+                <Switch
+                  id="highways"
+                  checked={routeOptions.avoidHighways}
+                  onCheckedChange={(checked) => setRouteOptions(prev => ({ ...prev, avoidHighways: checked }))}
+                  disabled={isPanelLoading}
+                />
               </div>
-              <div className="text-center p-3 bg-secondary/5 rounded-lg">
-                <div className="text-lg font-montserrat font-bold text-secondary">
-                  {routeResults.duration}
-                </div>
-                <div className="text-sm text-muted-foreground">Duration (with traffic)</div>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="tolls">Avoid Tolls</Label>
+                <Switch
+                  id="tolls"
+                  checked={routeOptions.avoidTolls}
+                  onCheckedChange={(checked) => setRouteOptions(prev => ({ ...prev, avoidTolls: checked }))}
+                  disabled={isPanelLoading}
+                />
               </div>
             </div>
 
-            <div className="text-center p-3 bg-muted/50 rounded-lg">
-              <div className="text-lg font-montserrat font-bold text-foreground">
-                {routeResults.fuelCost}
-              </div>
-              <div className="text-sm text-muted-foreground">Est. Fuel Cost</div>
-            </div>
-
-            {routeResults.alternatives > 0 && (
-              <p className="text-sm text-muted-foreground text-center">
-                Found {routeResults.alternatives} alternative route(s).
-              </p>
-            )}
-
-            <Separator />
-
-            <div className="flex space-x-2">
-              <Button variant="outline" className="flex-1">
-                <Star className="w-4 h-4 mr-2" />
-                Save Route
-              </Button>
-              <Button className="flex-1 bg-secondary hover:bg-secondary/90">
-                <Save className="w-4 h-4 mr-2" />
-                Start Navigation
-              </Button>
-            </div>
+            <Button
+              onClick={handleOptimizeRoute}
+              className="w-full bg-primary hover:bg-primary/90"
+              disabled={isPanelLoading || !startPoint || !endPoint || !user}
+            >
+              {isPanelLoading ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Route className="w-4 h-4 mr-2" />
+              )}
+              {isPanelLoading ? "Optimizing..." : "Optimize Route"}
+            </Button>
           </CardContent>
         </Card>
-      )}
 
-      <AIChatCard
-        routeDetails={routeResults}
-        startPoint={startPoint}
-        endPoint={endPoint}
-        weather={currentWeather}
-      />
+        {currentWeather && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <CloudRain className="w-5 h-5 mr-2 text-blue-500" />
+                Current Weather (Start Point)
+                {isWeatherLoading && <Loader2 className="ml-2 h-4 w-4 animate-spin text-muted-foreground" />}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="flex items-center justify-between">
+              <div className="flex items-center">
+                <img
+                  src={currentWeather.icon}
+                  alt={currentWeather.description}
+                  className="w-12 h-12 mr-2"
+                />
+                <div>
+                  <p className="text-lg font-semibold">{currentWeather.temperature}°C</p>
+                  <p className="text-sm text-muted-foreground capitalize">{currentWeather.description}</p>
+                </div>
+              </div>
+              <div className="text-right">
+                <p className="text-sm">Humidity: {currentWeather.humidity}%</p>
+                <p className="text-sm">Wind: {currentWeather.windSpeed} m/s</p>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {routeResults && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <ArrowRight className="w-5 h-5 mr-2 text-secondary" />
+                Route Summary
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 max-h-[400px] overflow-y-auto">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-center p-3 bg-primary/5 rounded-lg">
+                  <div className="text-lg font-montserrat font-bold text-primary">
+                    {routeResults.distance}
+                  </div>
+                  <div className="text-sm text-muted-foreground">Distance</div>
+                </div>
+                <div className="text-center p-3 bg-secondary/5 rounded-lg">
+                  <div className="text-lg font-montserrat font-bold text-secondary">
+                    {routeResults.duration}
+                  </div>
+                  <div className="text-sm text-muted-foreground">Duration (with traffic)</div>
+                </div>
+              </div>
+
+              <div className="text-center p-3 bg-muted/50 rounded-lg">
+                <div className="text-lg font-montserrat font-bold text-foreground">
+                  {routeResults.fuelCost}
+                </div>
+                <div className="text-sm text-muted-foreground">Est. Fuel Cost</div>
+              </div>
+
+              {routeResults.alternatives > 0 && (
+                <p className="text-sm text-muted-foreground text-center">
+                  Found {routeResults.alternatives} alternative route(s).
+                </p>
+              )}
+
+              <Separator />
+
+              <div className="flex space-x-2">
+                <Button variant="outline" className="flex-1">
+                  <Star className="w-4 h-4 mr-2" />
+                  Save Route
+                </Button>
+                <Button className="flex-1 bg-secondary hover:bg-secondary/90">
+                  <Save className="w-4 h-4 mr-2" />
+                  Start Navigation
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        <AIChatCard
+          routeDetails={routeResults}
+          startPoint={startPoint}
+          endPoint={endPoint}
+          weather={currentWeather}
+          aiInsights={routeResults?.aiInsights}
+        />
+      </div>
     </div>
   );
 };

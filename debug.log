@@ -249,3 +249,366 @@ INFO 2025-06-29 07:47:26,967 basehttp 723983 134295372953280 "POST /api/users/to
 INFO 2025-06-29 07:56:47,358 basehttp 723983 134295372953280 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
 INFO 2025-06-29 08:12:47,237 basehttp 723983 134295372953280 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
 INFO 2025-06-29 08:27:07,856 basehttp 723983 134295372953280 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 08:51:31,335 autoreload 773888 138016001904768 Watching for file changes with StatReloader
+INFO 2025-06-29 08:52:49,258 basehttp 773888 138015650346688 "OPTIONS /api/users/login/ HTTP/1.1" 200 0
+INFO 2025-06-29 08:52:51,841 basehttp 773888 138015650346688 "POST /api/users/login/ HTTP/1.1" 200 483
+INFO 2025-06-29 08:55:36,795 basehttp 773888 138015650346688 "OPTIONS /api/users/token/refresh/ HTTP/1.1" 200 0
+INFO 2025-06-29 08:55:37,114 basehttp 773888 138015650346688 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 08:56:22,080 basehttp 773888 138015650346688 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 08:56:41,720 basehttp 773888 138015650346688 "OPTIONS /api/weather/ HTTP/1.1" 200 0
+WARNING 2025-06-29 08:56:41,844 log 773888 138015650346688 Not Found: /api/weather/
+WARNING 2025-06-29 08:56:41,845 basehttp 773888 138015650346688 "POST /api/weather/ HTTP/1.1" 404 2568
+INFO 2025-06-29 08:57:03,207 basehttp 773888 138015650346688 "OPTIONS /api/route/optimize/ HTTP/1.1" 200 0
+WARNING 2025-06-29 08:57:03,243 log 773888 138015650346688 Not Found: /api/route/optimize/
+WARNING 2025-06-29 08:57:03,245 basehttp 773888 138015650346688 "POST /api/route/optimize/ HTTP/1.1" 404 2589
+INFO 2025-06-29 08:57:33,333 autoreload 773888 138016001904768 /home/tnqn/Documents/adaptive-routing-backend/core/urls.py changed, reloading.
+INFO 2025-06-29 08:57:36,206 autoreload 777150 135758847389824 Watching for file changes with StatReloader
+WARNING 2025-06-29 08:57:44,646 log 777150 135758563243712 Unauthorized: /api/route/optimize/
+WARNING 2025-06-29 08:57:44,654 basehttp 777150 135758563243712 "POST /api/route/optimize/ HTTP/1.1" 401 58
+INFO 2025-06-29 08:58:55,203 autoreload 777150 135758847389824 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 08:58:58,680 autoreload 777908 130014748139648 Watching for file changes with StatReloader
+INFO 2025-06-29 08:59:18,512 autoreload 777908 130014748139648 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 08:59:21,612 autoreload 778214 140326655529088 Watching for file changes with StatReloader
+INFO 2025-06-29 08:59:44,162 autoreload 778214 140326655529088 /home/tnqn/Documents/adaptive-routing-backend/core/settings.py changed, reloading.
+INFO 2025-06-29 08:59:46,586 autoreload 778537 125080060690560 Watching for file changes with StatReloader
+INFO 2025-06-29 09:00:14,886 basehttp 778537 125079707973312 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+WARNING 2025-06-29 09:00:33,695 log 778537 125079707973312 Not Found: /api/weather/
+WARNING 2025-06-29 09:00:33,696 basehttp 778537 125079707973312 "POST /api/weather/ HTTP/1.1" 404 2566
+INFO 2025-06-29 09:01:20,072 basehttp 778537 125079707973312 "OPTIONS /api/routes/weather/ HTTP/1.1" 200 0
+WARNING 2025-06-29 09:01:20,192 log 778537 125079707973312 Not Found: /api/routes/weather/
+WARNING 2025-06-29 09:01:20,193 basehttp 778537 125079707973312 "POST /api/routes/weather/ HTTP/1.1" 404 2587
+INFO 2025-06-29 09:01:48,014 basehttp 778537 125079707973312 "OPTIONS /api/route/weather/ HTTP/1.1" 200 0
+WARNING 2025-06-29 09:01:48,077 log 778537 125079707973312 Unauthorized: /api/route/weather/
+WARNING 2025-06-29 09:01:48,078 basehttp 778537 125079707973312 "POST /api/route/weather/ HTTP/1.1" 401 58
+INFO 2025-06-29 09:02:10,926 autoreload 778537 125080060690560 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 09:02:16,636 autoreload 780456 131879045804160 Watching for file changes with StatReloader
+INFO 2025-06-29 09:02:39,375 basehttp 780456 131878694680256 "POST /api/route/weather/ HTTP/1.1" 200 512
+ERROR 2025-06-29 09:02:57,314 log 780456 131878694680256 Internal Server Error: /api/route/optimize/
+Traceback (most recent call last):
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/routing/views.py", line 91, in post
+    mode = serializer.validated_data.get('mode', request.user.preferred_transport)
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'AnonymousUser' object has no attribute 'preferred_transport'
+ERROR 2025-06-29 09:02:57,326 basehttp 780456 131878694680256 "POST /api/route/optimize/ HTTP/1.1" 500 108807
+INFO 2025-06-29 09:22:41,223 autoreload 7972 140410493161600 Watching for file changes with StatReloader
+INFO 2025-06-29 09:23:05,741 autoreload 7972 140410493161600 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 09:23:13,463 autoreload 8587 130023954043008 Watching for file changes with StatReloader
+INFO 2025-06-29 09:23:43,113 basehttp 8587 130023603304128 "OPTIONS /api/users/token/refresh/ HTTP/1.1" 200 0
+INFO 2025-06-29 09:23:43,357 basehttp 8587 130023603304128 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 09:27:15,381 basehttp 8587 130023603304128 "OPTIONS /api/weather/ HTTP/1.1" 200 0
+WARNING 2025-06-29 09:27:15,448 log 8587 130023603304128 Not Found: /api/weather/
+WARNING 2025-06-29 09:27:15,449 basehttp 8587 130023603304128 "POST /api/weather/ HTTP/1.1" 404 2566
+INFO 2025-06-29 09:27:33,791 basehttp 8587 130023603304128 "OPTIONS /api/route/weather/ HTTP/1.1" 200 0
+INFO 2025-06-29 09:27:37,218 basehttp 8587 130023603304128 "POST /api/route/weather/ HTTP/1.1" 200 513
+INFO 2025-06-29 09:27:54,800 basehttp 8587 130023603304128 "OPTIONS /api/route/optimize/ HTTP/1.1" 200 0
+ERROR 2025-06-29 09:27:55,117 log 8587 130023603304128 Internal Server Error: /api/route/optimize/
+Traceback (most recent call last):
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/routing/views.py", line 94, in post
+    map_service = GoogleMapsService()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/routing/services.py", line 11, in __init__
+    self.client = googlemaps.Client(key=settings.Maps_API_KEY)
+                                        ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/conf/__init__.py", line 91, in __getattr__
+    val = getattr(_wrapped, name)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Settings' object has no attribute 'Maps_API_KEY'
+ERROR 2025-06-29 09:27:55,139 basehttp 8587 130023603304128 "POST /api/route/optimize/ HTTP/1.1" 500 117439
+INFO 2025-06-29 09:29:14,321 autoreload 8587 130023954043008 /home/tnqn/Documents/adaptive-routing-backend/routing/services.py changed, reloading.
+INFO 2025-06-29 09:29:16,043 autoreload 12039 128168334876800 Watching for file changes with StatReloader
+ERROR 2025-06-29 09:29:23,680 log 12039 128167983445696 Internal Server Error: /api/route/optimize/
+Traceback (most recent call last):
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/routing/views.py", line 94, in post
+    map_service = GoogleMapsService()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/routing/services.py", line 11, in __init__
+    self.client = googlemaps.Client(key=settings.Maps_API_KEY)
+                                        ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/conf/__init__.py", line 91, in __getattr__
+    val = getattr(_wrapped, name)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Settings' object has no attribute 'Maps_API_KEY'
+ERROR 2025-06-29 09:29:23,694 basehttp 12039 128167983445696 "POST /api/route/optimize/ HTTP/1.1" 500 117439
+INFO 2025-06-29 09:31:31,811 autoreload 12039 128168334876800 /home/tnqn/Documents/adaptive-routing-backend/routing/services.py changed, reloading.
+INFO 2025-06-29 09:31:36,189 autoreload 13060 132940697874560 Watching for file changes with StatReloader
+ERROR 2025-06-29 09:31:43,091 services 13060 132940346422976 Google Maps API error: Invalid travel mode.
+WARNING 2025-06-29 09:31:43,109 log 13060 132940346422976 Not Found: /api/route/optimize/
+WARNING 2025-06-29 09:31:43,110 basehttp 13060 132940346422976 "POST /api/route/optimize/ HTTP/1.1" 404 51
+INFO 2025-06-29 09:38:15,020 basehttp 13060 132940346422976 "POST /api/route/weather/ HTTP/1.1" 200 491
+INFO 2025-06-29 09:38:19,147 basehttp 13060 132940346422976 "OPTIONS /api/api/route/optimize/ HTTP/1.1" 200 0
+WARNING 2025-06-29 09:38:19,267 log 13060 132940346422976 Not Found: /api/api/route/optimize/
+WARNING 2025-06-29 09:38:19,270 basehttp 13060 132940346422976 "POST /api/api/route/optimize/ HTTP/1.1" 404 2599
+INFO 2025-06-29 09:39:19,044 basehttp 13060 132940346422976 "POST /api/route/weather/ HTTP/1.1" 200 491
+INFO 2025-06-29 09:39:19,438 basehttp 13060 132940335933120 "POST /api/route/weather/ HTTP/1.1" 200 491
+ERROR 2025-06-29 09:39:30,429 services 13060 132940335933120 Google Maps API error: REQUEST_DENIED (API keys with referer restrictions cannot be used with this API.)
+WARNING 2025-06-29 09:39:30,430 log 13060 132940335933120 Not Found: /api/route/optimize/
+WARNING 2025-06-29 09:39:30,430 basehttp 13060 132940335933120 "POST /api/route/optimize/ HTTP/1.1" 404 51
+ERROR 2025-06-29 09:40:51,061 services 13060 132940335933120 Gemini API error: GenerativeModel.generate_content() got an unexpected keyword argument 'system_instruction'
+ERROR 2025-06-29 09:40:51,204 log 13060 132940335933120 Internal Server Error: /api/route/optimize/
+Traceback (most recent call last):
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "origin" of relation "routing_route" violates not-null constraint
+DETAIL:  Failing row contains (1, null, null, driving, null, null, null, null, 2025-06-29 07:40:51.068364+00, 2).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/routing/views.py", line 142, in post
+    route = route_save_serializer.save(user=request.user) # Pass user instance
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 208, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 989, in create
+    instance = ModelClass._default_manager.create(**validated_data)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 679, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/models/base.py", line 822, in save
+    self.save_base(
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/models/base.py", line 909, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/models/base.py", line 1071, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/models/base.py", line 1112, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1823, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: null value in column "origin" of relation "routing_route" violates not-null constraint
+DETAIL:  Failing row contains (1, null, null, driving, null, null, null, null, 2025-06-29 07:40:51.068364+00, 2).
+
+ERROR 2025-06-29 09:40:51,209 basehttp 13060 132940335933120 "POST /api/route/optimize/ HTTP/1.1" 500 226860
+WARNING 2025-06-29 09:42:59,565 log 13060 132940326491840 Not Found: /clients/
+WARNING 2025-06-29 09:42:59,566 basehttp 13060 132940326491840 "GET /clients/ HTTP/1.1" 404 2553
+INFO 2025-06-29 09:43:02,173 basehttp 13060 132940326491840 "GET /admin/ HTTP/1.1" 302 0
+INFO 2025-06-29 09:43:02,305 basehttp 13060 132940326491840 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4166
+WARNING 2025-06-29 09:43:03,748 log 13060 132940326491840 Not Found: /favicon.ico
+WARNING 2025-06-29 09:43:03,750 basehttp 13060 132940326491840 "GET /favicon.ico HTTP/1.1" 404 2562
+INFO 2025-06-29 09:43:08,946 basehttp 13060 132940326491840 "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2025-06-29 09:43:09,039 basehttp 13060 132940326491840 "GET /admin/ HTTP/1.1" 200 9409
+INFO 2025-06-29 09:43:37,101 autoreload 13060 132940697874560 /home/tnqn/Documents/adaptive-routing-backend/routing/admin.py changed, reloading.
+INFO 2025-06-29 09:43:38,371 autoreload 19283 131612520259712 Watching for file changes with StatReloader
+INFO 2025-06-29 09:43:41,776 basehttp 19283 131612236838592 "GET /admin/ HTTP/1.1" 200 10059
+INFO 2025-06-29 09:43:44,014 basehttp 19283 131612236838592 "GET /admin/routing/route/ HTTP/1.1" 200 12021
+INFO 2025-06-29 09:43:44,390 basehttp 19283 131612236838592 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-06-29 09:43:44,514 basehttp 19283 131612149802688 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+INFO 2025-06-29 09:43:44,515 basehttp 19283 131612159243968 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+INFO 2025-06-29 10:41:59,834 autoreload 19283 131612520259712 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 10:42:00,823 autoreload 37635 126767951241344 Watching for file changes with StatReloader
+INFO 2025-06-29 10:42:19,021 autoreload 37635 126767951241344 /home/tnqn/Documents/adaptive-routing-backend/routing/serializers.py changed, reloading.
+INFO 2025-06-29 10:42:20,201 autoreload 37854 136175360401536 Watching for file changes with StatReloader
+INFO 2025-06-29 10:44:12,754 basehttp 37854 136175009396416 "POST /api/route/weather/ HTTP/1.1" 200 490
+ERROR 2025-06-29 10:44:41,692 views 37854 136175009396416 Gemini API error: 400 API key expired. Please renew the API key. [reason: "API_KEY_INVALID"
+domain: "googleapis.com"
+metadata {
+  key: "service"
+  value: "generativelanguage.googleapis.com"
+}
+, locale: "en-US"
+message: "API key expired. Please renew the API key."
+]
+INFO 2025-06-29 10:44:41,723 basehttp 37854 136175009396416 "POST /api/route/optimize/ HTTP/1.1" 200 9539
+INFO 2025-06-29 10:44:41,982 basehttp 37854 136175009396416 "OPTIONS /api/gemini-insights/ HTTP/1.1" 200 0
+WARNING 2025-06-29 10:44:42,087 log 37854 136175009396416 Not Found: /api/gemini-insights/
+WARNING 2025-06-29 10:44:42,087 basehttp 37854 136175009396416 "POST /api/gemini-insights/ HTTP/1.1" 404 2590
+INFO 2025-06-29 10:46:20,934 basehttp 37854 136175009396416 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 10:47:35,591 basehttp 37854 136174731511488 "GET /admin/routing/route/ HTTP/1.1" 200 14869
+INFO 2025-06-29 10:47:35,798 basehttp 37854 136174731511488 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-06-29 11:07:20,599 basehttp 37854 136174731511488 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 11:07:32,746 basehttp 37854 136174731511488 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 11:24:59,008 basehttp 37854 136174731511488 "OPTIONS /api/users/token/refresh/ HTTP/1.1" 200 0
+INFO 2025-06-29 11:24:59,067 basehttp 37854 136174731511488 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 11:27:01,996 basehttp 37854 136174731511488 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 11:27:13,054 basehttp 37854 136174731511488 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 11:29:01,716 basehttp 37854 136174731511488 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 11:32:57,041 basehttp 37854 136174731511488 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 11:33:11,965 basehttp 37854 136174731511488 "OPTIONS /api/route/weather/ HTTP/1.1" 200 0
+INFO 2025-06-29 11:33:12,674 basehttp 37854 136174731511488 "POST /api/route/weather/ HTTP/1.1" 200 492
+INFO 2025-06-29 11:33:44,973 basehttp 37854 136174731511488 "OPTIONS /api/route/optimize/ HTTP/1.1" 200 0
+ERROR 2025-06-29 11:33:47,646 views 37854 136174731511488 Gemini API error: 400 API key expired. Please renew the API key. [reason: "API_KEY_INVALID"
+domain: "googleapis.com"
+metadata {
+  key: "service"
+  value: "generativelanguage.googleapis.com"
+}
+, locale: "en-US"
+message: "API key expired. Please renew the API key."
+]
+INFO 2025-06-29 11:33:47,679 basehttp 37854 136174731511488 "POST /api/route/optimize/ HTTP/1.1" 200 28062
+INFO 2025-06-29 11:33:48,028 basehttp 37854 136174731511488 "OPTIONS /api/ai/ HTTP/1.1" 200 0
+WARNING 2025-06-29 11:33:48,053 log 37854 136174731511488 Not Found: /api/ai/
+WARNING 2025-06-29 11:33:48,055 basehttp 37854 136174731511488 "POST /api/ai/ HTTP/1.1" 404 2444
+ERROR 2025-06-29 11:34:24,323 views 37854 136174731511488 Gemini API error: 400 API key expired. Please renew the API key. [reason: "API_KEY_INVALID"
+domain: "googleapis.com"
+metadata {
+  key: "service"
+  value: "generativelanguage.googleapis.com"
+}
+, locale: "en-US"
+message: "API key expired. Please renew the API key."
+]
+INFO 2025-06-29 11:34:24,338 basehttp 37854 136174731511488 "POST /api/route/optimize/ HTTP/1.1" 200 28626
+WARNING 2025-06-29 11:34:24,595 log 37854 136174731511488 Not Found: /api/ai/
+WARNING 2025-06-29 11:34:24,596 basehttp 37854 136174731511488 "POST /api/ai/ HTTP/1.1" 404 2444
+INFO 2025-06-29 11:36:06,175 autoreload 37854 136175360401536 /home/tnqn/Documents/adaptive-routing-backend/routing/urls.py changed, reloading.
+INFO 2025-06-29 11:36:09,674 autoreload 58123 126010937086080 Watching for file changes with StatReloader
+INFO 2025-06-29 11:36:22,062 basehttp 58123 126010582365888 "OPTIONS /api/route/gemini-insights/ HTTP/1.1" 200 0
+ERROR 2025-06-29 11:36:23,390 log 58123 126010582365888 Internal Server Error: /api/route/gemini-insights/
+ERROR 2025-06-29 11:36:23,391 basehttp 58123 126010582365888 "POST /api/route/gemini-insights/ HTTP/1.1" 500 312
+ERROR 2025-06-29 11:37:32,532 log 58123 126010582365888 Internal Server Error: /api/route/gemini-insights/
+ERROR 2025-06-29 11:37:32,533 basehttp 58123 126010582365888 "POST /api/route/gemini-insights/ HTTP/1.1" 500 312
+ERROR 2025-06-29 11:38:38,872 log 58123 126010582365888 Internal Server Error: /api/route/gemini-insights/
+ERROR 2025-06-29 11:38:38,873 basehttp 58123 126010582365888 "POST /api/route/gemini-insights/ HTTP/1.1" 500 312
+INFO 2025-06-29 11:39:44,264 autoreload 58123 126010937086080 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 11:39:47,337 autoreload 60253 129076219916416 Watching for file changes with StatReloader
+INFO 2025-06-29 11:40:14,016 basehttp 60253 129075868858048 "POST /api/route/optimize/ HTTP/1.1" 200 30621
+ERROR 2025-06-29 11:40:14,545 log 60253 129075868858048 Internal Server Error: /api/route/gemini-insights/
+ERROR 2025-06-29 11:40:14,546 basehttp 60253 129075868858048 "POST /api/route/gemini-insights/ HTTP/1.1" 500 225
+INFO 2025-06-29 11:40:48,491 autoreload 60253 129076219916416 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 11:40:51,201 autoreload 60821 130558407913600 Watching for file changes with StatReloader
+INFO 2025-06-29 11:41:08,921 basehttp 60821 130558057248448 "POST /api/route/optimize/ HTTP/1.1" 200 31070
+INFO 2025-06-29 11:41:10,302 basehttp 60821 130558057248448 "POST /api/route/gemini-insights/ HTTP/1.1" 200 320
+INFO 2025-06-29 11:48:30,029 basehttp 60821 130558057248448 "POST /api/route/weather/ HTTP/1.1" 200 512
+WARNING 2025-06-29 11:48:57,846 log 60821 130558057248448 Not Found: /api/route/optimize/
+WARNING 2025-06-29 11:48:57,847 basehttp 60821 130558057248448 "POST /api/route/optimize/ HTTP/1.1" 404 51
+INFO 2025-06-29 11:49:26,831 basehttp 60821 130558057248448 "POST /api/route/optimize/ HTTP/1.1" 200 25566
+INFO 2025-06-29 11:49:28,404 basehttp 60821 130558057248448 "POST /api/route/gemini-insights/ HTTP/1.1" 200 463
+INFO 2025-06-29 12:05:40,740 autoreload 60821 130558407913600 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 12:05:44,139 autoreload 69716 140603464085632 Watching for file changes with StatReloader
+INFO 2025-06-29 12:07:31,800 basehttp 69716 140603113338560 "POST /api/route/weather/ HTTP/1.1" 200 490
+INFO 2025-06-29 12:07:34,975 basehttp 69716 140603113338560 "POST /api/route/gemini-insights/ HTTP/1.1" 200 302
+INFO 2025-06-29 12:08:09,438 basehttp 69716 140602833352384 "POST /api/route/weather/ HTTP/1.1" 200 490
+INFO 2025-06-29 12:08:10,044 basehttp 69716 140603113338560 "POST /api/route/gemini-insights/ HTTP/1.1" 200 440
+INFO 2025-06-29 12:08:10,852 basehttp 69716 140602833352384 "POST /api/route/gemini-insights/ HTTP/1.1" 200 342
+INFO 2025-06-29 12:09:51,016 autoreload 69716 140603464085632 /home/tnqn/Documents/adaptive-routing-backend/routing/urls.py changed, reloading.
+INFO 2025-06-29 12:09:54,853 autoreload 71778 129541121974400 Watching for file changes with StatReloader
+INFO 2025-06-29 12:10:39,915 basehttp 71778 129540769707712 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 12:11:07,171 basehttp 71778 129540769707712 "POST /api/route/weather/ HTTP/1.1" 200 509
+INFO 2025-06-29 12:11:36,167 basehttp 71778 129540769707712 "POST /api/route/optimize/ HTTP/1.1" 200 7254
+INFO 2025-06-29 12:11:37,681 basehttp 71778 129540769707712 "POST /api/route/gemini-insights/ HTTP/1.1" 200 287
+INFO 2025-06-29 12:15:28,123 basehttp 71778 129540769707712 "POST /api/route/weather/ HTTP/1.1" 200 509
+INFO 2025-06-29 12:16:16,832 basehttp 71778 129540769707712 "POST /api/route/optimize/ HTTP/1.1" 200 8078
+INFO 2025-06-29 12:16:18,157 basehttp 71778 129540769707712 "POST /api/route/gemini-insights/ HTTP/1.1" 200 333
+INFO 2025-06-29 12:19:07,085 basehttp 71778 129540769707712 "POST /api/route/optimize/ HTTP/1.1" 200 16787
+INFO 2025-06-29 12:19:08,445 basehttp 71778 129540769707712 "POST /api/route/gemini-insights/ HTTP/1.1" 200 340
+WARNING 2025-06-29 12:19:22,577 log 71778 129540769707712 Not Found: /api/route/optimize/
+WARNING 2025-06-29 12:19:22,578 basehttp 71778 129540769707712 "POST /api/route/optimize/ HTTP/1.1" 404 51

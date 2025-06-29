@@ -1,10 +1,10 @@
 // src/components/MapSection.tsx
-import React, { useState, useRef, useEffect, memo } from "react";
+import React, { useState, useRef, useEffect, memo, useCallback } from "react";
 import Map, { Source, Layer, Marker, NavigationControl, MapRef, ScaleControl, GeolocateControl } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
 import maplibregl, { LngLatBounds } from "maplibre-gl";
 import type { AnyLayer } from 'maplibre-gl';
-import { MapPin, Loader2, CarFront } from "lucide-react"; // Added CarFront icon
+import { MapPin, Loader2, CarFront } from "lucide-react";
 
 const MAPTILER_API_KEY = import.meta.env.VITE_MAPTILER_API_KEY;
 const DEFAULT_MAP_STYLE = `https://api.maptiler.com/maps/streets/style.json?key=${MAPTILER_API_KEY}`;
@@ -15,13 +15,13 @@ interface MapSectionProps {
   endMarker: [number, number] | null;
   isLoading: boolean;
   onMapInstanceReady?: (map: maplibregl.Map) => void;
-  // NEW PROP: For the simulated vehicle position [longitude, latitude]
   simulatedVehiclePosition?: [number, number] | null;
 }
 
 const routeLayerStyle: AnyLayer = {
   id: "route",
   type: "line",
+  source: "route-source",
   layout: {
     "line-join": "round",
     "line-cap": "round",
@@ -37,10 +37,35 @@ export const MapSection: React.FC<MapSectionProps> = memo(
   ({ routeGeoJSON, startMarker, endMarker, isLoading, onMapInstanceReady, simulatedVehiclePosition }) => {
     const mapRef = useRef<MapRef | null>(null);
     const [viewState, setViewState] = useState({
-      longitude: 31.0531, // Default to Harare, Zimbabwe
-      latitude: -17.8252, // Default to Harare, Zimbabwe
+      longitude: 31.0531,
+      latitude: -17.8252,
       zoom: 12,
     });
+
+    const cleanRouteGeoJSON = useCallback(() => {
+      if (!routeGeoJSON) return null;
+
+      // Ensure we have a proper GeoJSON Feature
+      if (routeGeoJSON.type === 'LineString') {
+        return {
+          type: 'Feature',
+          geometry: routeGeoJSON,
+          properties: {}
+        };
+      }
+
+      // If it's already a Feature, just return it
+      if (routeGeoJSON.type === 'Feature') {
+        return routeGeoJSON;
+      }
+
+      // If it's a FeatureCollection with one feature, extract it
+      if (routeGeoJSON.type === 'FeatureCollection' && routeGeoJSON.features?.length > 0) {
+        return routeGeoJSON.features[0];
+      }
+
+      return null;
+    }, [routeGeoJSON]);
 
     useEffect(() => {
       const mapInstance = mapRef.current?.getMap();
@@ -50,16 +75,15 @@ export const MapSection: React.FC<MapSectionProps> = memo(
       }
 
       if (mapInstance) {
-        if (routeGeoJSON) {
+        const cleanGeoJSON = cleanRouteGeoJSON();
+        if (cleanGeoJSON) {
           const bounds = new LngLatBounds();
-          routeGeoJSON.features.forEach((feature: any) => {
-            if (feature.geometry.type === "LineString") {
-              feature.geometry.coordinates.forEach((coord: [number, number]) => {
-                bounds.extend(coord);
-              });
-            }
-          });
-          mapInstance.fitBounds(bounds, { padding: 40, duration: 1000 });
+          if (cleanGeoJSON.geometry.type === "LineString") {
+            cleanGeoJSON.geometry.coordinates.forEach((coord: [number, number]) => {
+              bounds.extend(coord);
+            });
+            mapInstance.fitBounds(bounds, { padding: 40, duration: 1000 });
+          }
         } else if (startMarker && endMarker) {
           const bounds = new LngLatBounds();
           bounds.extend(startMarker);
@@ -71,22 +95,7 @@ export const MapSection: React.FC<MapSectionProps> = memo(
           mapInstance.flyTo({ center: endMarker, zoom: 14, duration: 1000 });
         }
       }
-    }, [routeGeoJSON, startMarker, endMarker, onMapInstanceReady]);
-
-    // Effect to keep the simulated vehicle in view (optional, could be refined)
-    useEffect(() => {
-      if (mapRef.current && simulatedVehiclePosition) {
-        // Only pan the map if the vehicle goes out of current view
-        const mapInstance = mapRef.current.getMap();
-        const currentBounds = mapInstance.getBounds();
-        const currentLngLat = new maplibregl.LngLat(simulatedVehiclePosition[0], simulatedVehiclePosition[1]);
-
-        if (!currentBounds.contains(currentLngLat)) {
-          mapInstance.flyTo({ center: simulatedVehiclePosition, speed: 0.8, curve: 1, easing: (t) => t });
-        }
-      }
-    }, [simulatedVehiclePosition]);
-
+    }, [routeGeoJSON, startMarker, endMarker, onMapInstanceReady, cleanRouteGeoJSON]);
 
     const onMapLoad = () => {
       console.log("MapGL: Map loaded successfully.");
@@ -124,8 +133,12 @@ export const MapSection: React.FC<MapSectionProps> = memo(
           />
           <ScaleControl position="bottom-left" />
 
-          {routeGeoJSON && (
-            <Source id="route-source" type="geojson" data={routeGeoJSON}>
+          {cleanRouteGeoJSON() && (
+            <Source
+              id="route-source"
+              type="geojson"
+              data={cleanRouteGeoJSON()}
+            >
               <Layer {...routeLayerStyle} />
             </Source>
           )}
@@ -142,10 +155,9 @@ export const MapSection: React.FC<MapSectionProps> = memo(
             </Marker>
           )}
 
-          {/* NEW: Simulated Vehicle Marker */}
           {simulatedVehiclePosition && (
             <Marker longitude={simulatedVehiclePosition[0]} latitude={simulatedVehiclePosition[1]} anchor="center">
-              <CarFront className="w-8 h-8 text-blue-600 drop-shadow-md" /> {/* Blue car icon */}
+              <CarFront className="w-8 h-8 text-blue-600 drop-shadow-md" />
             </Marker>
           )}
         </Map>
