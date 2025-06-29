@@ -657,3 +657,58 @@ INFO 2025-06-29 12:53:18,723 autoreload 90179 124152037019776 Watching for file 
 INFO 2025-06-29 12:53:22,476 basehttp 90179 124151752816320 "POST /api/route/simulate/ HTTP/1.1" 200 14457
 INFO 2025-06-29 12:53:48,770 autoreload 90179 124152037019776 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
 INFO 2025-06-29 12:53:49,709 autoreload 90478 129765699330176 Watching for file changes with StatReloader
+INFO 2025-06-29 13:02:55,504 autoreload 90478 129765699330176 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 13:02:56,644 autoreload 93886 133426537435264 Watching for file changes with StatReloader
+INFO 2025-06-29 13:04:43,817 autoreload 93886 133426537435264 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 13:04:44,745 autoreload 94628 124822483267712 Watching for file changes with StatReloader
+INFO 2025-06-29 13:05:23,773 basehttp 94628 124822132618944 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 13:05:56,817 views 94628 124822132618944 Simulate route request received
+INFO 2025-06-29 13:05:56,817 views 94628 124822132618944 Start Place ID: ChIJkZC0TFZRMBkRmVEl6eAPeXU, End Place ID: ChIJPzA0JhuwMRkR_gy89V5yvZ0, Mode: driving
+INFO 2025-06-29 13:05:57,422 basehttp 94628 124822132618944 "POST /api/route/simulate/ HTTP/1.1" 200 8681
+WARNING 2025-06-29 13:16:57,234 log 94628 124822132618944 Bad Request: /api/route/gemini-insights/
+WARNING 2025-06-29 13:16:57,240 basehttp 94628 124822132618944 "POST /api/route/gemini-insights/ HTTP/1.1" 400 54
+INFO 2025-06-29 13:19:41,084 autoreload 94628 124822483267712 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 13:19:42,207 autoreload 99948 129921740079232 Watching for file changes with StatReloader
+INFO 2025-06-29 13:19:48,879 views 99948 129921389164224 Simulate route request received
+INFO 2025-06-29 13:19:48,879 views 99948 129921389164224 Start Place ID: ChIJx6UXZOKAMBkR3ltCcCq9VAc, End Place ID: ChIJ0_1HKe2lMRkRSoRHp8-TG_o, Mode: driving
+INFO 2025-06-29 13:19:49,488 views 99948 129921389164224 Simulation Route Created Successfully
+INFO 2025-06-29 13:19:49,490 basehttp 99948 129921389164224 "POST /api/route/simulate/ HTTP/1.1" 200 12317
+INFO 2025-06-29 13:20:31,716 basehttp 99948 129921389164224 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+WARNING 2025-06-29 13:20:57,448 log 99948 129921389164224 Bad Request: /api/route/gemini-insights/
+WARNING 2025-06-29 13:20:57,448 basehttp 99948 129921389164224 "POST /api/route/gemini-insights/ HTTP/1.1" 400 54
+INFO 2025-06-29 13:21:20,671 views 99948 129921389164224 Simulate route request received
+INFO 2025-06-29 13:21:20,671 views 99948 129921389164224 Start Place ID: ChIJrcehbJqUNBkR069LY9XaJXk, End Place ID: ChIJYf9BksKkNhkR___V_7jeChI, Mode: driving
+WARNING 2025-06-29 13:21:20,729 log 99948 129921379722944 Bad Request: /api/route/gemini-insights/
+WARNING 2025-06-29 13:21:20,733 basehttp 99948 129921379722944 "POST /api/route/gemini-insights/ HTTP/1.1" 400 54
+INFO 2025-06-29 13:21:21,345 views 99948 129921389164224 Simulation Route Created Successfully
+INFO 2025-06-29 13:21:21,347 basehttp 99948 129921389164224 "POST /api/route/simulate/ HTTP/1.1" 200 16829
+INFO 2025-06-29 13:21:21,680 views 99948 129921389164224 Generating insights for route from Gweru to Kadoma using DRIVING
+INFO 2025-06-29 13:21:21,681 views 99948 129921389164224 Getting Destination Insights...
+INFO 2025-06-29 13:21:21,681 views 99948 129921389164224 Distance: 0.0 km, Duration: 0 mins, Traffic: Expected travel time with traffic is 0 mins., Time: 6/29/2025, 1:21:21 PM
+INFO 2025-06-29 13:21:22,020 views 99948 129921379722944 Generating insights for route from Gweru to Kadoma using DRIVING
+INFO 2025-06-29 13:21:22,020 views 99948 129921379722944 Getting Destination Insights...
+INFO 2025-06-29 13:21:22,020 views 99948 129921379722944 Distance: 0.0 km, Duration: 0 mins, Traffic: Expected travel time with traffic is 0 mins., Time: 6/29/2025, 1:21:22 PM
+INFO 2025-06-29 13:21:24,322 views 99948 129921389164224 Insights Generated Successfully, sending response...
+INFO 2025-06-29 13:21:24,323 basehttp 99948 129921389164224 "POST /api/route/gemini-insights/ HTTP/1.1" 200 400
+INFO 2025-06-29 13:21:24,471 views 99948 129921379722944 Insights Generated Successfully, sending response...
+INFO 2025-06-29 13:21:24,472 basehttp 99948 129921379722944 "POST /api/route/gemini-insights/ HTTP/1.1" 200 400
+INFO 2025-06-29 13:35:35,063 basehttp 99948 129921379722944 "OPTIONS /api/users/token/refresh/ HTTP/1.1" 200 0
+INFO 2025-06-29 13:35:35,095 basehttp 99948 129921379722944 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+WARNING 2025-06-29 13:36:05,742 log 99948 129921379722944 Bad Request: /api/route/gemini-insights/
+WARNING 2025-06-29 13:36:05,742 basehttp 99948 129921379722944 "POST /api/route/gemini-insights/ HTTP/1.1" 400 54
+INFO 2025-06-29 13:36:10,521 views 99948 129921379722944 Simulate route request received
+INFO 2025-06-29 13:36:10,521 views 99948 129921379722944 Start Place ID: ChIJOTIPigulMRkRbfLYFebbLnQ, End Place ID: ChIJ0_1HKe2lMRkRSoRHp8-TG_o, Mode: driving
+WARNING 2025-06-29 13:36:10,611 log 99948 129921389164224 Bad Request: /api/route/gemini-insights/
+WARNING 2025-06-29 13:36:10,619 basehttp 99948 129921389164224 "POST /api/route/gemini-insights/ HTTP/1.1" 400 54
+INFO 2025-06-29 13:36:11,091 views 99948 129921379722944 Simulation Route Created Successfully
+INFO 2025-06-29 13:36:11,092 basehttp 99948 129921379722944 "POST /api/route/simulate/ HTTP/1.1" 200 1643
+INFO 2025-06-29 13:36:11,401 views 99948 129921379722944 Generating insights for route from Belgravia to Harare CBD using DRIVING
+INFO 2025-06-29 13:36:11,402 views 99948 129921379722944 Getting Destination Insights...
+INFO 2025-06-29 13:36:11,402 views 99948 129921379722944 Distance: 0.0 km, Duration: 0 mins, Traffic: Expected travel time with traffic is 0 mins., Time: 6/29/2025, 1:36:11 PM
+INFO 2025-06-29 13:36:11,822 views 99948 129921389164224 Generating insights for route from Belgravia to Harare CBD using DRIVING
+INFO 2025-06-29 13:36:11,829 views 99948 129921389164224 Getting Destination Insights...
+INFO 2025-06-29 13:36:11,831 views 99948 129921389164224 Distance: 0.0 km, Duration: 0 mins, Traffic: Expected travel time with traffic is 0 mins., Time: 6/29/2025, 1:36:11 PM
+INFO 2025-06-29 13:36:13,907 views 99948 129921389164224 Insights Generated Successfully, sending response...
+INFO 2025-06-29 13:36:13,915 basehttp 99948 129921389164224 "POST /api/route/gemini-insights/ HTTP/1.1" 200 352
+INFO 2025-06-29 13:36:13,963 views 99948 129921379722944 Insights Generated Successfully, sending response...
+INFO 2025-06-29 13:36:13,964 basehttp 99948 129921379722944 "POST /api/route/gemini-insights/ HTTP/1.1" 200 454
