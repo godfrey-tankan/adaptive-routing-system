@@ -1,5 +1,5 @@
 // src/components/map/PlaceSearchInput.tsx
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react'; // Added useCallback
 import { Input } from '@/components/ui/input';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -7,6 +7,8 @@ import { Check, Search, XCircle, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useDebounce } from '@/hooks/use-debounce';
 import { toast } from '@/hooks/use-toast';
+// Import Google Maps types for TypeScript
+import type { } from '@types/google.maps';
 
 // Define a type for a geographic point
 export type GeoPoint = {
@@ -23,11 +25,15 @@ interface PlaceSearchInputProps {
     className?: string;
     currentMapCenter?: [number, number] | null;
 }
+
 declare global {
     interface Window {
         google: typeof import('@googlemaps/google-maps-services-js').google.maps;
     }
 }
+
+// Component function for use with React.memo
+const minLettersForSearch = 4;
 
 export const PlaceSearchInput: React.FC<PlaceSearchInputProps> = ({
     value,
@@ -41,9 +47,14 @@ export const PlaceSearchInput: React.FC<PlaceSearchInputProps> = ({
     const [searchResults, setSearchResults] = useState<GeoPoint[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const debouncedSearchTerm = useDebounce(inputValue, 500);
-    const autocompleteServiceRef = useRef<google.maps.places.AutocompleteService | null>(null);
-    const placesServiceRef = useRef<google.maps.places.PlacesService | null>(null); // For fetching place details
 
+    // New state for "4 new letters" logic
+    const [lastSearchInputLength, setLastSearchInputLength] = useState(0);
+
+    const autocompleteServiceRef = useRef<google.maps.places.AutocompleteService | null>(null);
+    const placesServiceRef = useRef<google.maps.places.PlacesService | null>(null);
+
+    // Effect to initialize Google Maps services
     useEffect(() => {
         const checkGoogleMaps = () => {
             if (window.google && window.google.maps && window.google.maps.places) {
@@ -56,36 +67,43 @@ export const PlaceSearchInput: React.FC<PlaceSearchInputProps> = ({
                 console.log("PlaceSearchInput: Google Maps Places services initialized.");
             } else {
                 console.warn("PlaceSearchInput: Google Maps JavaScript API or Places library not loaded yet. Retrying in 100ms...");
-                setTimeout(checkGoogleMaps, 100); // Retry after 100ms
+                setTimeout(checkGoogleMaps, 100);
             }
         };
 
-        checkGoogleMaps(); // Initial call
-    }, []); // Run once on component mount
+        checkGoogleMaps();
+    }, []);
 
+    // Effect to synchronize inputValue with the external 'value' prop
     useEffect(() => {
-        if (value && value.name !== inputValue) {
-            setInputValue(value.name);
-        } else if (!value && inputValue !== '') {
+        if (value) {
+            if (value.name !== inputValue) {
+                setInputValue(value.name);
+                setLastSearchInputLength(value.name.length);
+            }
+        } else if (inputValue !== '') {
             setInputValue('');
+            setLastSearchInputLength(0); // Reset length when input is cleared
         }
-    }, [value]);
+    }, [value]); // Only depend on 'value' to react to external changes
 
     useEffect(() => {
-        const fetchPlaces = () => {
+        const fetchPlaces = async () => { // Made async for potential future async operations if needed
             console.log("PlaceSearchInput: Debounced search term changed:", debouncedSearchTerm);
 
-            if (!debouncedSearchTerm || debouncedSearchTerm.length < 4) {
+            const currentInputLength = debouncedSearchTerm.length;
+
+            if (!debouncedSearchTerm || currentInputLength < minLettersForSearch) {
                 console.log("PlaceSearchInput: Search term is empty or too short, clearing results.");
                 setSearchResults([]);
                 setIsLoading(false);
+                setLastSearchInputLength(0); // Reset length when input is cleared
                 return;
             }
 
-
             if (!autocompleteServiceRef.current || !placesServiceRef.current) {
                 console.warn("PlaceSearchInput: Google Maps services not ready. Cannot search yet.");
-                setIsLoading(false); // Make sure not to show spinner indefinitely
+                setIsLoading(false);
                 return;
             }
 
@@ -93,17 +111,15 @@ export const PlaceSearchInput: React.FC<PlaceSearchInputProps> = ({
             try {
                 const request: google.maps.places.AutocompletionRequest = {
                     input: debouncedSearchTerm,
-                    componentRestrictions: { country: 'zw' }, // Restrict to Zimbabwe
-                    types: ['geocode', 'establishment'], // Prioritize general locations and businesses
-                    // 'address' type can also be useful
+                    componentRestrictions: { country: 'zw' },
+                    types: ['geocode', 'establishment'],
                 };
 
                 if (currentMapCenter) {
-                    // Ensure currentMapCenter is valid [lng, lat]
                     if (currentMapCenter[0] !== undefined && currentMapCenter[1] !== undefined) {
                         request.locationBias = {
-                            center: new window.google.maps.LatLng(currentMapCenter[1], currentMapCenter[0]), // lat, lng
-                            radius: 50000, // 50km radius for biasing
+                            center: new window.google.maps.LatLng(currentMapCenter[1], currentMapCenter[0]),
+                            radius: 50000,
                         };
                         console.log("PlaceSearchInput: Adding location bias:", request.locationBias);
                     } else {
@@ -116,29 +132,30 @@ export const PlaceSearchInput: React.FC<PlaceSearchInputProps> = ({
                     console.log("PlaceSearchInput: getPlacePredictions callback - Status:", status, "Predictions:", predictions);
 
                     if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions && predictions.length > 0) {
+                        // Crucially, update lastSearchInputLength ONLY on a successful API response
+                        setLastSearchInputLength(currentInputLength);
+
                         const detailedResultsPromises = predictions.map((prediction) => {
                             return new Promise<GeoPoint | null>((resolve) => {
-                                // Check if PlacesService is available before calling getDetails
                                 if (placesServiceRef.current) {
                                     placesServiceRef.current.getDetails(
                                         {
                                             placeId: prediction.place_id,
-                                            fields: ['geometry', 'name', 'formatted_address'], // Request only necessary fields
+                                            fields: ['geometry', 'name', 'formatted_address'],
                                         },
                                         (place, detailsStatus) => {
                                             if (detailsStatus === window.google.maps.places.PlacesServiceStatus.OK && place && place.geometry && place.geometry.location) {
                                                 resolve({
-                                                    name: place.name || prediction.description, // Use place name if available, fallback to prediction
-                                                    coordinates: [place.geometry.location.lng(), place.geometry.location.lat()], // [longitude, latitude]
+                                                    name: place.name || prediction.description,
+                                                    coordinates: [place.geometry.location.lng(), place.geometry.location.lat()],
                                                     address: place.formatted_address || prediction.description,
                                                     placeId: prediction.place_id,
                                                 });
                                             } else {
-                                                // If details fail, at least use prediction info, but mark coordinates as unknown
                                                 console.warn(`Could not get full details for ${prediction.description} (status: ${detailsStatus}). Using prediction info.`);
                                                 resolve({
                                                     name: prediction.description,
-                                                    coordinates: [0, 0], // Indicate unknown coordinates if details failed
+                                                    coordinates: [0, 0],
                                                     address: prediction.description,
                                                     placeId: prediction.place_id,
                                                 });
@@ -147,13 +164,12 @@ export const PlaceSearchInput: React.FC<PlaceSearchInputProps> = ({
                                     );
                                 } else {
                                     console.error("PlaceSearchInput: PlacesService is not available when trying to get details.");
-                                    resolve(null); // Resolve with null if service is not ready
+                                    resolve(null);
                                 }
                             });
                         });
 
                         Promise.all(detailedResultsPromises).then((results) => {
-                            // Filter out any null results from failed detail fetches
                             setSearchResults(results.filter(Boolean) as GeoPoint[]);
                             setIsLoading(false);
                         });
@@ -161,11 +177,13 @@ export const PlaceSearchInput: React.FC<PlaceSearchInputProps> = ({
                         console.log("PlaceSearchInput: No results found for query.");
                         setSearchResults([]);
                         setIsLoading(false);
+                        setLastSearchInputLength(currentInputLength); // Still update length to avoid re-triggering immediately on next key
                     } else {
                         console.error("PlaceSearchInput: Error fetching Google Places predictions:", status);
                         toast({ title: "Search Error", description: `Failed to fetch place suggestions: ${status}.`, variant: "destructive" });
                         setSearchResults([]);
                         setIsLoading(false);
+                        setLastSearchInputLength(currentInputLength); // Still update length to avoid re-triggering immediately on next key
                     }
                 });
             } catch (error) {
@@ -177,21 +195,25 @@ export const PlaceSearchInput: React.FC<PlaceSearchInputProps> = ({
         };
 
         fetchPlaces();
-    }, [debouncedSearchTerm, currentMapCenter]); // Dependencies for useEffect
+    }, [debouncedSearchTerm, currentMapCenter, lastSearchInputLength]); // ADD lastSearchInputLength to dependencies
 
-    const handleSelect = (selectedPoint: GeoPoint) => {
+    // Memoize handleSelect and handleClear to prevent new function references on every render,
+    // which helps if they were passed down as props to memoized children (though not directly here)
+    const handleSelect = useCallback((selectedPoint: GeoPoint) => {
         setInputValue(selectedPoint.name);
         onSelect(selectedPoint);
         setOpen(false);
-    };
+        setLastSearchInputLength(selectedPoint.name.length); // Update length when a selection is made
+    }, [onSelect]);
 
-    const handleClear = (e: React.MouseEvent) => {
-        e.stopPropagation(); // Prevent the popover from closing immediately
+    const handleClear = useCallback((e: React.MouseEvent) => {
+        e.stopPropagation();
         setInputValue('');
         setSearchResults([]);
-        onSelect(null); // Clear the selected point in the parent component
-        setOpen(false); // Close the popover
-    };
+        onSelect(null);
+        setOpen(false);
+        setLastSearchInputLength(0); // Reset length when input is cleared
+    }, [onSelect]);
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -202,7 +224,7 @@ export const PlaceSearchInput: React.FC<PlaceSearchInputProps> = ({
                         onChange={(e) => setInputValue(e.target.value)}
                         placeholder={placeholder}
                         className="w-full pl-8 pr-8"
-                        onFocus={() => setOpen(true)} // Open popover when input is focused
+                        onFocus={() => setOpen(true)}
                     />
                     <Search className="absolute left-2 h-4 w-4 text-muted-foreground" />
                     {inputValue && (
@@ -215,33 +237,31 @@ export const PlaceSearchInput: React.FC<PlaceSearchInputProps> = ({
             </PopoverTrigger>
             <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0 z-[100]">
                 <Command>
-                    {/* CommandInput is hidden because the main Input handles the typing */}
                     <CommandInput
                         placeholder="Search locations..."
                         value={inputValue}
                         onValueChange={setInputValue}
-                        className="sr-only" // Hide visually but keep accessible if needed
+                        className="sr-only"
                     />
                     <CommandList>
                         {isLoading ? (
                             <div className="py-6 text-center text-sm text-muted-foreground flex items-center justify-center">
                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Searching...
                             </div>
-                        ) : searchResults.length === 0 && debouncedSearchTerm ? (
+                        ) : searchResults.length === 0 && debouncedSearchTerm && debouncedSearchTerm.length >= minLettersForSearch ? (
                             <CommandEmpty>No results found for "{debouncedSearchTerm}".</CommandEmpty>
-                        ) : searchResults.length === 0 && !debouncedSearchTerm ? (
-                            <CommandEmpty>Start typing to search for a place.</CommandEmpty>
+                        ) : searchResults.length === 0 && (!debouncedSearchTerm || debouncedSearchTerm.length < minLettersForSearch) ? (
+                            <CommandEmpty>Start typing to search for a place (min {minLettersForSearch} letters).</CommandEmpty>
                         ) : (
                             <CommandGroup>
                                 {searchResults.map((point) => (
                                     <CommandItem
                                         key={point.placeId}
-                                        value={point.name} // Value for keyboard navigation/selection
+                                        value={point.name}
                                         onSelect={() => handleSelect(point)}
                                         className="flex items-center justify-between"
                                     >
                                         <span>{point.name}</span>
-                                        {/* Display a truncated address if it's long, or just the remainder */}
                                         {point.address && (
                                             <span className="text-muted-foreground text-xs ml-2 text-right overflow-hidden text-ellipsis whitespace-nowrap max-w-[60%]">
                                                 {point.address?.replace(`${point.name}, `, '')}
@@ -265,3 +285,6 @@ export const PlaceSearchInput: React.FC<PlaceSearchInputProps> = ({
         </Popover>
     );
 };
+
+// Export the memoized component
+export const MemoizedPlaceSearchInput = React.memo(PlaceSearchInput);
