@@ -174,3 +174,61 @@ INFO 2025-06-28 20:12:11,621 basehttp 452242 133381501220544 "POST /api/users/lo
 INFO 2025-06-28 20:13:24,321 basehttp 452242 133381501220544 "POST /api/users/login/ HTTP/1.1" 200 483
 INFO 2025-06-28 20:16:20,394 autoreload 452242 133381785211008 /home/tnqn/Documents/adaptive-routing-backend/users/views.py changed, reloading.
 INFO 2025-06-28 20:16:21,679 autoreload 455179 133372464328832 Watching for file changes with StatReloader
+INFO 2025-06-28 22:59:42,202 autoreload 554001 129149529817216 Watching for file changes with StatReloader
+INFO 2025-06-28 22:59:50,359 basehttp 554001 129149179000512 "OPTIONS /api/users/login/ HTTP/1.1" 200 0
+INFO 2025-06-28 22:59:51,532 basehttp 554001 129149179000512 "POST /api/users/login/ HTTP/1.1" 200 483
+WARNING 2025-06-28 23:22:45,793 log 554001 129149179000512 Unauthorized: /api/users/login/
+WARNING 2025-06-28 23:22:45,794 basehttp 554001 129149179000512 "POST /api/users/login/ HTTP/1.1" 401 63
+INFO 2025-06-28 23:22:51,778 basehttp 554001 129149179000512 "POST /api/users/login/ HTTP/1.1" 200 483
+INFO 2025-06-28 23:28:18,609 basehttp 554001 129149179000512 "POST /api/users/login/ HTTP/1.1" 200 483
+INFO 2025-06-28 23:30:08,970 basehttp 554001 129149179000512 "POST /api/users/login/ HTTP/1.1" 200 483
+INFO 2025-06-28 23:37:00,748 basehttp 554001 129149179000512 "OPTIONS /api/users/token/refresh/ HTTP/1.1" 200 0
+INFO 2025-06-28 23:37:00,811 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-28 23:37:14,683 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-28 23:37:26,930 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-28 23:44:22,608 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-28 23:44:32,269 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-28 23:45:37,624 basehttp 554001 129149179000512 "POST /api/users/login/ HTTP/1.1" 200 483
+INFO 2025-06-29 00:14:41,823 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 00:14:54,996 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 00:24:11,023 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 00:24:30,635 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 00:24:40,072 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 00:26:32,058 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 00:36:54,921 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 00:41:15,274 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 00:41:51,013 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 00:53:57,258 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 00:59:28,371 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 01:08:54,855 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 01:14:58,041 basehttp 554001 129149179000512 "OPTIONS /api/users/token/refresh/ HTTP/1.1" 200 0
+INFO 2025-06-29 01:14:58,062 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 01:16:49,061 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 01:17:46,944 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 01:18:25,509 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 01:22:55,017 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 01:24:00,351 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 01:30:42,495 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 01:31:23,657 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 01:36:12,642 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 01:40:21,892 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 01:40:51,733 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 01:41:35,280 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 01:48:04,214 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 02:02:06,953 basehttp 554001 129149179000512 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 02:07:54,947 autoreload 554001 129149529817216 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 02:07:57,786 autoreload 632526 124501439881344 Watching for file changes with StatReloader
+INFO 2025-06-29 02:09:08,571 autoreload 632526 124501439881344 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-29 02:09:09,860 autoreload 633178 131625142354048 Watching for file changes with StatReloader
+INFO 2025-06-29 02:09:33,585 autoreload 633178 131625142354048 /home/tnqn/Documents/adaptive-routing-backend/routing/urls.py changed, reloading.
+INFO 2025-06-29 02:09:34,584 autoreload 633460 137561865736320 Watching for file changes with StatReloader
+INFO 2025-06-29 02:09:52,559 basehttp 633460 137561582335680 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 02:17:29,577 basehttp 633460 137561582335680 "OPTIONS /api/users/login/ HTTP/1.1" 200 0
+INFO 2025-06-29 02:17:30,432 basehttp 633460 137561582335680 "POST /api/users/login/ HTTP/1.1" 200 483
+INFO 2025-06-29 02:34:00,037 basehttp 633460 137561582335680 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 02:37:10,454 basehttp 633460 137561582335680 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 02:39:02,411 basehttp 633460 137561582335680 "POST /api/users/login/ HTTP/1.1" 200 483
+INFO 2025-06-29 02:41:01,438 basehttp 633460 137561582335680 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 02:43:30,894 basehttp 633460 137561582335680 "OPTIONS /api/users/token/refresh/ HTTP/1.1" 200 0
+INFO 2025-06-29 02:43:30,922 basehttp 633460 137561582335680 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-29 02:52:12,862 basehttp 633460 137561582335680 "POST /api/users/token/refresh/ HTTP/1.1" 200 483

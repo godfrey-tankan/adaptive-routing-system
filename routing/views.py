@@ -10,6 +10,71 @@ from ai_services.services import GeminiService
 from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+import os
+import google.generativeai as genai
+from rest_framework.permissions import AllowAny # Consider stricter permissions in production
+from dotenv import load_dotenv
+
+load_dotenv(override=True) # Load environment variables from .env
+
+# Configure Gemini API
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+
+class GeminiInsightsView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        start_location = data.get('start_location')
+        end_location = data.get('end_location')
+        distance = data.get('distance')
+        duration = data.get('duration') 
+        traffic_info = data.get('traffic_info')
+        weather_info = data.get('weather_info')
+        avoid_highways = data.get('avoid_highways', False)
+        avoid_tolls = data.get('avoid_tolls', False)
+        transport_mode = data.get('transport_mode', 'driving')
+        current_time = data.get('current_time', 'N/A')
+
+        if not all([start_location, end_location, distance, duration]):
+            return Response({"detail": "Missing required route data for insights."}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Construct a detailed prompt for Gemini
+        prompt = f"""
+        Analyze the following route details for a journey from {start_location} to {end_location} in Harare, Zimbabwe:
+
+        - Distance: {distance}
+        - Estimated Duration (with traffic): {duration}
+        - Transport Mode: {transport_mode}
+        - Current Time: {current_time}
+
+        Additional information:
+        - Traffic/Real-time condition: {traffic_info}
+        - Current Weather at start: {weather_info}
+        - Avoid Highways: {avoid_highways}
+        - Avoid Tolls: {avoid_tolls}
+
+        Based on this information and general knowledge about driving/travel in Harare, provide a concise and helpful AI route insight.
+        Consider aspects like:
+        - Expected journey conditions (e.g., "smooth," "potential delays").
+        - Any specific road names or areas known for issues (e.g., "expect congestion near Mbare market").
+        - Suggestions for optimal travel times if relevant.
+        - How weather might impact the trip (e.g., "rainy conditions may cause slippery roads").
+        - Any specific advice for the chosen transport mode (e.g., for 'Kombi', "expect multiple stops and shared ride," for 'Walking', "consider comfortable shoes").
+        - General safety tips relevant to the route or time.
+        - Mention if the chosen avoidance options (highways/tolls) might significantly affect duration or distance.
+
+        Keep the insight to 2-3 sentences maximum. Be specific to Harare where possible.
+        """
+
+        try:
+            model = genai.GenerativeModel('gemini-pro')
+            response = model.generate_content(prompt)
+            insights = response.text.strip()
+            return Response({"insights": insights}, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(f"Error calling Gemini API: {e}")
+            return Response({"detail": f"Failed to generate AI insights: {e}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class RouteOptimizationView(APIView):
     permission_classes = [IsAuthenticated]

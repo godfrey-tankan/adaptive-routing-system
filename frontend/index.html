@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ZimSmart Routes - Smart Routing for Zimbabwe's Roads</title>
+    <title>Adaptive Route Optimizer</title>
     <meta name="description" content="Adaptive routing system for Zimbabwe with real-time traffic and multi-modal transport options" />
     <meta name="author" content="ZimSmart Routes" />
 
@@ -16,10 +16,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=%VITE_Maps_API_KEY%&libraries=places&callback=initMap"></script>
   </head>
 
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      function initMap() {
+        // This function is called once the Maps JavaScript API is loaded.
+        // If your React app handles its own loading state, you might not strictly need this,
+        // but it's good practice for ensuring the `google.maps` object is available.
+        console.log("Google Maps JavaScript API loaded.");
+      }
+    </script>
   </body>
 </html>

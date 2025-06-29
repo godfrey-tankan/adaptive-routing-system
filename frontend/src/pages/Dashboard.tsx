@@ -1,20 +1,27 @@
-// src/Dashboard.tsx
+// src/pages/Dashboard.tsx
 import { useState } from "react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { MapSection } from "@/components/MapSection";
 import { RouteControlPanel } from "@/components/RouteControlPanel";
+import maplibregl from "maplibre-gl";
 
 const Dashboard = () => {
-  const [routeDataForMap, setRouteDataForMap] = useState<any>(null);
-  const [startCoordsForMap, setStartCoordsForMap] = useState<[number, number] | null>(null);
-  const [endCoordsForMap, setEndCoordsForMap] = useState<[number, number] | null>(null);
+  const [routeGeoJSON, setRouteGeoJSON] = useState<any>(null);
+  const [startMarker, setStartMarker] = useState<[number, number] | null>(null);
+  const [endMarker, setEndMarker] = useState<[number, number] | null>(null);
+  const [isMapAndRouteLoading, setIsMapAndRouteLoading] = useState(false);
+  const [mapInstance, setMapInstance] = useState<maplibregl.Map | null>(null);
 
-  const updateMapWithRoute = (start: [number, number], end: [number, number], geoJSON: any) => {
-    setStartCoordsForMap(start);
-    setEndCoordsForMap(end);
-    setRouteDataForMap(geoJSON);
+  const updateMapWithRoute = (
+    startCoords: [number, number] | null,
+    endCoords: [number, number] | null,
+    geoJSON: any | null
+  ) => {
+    setStartMarker(startCoords);
+    setEndMarker(endCoords);
+    setRouteGeoJSON(geoJSON);
   };
 
   return (
@@ -23,16 +30,22 @@ const Dashboard = () => {
         <AppSidebar />
         <main className="flex-1 flex flex-col">
           <DashboardHeader />
-          <div className="flex-1 flex flex-col lg:flex-row gap-4 p-4">
+          <div className="flex-1 flex flex-col lg:flex-row gap-4 p-4 overflow-y-auto">
             <div className="flex-1 order-2 lg:order-1">
               <MapSection
-                routeGeoJSON={routeDataForMap}
-                startMarker={startCoordsForMap}
-                endMarker={endCoordsForMap}
+                routeGeoJSON={routeGeoJSON}
+                startMarker={startMarker}
+                endMarker={endMarker}
+                isLoading={isMapAndRouteLoading}
+                onMapInstanceReady={setMapInstance}
               />
             </div>
             <div className="w-full lg:w-96 order-1 lg:order-2">
-              <RouteControlPanel updateMapWithRoute={updateMapWithRoute} />
+              <RouteControlPanel
+                updateMapWithRoute={updateMapWithRoute}
+                setIsLoadingMapAndRoute={setIsMapAndRouteLoading}
+                mapInstance={mapInstance}
+              />
             </div>
           </div>
         </main>

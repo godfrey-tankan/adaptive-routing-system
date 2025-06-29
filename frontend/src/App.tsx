@@ -1,36 +1,103 @@
+// src/App.tsx
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import Dashboard from './pages/Dashboard';
+import LandingPage from './pages/Index'; // Correct import based on your confirmation (default export)
+import { Toaster } from './components/ui/toaster';
+import { Loader2 } from 'lucide-react';
+import LoginPage from './pages/Login'; // Import the LoginPage
+import SignupPage from './pages/Signup'; // Import the SignupPage
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import Dashboard from "./pages/Dashboard";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import NotFound from "./pages/NotFound";
-import { AuthProvider } from "@/context/AuthContext";
+// Import QueryClient and QueryClientProvider from @tanstack/react-query
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+// Create a client instance of QueryClient outside of the component to prevent re-creation on re-renders
 const queryClient = new QueryClient();
 
-const App = () => (
-  <AuthProvider>
+// A component to protect routes, ensuring only authenticated users can access them
+const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { isAuthenticated, isLoadingAuth } = useAuth();
+
+  useEffect(() => {
+    console.log("ProtectedRoute: isLoadingAuth:", isLoadingAuth, "isAuthenticated:", isAuthenticated); // Debug
+  }, [isLoadingAuth, isAuthenticated]);
+
+  // If still checking authentication status, show a loader
+  if (isLoadingAuth) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <Loader2 className="h-16 w-16 animate-spin text-primary" />
+        <p className="ml-4 text-lg text-gray-600">Checking authentication...</p>
+      </div>
+    );
+  }
+
+  // If not authenticated and not loading, redirect to the landing page
+  if (!isAuthenticated) {
+    console.log("ProtectedRoute: Not authenticated, redirecting to /."); // Debug
+    return <Navigate to="/login" replace />;
+  }
+
+  // If authenticated, render the children (the protected content)
+  console.log("ProtectedRoute: Authenticated, rendering children."); // Debug
+  return <>{children}</>;
+};
+
+const App: React.FC = () => {
+  console.log("App: Root component rendering."); // Debug
+  return (
+    // QueryClientProvider must wrap any component that uses @tanstack/react-query hooks.
+    // It's usually placed at the highest level of your application.
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="*" element={<NotFound />} />
+      <AuthProvider> {/* AuthProvider still wraps Router to provide context */}
+        <Router>
+          <Routes> {/* All Route components MUST be children of Routes */}
+            {/* Public routes (accessible to anyone) */}
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+
+            {/* Protected routes (require authentication) */}
+            <Route
+              path="/dashboard/*" // Use /* to catch nested dashboard routes
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            {/* Example of other protected routes */}
+            <Route
+              path="/dashboard/saved"
+              element={
+                <ProtectedRoute>
+                  <div>Saved Routes Page</div>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/simulation"
+              element={
+                <ProtectedRoute>
+                  <div>Simulation Mode Page</div>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/settings"
+              element={
+                <ProtectedRoute>
+                  <div>Settings Page</div>
+                </ProtectedRoute>
+              }
+            />
           </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+        </Router>
+        <Toaster /> {/* Shadcn Toaster for notifications */}
+      </AuthProvider>
     </QueryClientProvider>
-  </AuthProvider>
-);
+  );
+};
 
 export default App;

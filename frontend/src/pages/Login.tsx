@@ -6,67 +6,33 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Map, ArrowLeft } from 'lucide-react';
+import { Map, ArrowLeft, Loader2 } from 'lucide-react'; // Added Loader2 for loading button
 import { toast } from '@/hooks/use-toast';
-import axios, { AxiosError } from 'axios'; // Import axios and AxiosError
-import { useMutation, useQueryClient } from '@tanstack/react-query'; // Import useMutation and useQueryClient
 
-const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+import { useAuth } from '@/context/AuthContext'; // Import useAuth hook
+
 const Login = () => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient(); // Get query client for invalidation
+  const { login, isLoadingAuth } = useAuth(); // Get the login function and loading state from AuthContext
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     rememberMe: false
   });
 
-  const [isLoading, setIsLoading] = useState(false); // State for loading indicator
-
-  // Mutation for login
-  const loginMutation = useMutation({
-    mutationFn: async (credentials: typeof formData) => {
-      setIsLoading(true); // Start loading
-      const response = await axios.post(`${API_BASE_URL}/users/login/`, {
-        email: credentials.email,
-        password: credentials.password,
-      });
-      return response.data;
-    },
-    onSuccess: (data) => {
-      // Store tokens (e.g., in localStorage)
-      localStorage.setItem('accessToken', data.access);
-      localStorage.setItem('refreshToken', data.refresh);
-
-      // Invalidate relevant queries (e.g., user profile data if you fetch it)
-      queryClient.invalidateQueries({ queryKey: ['userProfile'] });
-
-      toast({
-        title: "Login Successful",
-        description: "Welcome back to ZimSmart Routes!",
-      });
-      navigate('/dashboard');
-    },
-    onError: (error: AxiosError) => {
-      setIsLoading(false); // Stop loading on error
-      const errorMessage =
-        (error.response?.data as { detail?: string })?.detail ||
-        error.message ||
-        "Login failed. Please check your credentials.";
-      toast({
-        title: "Login Failed",
-        description: errorMessage,
-        variant: "destructive",
-      });
-    },
-    onSettled: () => {
-      setIsLoading(false); // Stop loading after success or error
-    }
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    loginMutation.mutate(formData);
+    console.log("LoginPage: Handling submit for login."); // Debug
+    // Call the login function from AuthContext
+    const success = await login(formData.email, formData.password);
+    if (success) {
+      console.log("LoginPage: Login successful via AuthContext, navigating to dashboard."); // Debug
+      navigate('/dashboard');
+    } else {
+      console.log("LoginPage: Login failed via AuthContext."); // Debug
+      // AuthContext's toast handles the error message
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -123,6 +89,7 @@ const Login = () => {
                     placeholder="your.email@example.com"
                     className="h-12"
                     required
+                    disabled={isLoadingAuth} // Disable while AuthContext is loading
                   />
                 </div>
 
@@ -137,6 +104,7 @@ const Login = () => {
                     placeholder="Enter your password"
                     className="h-12"
                     required
+                    disabled={isLoadingAuth} // Disable while AuthContext is loading
                   />
                 </div>
 
@@ -148,6 +116,7 @@ const Login = () => {
                       onCheckedChange={(checked) =>
                         setFormData(prev => ({ ...prev, rememberMe: !!checked }))
                       }
+                      disabled={isLoadingAuth} // Disable while AuthContext is loading
                     />
                     <Label htmlFor="remember" className="text-sm">
                       Remember me
@@ -164,9 +133,13 @@ const Login = () => {
                 <Button
                   type="submit"
                   className="w-full h-12 bg-primary hover:bg-primary/90 text-white text-lg"
-                  disabled={isLoading} // Disable button while loading
+                  disabled={isLoadingAuth} // Control button loading with AuthContext's isLoadingAuth
                 >
-                  {isLoading ? 'Signing In...' : 'Sign In'}
+                  {isLoadingAuth ? (
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  ) : (
+                    'Sign In'
+                  )}
                 </Button>
               </form>
 

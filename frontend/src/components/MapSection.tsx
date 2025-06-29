@@ -1,158 +1,142 @@
 // src/components/MapSection.tsx
-import { useState, useCallback, useRef, useEffect } from "react";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Map, Compass } from "lucide-react";
-import MapGL, { Source, Layer, Marker } from 'react-map-gl';
-import 'mapbox-gl/dist/mapbox-gl.css'; // Don't forget to import Mapbox GL CSS
-import mapboxgl from 'mapbox-gl'; // Import mapbox-gl for LngLatBounds
+import React, { useState, useRef, useEffect, memo } from "react";
+// Ensure you are importing from 'react-map-gl/maplibre'
+import Map, { Source, Layer, Marker, NavigationControl, MapRef, ScaleControl, GeolocateControl } from "react-map-gl/maplibre";
+import "maplibre-gl/dist/maplibre-gl.css";
+import maplibregl, { LngLatBounds } from "maplibre-gl"; // Keep maplibregl for types and LngLatBounds
+import type { AnyLayer } from 'maplibre-gl'; // Keep for types
+import { MapPin, Loader2 } from "lucide-react";
 
-// Replace with your actual Mapbox Public Access Token
-const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN; // Recommended way
+// IMPORTANT: Use import.meta.env for your API key
+const MAPTILER_API_KEY = import.meta.env.VITE_MAPTILER_API_KEY;
 
-export const MapSection = () => {
-  const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/streets-v11'); // Default to streets
-  const mapRef = useRef(null);
+// MapTiler Streets style for the base map
+const DEFAULT_MAP_STYLE = `https://api.maptiler.com/maps/streets/style.json?key=${MAPTILER_API_KEY}`;
 
-  // Initial view state for Harare, Zimbabwe
-  const [viewState, setViewState] = useState({
-    longitude: 31.0530, // Approx. longitude for Harare
-    latitude: -17.8252, // Approx. latitude for Harare
-    zoom: 12
-  });
+interface MapSectionProps {
+  routeGeoJSON: any | null;
+  startMarker: [number, number] | null;
+  endMarker: [number, number] | null;
+  isLoading: boolean;
+  // NEW PROP: Callback to pass the map instance up
+  onMapInstanceReady?: (map: maplibregl.Map) => void;
+}
 
-  // Example route data (will come from RouteControlPanel in a real app)
-  const [routeGeoJSON, setRouteGeoJSON] = useState<any>(null);
-  const [startMarker, setStartMarker] = useState<[number, number] | null>(null);
-  const [endMarker, setEndMarker] = useState<[number, number] | null>(null);
-
-  // This function would be called from RouteControlPanel upon route optimization
-  const updateMapWithRoute = useCallback((startCoords: [number, number], endCoords: [number, number], geoJSON: any) => {
-    setStartMarker(startCoords);
-    setEndMarker(endCoords);
-    setRouteGeoJSON(geoJSON);
-
-    // Fit map to route bounds (optional, but good for UX)
-    if (mapRef.current && geoJSON) {
-      // You'll need to calculate bounds from the geoJSON for a perfect fit
-      // For simplicity, we'll just center between start and end for this example
-      const bounds = new mapboxgl.LngLatBounds();
-      bounds.extend(startCoords);
-      bounds.extend(endCoords);
-      mapRef.current.fitBounds(bounds, { padding: 50 });
-    }
-  }, []);
-
-  // Expose this function for the RouteControlPanel to call
-  // You might want to lift state up or use a context for this
-  useEffect(() => {
-    // This is a placeholder. In a real app, RouteControlPanel would send data here.
-    // For demonstration, let's simulate a route after initial load.
-    // Example coordinates for a route within Harare
-    const mockStart = [31.0530, -17.8252]; // Harare CBD
-    const mockEnd = [30.9800, -17.7800]; // Another point in Harare
-    const mockGeoJSON = {
-      type: 'Feature',
-      properties: {},
-      geometry: {
-        type: 'LineString',
-        coordinates: [
-          mockStart,
-          [31.02, -17.80], // Intermediate point
-          mockEnd
-        ]
-      }
-    };
-    updateMapWithRoute(mockStart, mockEnd, mockGeoJSON);
-  }, [updateMapWithRoute]);
-
-
-  const layerStyle = {
-    id: 'route',
-    type: 'line',
-    paint: {
-      'line-color': '#008080',
-      'line-width': 4,
-      'line-dasharray': [2, 2], // For animated dashed line
-    },
-  };
-
-  return (
-    <Card className="h-full min-h-[500px] overflow-hidden relative">
-      {/* Map Controls */}
-      <div className="absolute top-4 right-4 z-10 flex flex-col space-y-2">
-        <Button
-          variant={mapStyle === 'mapbox://styles/mapbox/streets-v11' ? 'default' : 'secondary'}
-          size="sm"
-          onClick={() => setMapStyle('mapbox://styles/mapbox/streets-v11')}
-          className="bg-white/90 backdrop-blur-sm hover:bg-white"
-        >
-          Streets
-        </Button>
-        <Button
-          variant={mapStyle === 'mapbox://styles/mapbox/satellite-streets-v11' ? 'default' : 'secondary'}
-          size="sm"
-          onClick={() => setMapStyle('mapbox://styles/mapbox/satellite-streets-v11')}
-          className="bg-white/90 backdrop-blur-sm hover:bg-white"
-        >
-          Satellite
-        </Button>
-      </div>
-
-      {/* Map Container */}
-      <MapGL
-        {...viewState}
-        onMove={evt => setViewState(evt.viewState)}
-        style={{ width: '100%', height: '100%' }}
-        mapStyle={mapStyle}
-        mapboxAccessToken={MAPBOX_TOKEN}
-        ref={mapRef}
-      >
-        {routeGeoJSON && (
-          <Source id="my-route" type="geojson" data={routeGeoJSON}>
-            <Layer {...layerStyle} />
-          </Source>
-        )}
-
-        {startMarker && (
-          <Marker longitude={startMarker[0]} latitude={startMarker[1]} anchor="bottom">
-            <div className="relative">
-              <div className="w-6 h-6 bg-primary rounded-full animate-ping"></div>
-              <div className="absolute top-0 left-0 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
-                <Compass className="w-3 h-3 text-white" />
-              </div>
-            </div>
-          </Marker>
-        )}
-
-        {endMarker && (
-          <Marker longitude={endMarker[0]} latitude={endMarker[1]} anchor="bottom">
-            <div className="relative">
-              <div className="w-6 h-6 bg-orange-500 rounded-full"></div> {/* Different color for end */}
-              <div className="absolute top-0 left-0 w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center">
-                <Map className="w-3 h-3 text-white" />
-              </div>
-            </div>
-          </Marker>
-        )}
-
-        {/* Traffic Indicators - These would ideally be dynamic based on Mapbox API responses */}
-        {/* For now, keep them as static placeholders for visual consistency */}
-        <div className="absolute top-16 left-16 bg-white/90 backdrop-blur-sm rounded-lg p-2 shadow-lg">
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-            <span className="text-xs font-medium">Light Traffic</span>
-          </div>
-        </div>
-
-        <div className="absolute top-32 right-32 bg-white/90 backdrop-blur-sm rounded-lg p-2 shadow-lg">
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse"></div>
-            <span className="text-xs font-medium">Moderate Traffic</span>
-          </div>
-        </div>
-
-      </MapGL>
-    </Card>
-  );
+const routeLayerStyle: AnyLayer = {
+  id: "route",
+  type: "line",
+  layout: {
+    "line-join": "round",
+    "line-cap": "round",
+  },
+  paint: {
+    "line-color": "#4F46E5",
+    "line-width": 6,
+    "line-opacity": 0.8,
+  },
 };
+
+export const MapSection: React.FC<MapSectionProps> = memo(
+  ({ routeGeoJSON, startMarker, endMarker, isLoading, onMapInstanceReady }) => { // Include onMapInstanceReady
+    const mapRef = useRef<MapRef | null>(null);
+    const [viewState, setViewState] = useState({
+      longitude: 31.0531, // Default to Harare, Zimbabwe
+      latitude: -17.8252, // Default to Harare, Zimbabwe
+      zoom: 12,
+    });
+
+    useEffect(() => {
+      const mapInstance = mapRef.current?.getMap();
+
+      // Pass map instance to parent once it's available
+      if (mapInstance && onMapInstanceReady) {
+        onMapInstanceReady(mapInstance);
+      }
+
+      // Logic to fit map to route or markers (optimized)
+      if (mapInstance) {
+        if (routeGeoJSON) {
+          const bounds = new LngLatBounds();
+          routeGeoJSON.features.forEach((feature: any) => {
+            if (feature.geometry.type === "LineString") {
+              feature.geometry.coordinates.forEach((coord: [number, number]) => {
+                bounds.extend(coord);
+              });
+            }
+          });
+          mapInstance.fitBounds(bounds, { padding: 40, duration: 1000 });
+        } else if (startMarker && endMarker) {
+          const bounds = new LngLatBounds();
+          bounds.extend(startMarker);
+          bounds.extend(endMarker);
+          mapInstance.fitBounds(bounds, { padding: 80, duration: 1000 });
+        } else if (startMarker) {
+          // If only start marker, fly to it
+          mapInstance.flyTo({ center: startMarker, zoom: 14, duration: 1000 });
+        } else if (endMarker) {
+          // If only end marker, fly to it (less common, but good to have)
+          mapInstance.flyTo({ center: endMarker, zoom: 14, duration: 1000 });
+        }
+      }
+    }, [routeGeoJSON, startMarker, endMarker, onMapInstanceReady]); // Add onMapInstanceReady to dependencies
+
+    const onMapLoad = () => {
+      console.log("MapGL: Map loaded successfully.");
+    };
+
+    const onMapError = (e: any) => { // Use any for error to capture full object
+      console.error("MapGL: Error loading map:", e);
+    };
+
+    return (
+      <div className="relative w-full h-[500px] lg:h-full rounded-lg overflow-hidden shadow-lg bg-gray-200">
+        {isLoading && (
+          <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10 rounded-lg">
+            <Loader2 className="h-12 w-12 animate-spin text-white" />
+            <p className="ml-3 text-white text-lg">Loading route...</p>
+          </div>
+        )}
+
+        <Map
+          ref={mapRef}
+          {...viewState}
+          onMove={(evt) => setViewState(evt.viewState)}
+          mapStyle={DEFAULT_MAP_STYLE}
+          style={{ width: "100%", height: "100%" }}
+          onLoad={onMapLoad}
+          onError={onMapError}
+          antialias={true}
+        >
+          <NavigationControl position="bottom-right" />
+          <GeolocateControl
+            positionOptions={{ enableHighAccuracy: true }}
+            trackUserLocation={true}
+            showUserHeading={true}
+            position="top-left"
+          />
+          <ScaleControl position="bottom-left" />
+
+          {routeGeoJSON && (
+            <Source id="route-source" type="geojson" data={routeGeoJSON}>
+              <Layer {...routeLayerStyle} />
+            </Source>
+          )}
+
+          {startMarker && (
+            <Marker longitude={startMarker[0]} latitude={startMarker[1]} anchor="bottom">
+              <MapPin className="text-green-500 w-8 h-8" fill="currentColor" />
+            </Marker>
+          )}
+
+          {endMarker && (
+            <Marker longitude={endMarker[0]} latitude={endMarker[1]} anchor="bottom">
+              <MapPin className="text-red-500 w-8 h-8" fill="currentColor" />
+            </Marker>
+          )}
+        </Map>
+      </div>
+    );
+  }
+);
+
+MapSection.displayName = "MapSection";

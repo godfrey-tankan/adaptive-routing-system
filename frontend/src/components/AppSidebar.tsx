@@ -1,5 +1,5 @@
-
-import { Map, Route, Star, Settings, Bell } from "lucide-react";
+// src/components/AppSidebar.tsx (No major changes, just confirmation)
+import { Map, Route, Star, Settings, Bell, LogOut } from "lucide-react"; // Added LogOut icon
 import { NavLink, useLocation } from "react-router-dom";
 import {
   Sidebar,
@@ -13,6 +13,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { useAuth } from "@/context/AuthContext";
 
 const navigationItems = [
   { title: "Route Planner", url: "/dashboard", icon: Map },
@@ -25,8 +26,16 @@ export function AppSidebar() {
   const { collapsed } = useSidebar();
   const location = useLocation();
   const currentPath = location.pathname;
+  const { user, logout } = useAuth(); // Ensure logout is available
 
-  const isActive = (path: string) => currentPath === path;
+  const isActive = (path: string) => {
+    if (path === "/dashboard") {
+      return currentPath === "/dashboard" || currentPath === "/dashboard/";
+    }
+    return currentPath.startsWith(path);
+  };
+
+  console.log("AppSidebar: Rendering. Current path:", currentPath); // Debug
 
   return (
     <Sidebar className={collapsed ? "w-16" : "w-64"} collapsible>
@@ -45,6 +54,7 @@ export function AppSidebar() {
           </div>
         </div>
 
+        {/* Navigation */}
         <SidebarGroup>
           <SidebarGroupLabel className={collapsed ? "sr-only" : ""}>
             Navigation
@@ -73,25 +83,40 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {/* User Profile */}
-        {!collapsed && (
-          <div className="mt-auto p-4 border-t">
-            <div className="flex items-center space-x-3">
+        {/* User Profile and Logout */}
+        {user && ( // Only show if user is logged in
+          <div className={`mt-auto p-4 border-t ${collapsed ? "text-center" : ""}`}>
+            <div className={`flex items-center ${collapsed ? "justify-center" : "space-x-3"}`}>
               <Avatar className="w-10 h-10">
                 <AvatarFallback className="bg-primary text-white">
-                  JD
+                  {user.avatarFallback}
                 </AvatarFallback>
               </Avatar>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-foreground truncate">
-                  John Doe
-                </p>
-                <p className="text-xs text-muted-foreground truncate">
-                  john@example.com
-                </p>
-              </div>
-              <Bell className="w-4 h-4 text-muted-foreground" />
+              {!collapsed && (
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-foreground truncate">
+                    {user.name}
+                  </p>
+                  <p className="text-xs text-muted-foreground truncate">
+                    {user.email}
+                  </p>
+                </div>
+              )}
+              {!collapsed && (
+                <Bell className="w-4 h-4 text-muted-foreground cursor-pointer" />
+              )}
             </div>
+            {/* Logout button */}
+            <button
+              onClick={logout} // Use the logout function from AuthContext
+              className={`mt-3 w-full text-sm text-red-500 hover:text-red-600 ${collapsed ? "text-center" : "text-left"}`}
+            >
+              {collapsed ? (
+                <LogOut className="w-5 h-5 mx-auto" />
+              ) : (
+                "Log Out"
+              )}
+            </button>
           </div>
         )}
       </SidebarContent>

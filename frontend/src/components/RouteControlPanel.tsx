@@ -1,152 +1,268 @@
 // src/components/RouteControlPanel.tsx
-import { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
-import { Map, Car, Route, Star, ArrowRight, Loader2 } from "lucide-react"; // Add Loader2 for loading state
+import { Map, Route, Star, ArrowRight, Loader2, Save, CloudRain } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import axios from 'axios';
+import maplibregl, { LngLatBounds } from "maplibre-gl";
 
-// Import MapSection here or pass a function to update the map
-// For simplicity, let's assume MapSection is a sibling component that can receive updates via props or context
-// A better approach would be a shared state/context for map data
-import { MapSection } from "./MapSection"; // Assuming MapSection is in the same directory for this example
+import { PlaceSearchInput, GeoPoint } from '@/components/map/PlaceSearchInput';
+import AIChatCard from './AIChatCard'; // Import the new AI Chat Card
 
-const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
+const Maps_API_KEY = import.meta.env.VITE_Maps_API_KEY;
+const OPENWEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
-export const RouteControlPanel = ({ updateMapWithRoute }: { updateMapWithRoute: (start: [number, number], end: [number, number], geoJSON: any) => void }) => {
-  const [routeData, setRouteData] = useState({
-    from: '',
-    to: '',
-    transportMode: 'driving', // Mapbox uses 'driving', 'walking', 'cycling'
+interface RouteControlPanelProps {
+  updateMapWithRoute: (start: [number, number] | null, end: [number, number] | null, geoJSON: any | null) => void;
+  setIsLoadingMapAndRoute: (isLoading: boolean) => void;
+  mapInstance: maplibregl.Map | null;
+}
+
+interface WeatherData {
+  description: string;
+  temperature: number; // in Celsius
+  humidity: number; // in %
+  windSpeed: number; // in m/s
+  icon: string;
+}
+
+export const RouteControlPanel: React.FC<RouteControlPanelProps> = ({
+  updateMapWithRoute,
+  setIsLoadingMapAndRoute,
+  mapInstance,
+}) => {
+  const [startPoint, setStartPoint] = useState<GeoPoint | null>(null);
+  const [endPoint, setEndPoint] = useState<GeoPoint | null>(null);
+
+  const [routeOptions, setRouteOptions] = useState({
+    transportMode: 'DRIVING', // Google Directions API uses uppercase modes
     avoidHighways: false,
     avoidTolls: false
   });
+
   const [routeResults, setRouteResults] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isPanelLoading, setIsPanelLoading] = useState(false);
+  const [currentWeather, setCurrentWeather] = useState<WeatherData | null>(null);
+  const [isWeatherLoading, setIsWeatherLoading] = useState(false);
 
-  const geocodeAddress = async (address: string) => {
-    const response = await fetch(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${MAPBOX_TOKEN}`
+  useEffect(() => {
+    updateMapWithRoute(
+      startPoint ? startPoint.coordinates : null,
+      endPoint ? endPoint.coordinates : null,
+      null // Clear route when points change
     );
-    const data = await response.json();
-    if (data.features && data.features.length > 0) {
-      return data.features[0].center; // [longitude, latitude]
+
+    if (mapInstance) {
+      if (startPoint && !endPoint) {
+        mapInstance.flyTo({ center: startPoint.coordinates, zoom: 14, duration: 1000 });
+      } else if (endPoint && !startPoint) {
+        mapInstance.flyTo({ center: endPoint.coordinates, zoom: 14, duration: 1000 });
+      }
     }
-    return null;
-  };
+  }, [startPoint, endPoint, mapInstance, updateMapWithRoute]);
 
-  const getRoute = async (startCoords: [number, number], endCoords: [number, number], profile: string, avoidHighways: boolean, avoidTolls: boolean) => {
-    let url = `https://api.mapbox.com/directions/v5/mapbox/${profile}/${startCoords.join(',')};${endCoords.join(',')}?geometries=geojson&access_token=${MAPBOX_TOKEN}`;
-
-    // Add avoidance options if true
-    const alternatives = [];
-    if (avoidHighways) alternatives.push('toll'); // Mapbox uses 'toll' for avoiding tolls, not necessarily highways directly in this parameter
-    // Mapbox doesn't have a direct "avoid highways" parameter for all profiles,
-    // but avoiding tolls often implies avoiding major highways.
-    // For more granular control, you might need to use waypoints or custom logic.
-    if (avoidTolls) alternatives.push('toll');
-
-    if (alternatives.length > 0) {
-      url += `&alternatives=true&exclude=${alternatives.join(',')}`;
-    } else {
-      url += `&alternatives=false`; // Ensure no alternatives if none are explicitly requested
+  const fetchWeather = useCallback(async (coords: [number, number]) => {
+    if (!OPENWEATHER_API_KEY) {
+      console.warn("OpenWeatherMap API Key is missing. Cannot fetch weather data.");
+      return null;
     }
 
-
-    const response = await fetch(url);
-    const data = await response.json();
-    if (data.routes && data.routes.length > 0) {
-      const route = data.routes[0];
+    setIsWeatherLoading(true);
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${coords[1]}&lon=${coords[0]}&appid=${OPENWEATHER_API_KEY}&units=metric`
+      );
+      const data = response.data;
       return {
-        geoJSON: route.geometry,
-        distance: `${(route.distance / 1000).toFixed(1)} km`, // meters to km
-        duration: `${Math.round(route.duration / 60)} mins`, // seconds to minutes
-        // Fuel cost simulation remains static for now, as it's not a Mapbox feature
-        fuelCost: "ZWL $45.00", // This would need a custom calculation based on vehicle type and fuel price
-        alternatives: data.routes.length - 1
-      };
+        description: data.weather[0].description,
+        temperature: data.main.temp,
+        humidity: data.main.humidity,
+        windSpeed: data.wind.speed,
+        icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
+      } as WeatherData;
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+      toast({ title: "Weather Fetch Failed", description: "Could not retrieve current weather.", variant: "destructive" });
+      return null;
+    } finally {
+      setIsWeatherLoading(false);
     }
-    return null;
-  };
+  }, [OPENWEATHER_API_KEY]);
+
+  useEffect(() => {
+    if (startPoint) {
+      fetchWeather(startPoint.coordinates).then(weather => {
+        setCurrentWeather(weather);
+      });
+    } else {
+      setCurrentWeather(null);
+    }
+  }, [startPoint, fetchWeather]);
+
+  const getRoute = useCallback(async (
+    startPlaceId: string,
+    endPlaceId: string,
+    profile: string,
+    avoidHighways: boolean,
+    avoidTolls: boolean
+  ) => {
+    if (!Maps_API_KEY) {
+      console.error("Google Maps API Key is missing for Directions API.");
+      toast({ title: "API Key Missing", description: "Google Maps API Key not configured for directions.", variant: "destructive" });
+      return null;
+    }
+
+    const googleMode = profile; // DRIVING, WALKING, BICYCLING, TRANSIT
+
+    let url = `https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${startPlaceId}&destination=place_id:${endPlaceId}&mode=${googleMode}&key=${Maps_API_KEY}`;
+
+    if (avoidHighways) {
+      url += `&avoid=highways`;
+    }
+    if (avoidTolls) {
+      url += `&avoid=tolls`;
+    }
+
+    if (googleMode === 'DRIVING') {
+      url += `&departure_time=now&traffic_model=best_guess`; // Real-time traffic
+    }
+
+    console.log("RouteControlPanel: Google Directions API URL:", url);
+    try {
+      const response = await axios.get(url);
+      const data = response.data;
+      console.log("RouteControlPanel: Google Directions API full response:", data);
+
+      if (data.routes && data.routes.length > 0) {
+        const route = data.routes[0];
+        const overviewPolyline = route.overview_polyline.points;
+
+        const decodedPath = decodePolyline(overviewPolyline);
+        const geoJSONLineString = {
+          type: 'LineString',
+          coordinates: decodedPath,
+        };
+
+        const durationInTraffic = route.legs[0]?.duration_in_traffic?.value || route.legs[0]?.duration?.value; // In seconds
+        const distance = route.legs[0]?.distance?.value || 0; // In meters
+
+        return {
+          geoJSON: geoJSONLineString,
+          distance: `${(distance / 1000).toFixed(1)} km`,
+          duration: `${Math.round(durationInTraffic / 60)} mins`,
+          fuelCost: "ZWL $XX.XX", // Placeholder, requires external calculation
+          alternatives: data.routes.length > 1 ? data.routes.length - 1 : 0,
+          avoidHighways: avoidHighways, // Pass options to AI Card
+          avoidTolls: avoidTolls,
+          transportMode: transportMode
+        };
+      }
+      console.warn("RouteControlPanel: No routes found in Google Directions API response.");
+      return null;
+    } catch (error: any) {
+      console.error("RouteControlPanel: Error fetching Google route:", error.response?.data || error.message);
+      toast({
+        title: "Route Calculation Failed",
+        description: `Could not calculate route: ${error.response?.data?.error_message || error.message}. Check locations.`,
+        variant: "destructive"
+      });
+      return null;
+    }
+  }, [Maps_API_KEY, toast]);
 
   const handleOptimizeRoute = async () => {
-    if (!routeData.from || !routeData.to) {
+    if (!startPoint || !endPoint) {
       toast({
         title: "Missing Information",
-        description: "Please enter both start and end locations.",
+        description: "Please select both a start and an end location using the search inputs.",
         variant: "destructive"
       });
       return;
     }
 
-    setIsLoading(true);
-    setRouteResults(null);
+    setIsPanelLoading(true);
+    setIsLoadingMapAndRoute(true);
+    setRouteResults(null); // Clear previous results
 
     try {
-      const startCoords = await geocodeAddress(routeData.from + ", Harare, Zimbabwe"); // Add context for geocoding
-      const endCoords = await geocodeAddress(routeData.to + ", Harare, Zimbabwe");
-
-      if (!startCoords || !endCoords) {
-        toast({
-          title: "Location Not Found",
-          description: "Could not find coordinates for one or both locations. Please be more specific.",
-          variant: "destructive"
-        });
-        setIsLoading(false);
-        return;
-      }
-
-      // Map our transport modes to Mapbox profiles
-      let mapboxProfile = 'driving';
-      if (routeData.transportMode === 'walking') {
-        mapboxProfile = 'walking';
-      } else if (routeData.transportMode === 'bicycle') {
-        mapboxProfile = 'cycling';
-      }
-      // 'kombi' would still map to 'driving' for Mapbox, or require public transit API if available
-
       const results = await getRoute(
-        startCoords,
-        endCoords,
-        mapboxProfile,
-        routeData.avoidHighways,
-        routeData.avoidTolls
+        startPoint.placeId,
+        endPoint.placeId,
+        routeOptions.transportMode,
+        routeOptions.avoidHighways,
+        routeOptions.avoidTolls
       );
 
       if (results) {
         setRouteResults(results);
-        // This is crucial: update the MapSection
-        updateMapWithRoute(startCoords, endCoords, results.geoJSON);
+        updateMapWithRoute(startPoint.coordinates, endPoint.coordinates, results.geoJSON);
         toast({
-          title: "Route Optimized",
+          title: "Route Optimized Successfully!",
           description: "Found the best route for your journey!",
         });
+
+        if (mapInstance && results.geoJSON) {
+          const bounds = new LngLatBounds();
+          results.geoJSON.coordinates.forEach((coord: [number, number]) => {
+            bounds.extend(coord);
+          });
+          mapInstance.fitBounds(bounds, { padding: 80, duration: 1000 });
+        }
       } else {
-        toast({
-          title: "No Route Found",
-          description: "Could not find a route between the specified locations.",
-          variant: "destructive"
-        });
+        updateMapWithRoute(null, null, null);
       }
     } catch (error) {
-      console.error("Error optimizing route:", error);
+      console.error("RouteControlPanel: Uncaught error during route optimization process:", error);
       toast({
-        title: "Error",
-        description: "An error occurred while optimizing the route. Please try again.",
+        title: "An Unexpected Error Occurred",
+        description: "Please check your network connection and try again.",
         variant: "destructive"
       });
+      updateMapWithRoute(null, null, null);
     } finally {
-      setIsLoading(false);
+      setIsPanelLoading(false);
+      setIsLoadingMapAndRoute(false);
     }
+  };
+
+  // Helper function to decode Google Encoded Polylines
+  const decodePolyline = (encoded: string): [number, number][] => {
+    let poly = [];
+    let index = 0, len = encoded.length;
+    let lat = 0, lng = 0;
+
+    while (index < len) {
+      let b, shift = 0, result = 0;
+      do {
+        b = encoded.charCodeAt(index++) - 63;
+        result |= (b & 0x1f) << shift;
+        shift += 5;
+      } while (b >= 0x20);
+      let dlat = ((result & 1) ? ~(result >> 1) : (result >> 1));
+      lat += dlat;
+
+      shift = 0;
+      result = 0;
+      do {
+        b = encoded.charCodeAt(index++) - 63;
+        result |= (b & 0x1f) << shift;
+        shift += 5;
+      } while (b >= 0x20);
+      let dlng = ((result & 1) ? ~(result >> 1) : (result >> 1));
+      lng += dlng;
+
+      poly.push([lng / 1E5, lat / 1E5]); // [longitude, latitude]
+    }
+    return poly;
   };
 
   return (
     <div className="space-y-4">
-      {/* Route Input */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center">
@@ -156,39 +272,40 @@ export const RouteControlPanel = ({ updateMapWithRoute }: { updateMapWithRoute: 
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="from">From</Label>
-            <Input
-              id="from"
-              placeholder="e.g., Avondale, Harare"
-              value={routeData.from}
-              onChange={(e) => setRouteData(prev => ({ ...prev, from: e.target.value }))}
+            <Label htmlFor="from-location">From</Label>
+            <PlaceSearchInput
+              value={startPoint}
+              onSelect={setStartPoint}
+              placeholder="e.g., Avondale"
+              currentMapCenter={mapInstance?.getCenter().toArray() as [number, number] || null}
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="to">To</Label>
-            <Input
-              id="to"
-              placeholder="e.g., CBD, Harare"
-              value={routeData.to}
-              onChange={(e) => setRouteData(prev => ({ ...prev, to: e.target.value }))}
+            <Label htmlFor="to-location">To</Label>
+            <PlaceSearchInput
+              value={endPoint}
+              onSelect={setEndPoint}
+              placeholder="e.g., Harare CBD"
+              currentMapCenter={mapInstance?.getCenter().toArray() as [number, number] || null}
             />
           </div>
 
           <div className="space-y-2">
             <Label>Transport Mode</Label>
             <Select
-              value={routeData.transportMode}
-              onValueChange={(value) => setRouteData(prev => ({ ...prev, transportMode: value }))}
+              value={routeOptions.transportMode}
+              onValueChange={(value) => setRouteOptions(prev => ({ ...prev, transportMode: value }))}
+              disabled={isPanelLoading}
             >
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="driving">🚗 Private Car</SelectItem>
-                <SelectItem value="kombi">🚐 Kombi (Driving profile)</SelectItem> {/* Map kombi to driving for Mapbox */}
-                <SelectItem value="walking">🚶 Walking</SelectItem>
-                <SelectItem value="bicycle">🚴 Bicycle</SelectItem>
+                <SelectItem value="DRIVING">🚗 Private Car</SelectItem>
+                <SelectItem value="TRANSIT">🚌 Kombi (Transit Profile)</SelectItem>
+                <SelectItem value="WALKING">🚶 Walking</SelectItem>
+                <SelectItem value="BICYCLING">🚴 Bicycle</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -198,16 +315,18 @@ export const RouteControlPanel = ({ updateMapWithRoute }: { updateMapWithRoute: 
               <Label htmlFor="highways">Avoid Highways</Label>
               <Switch
                 id="highways"
-                checked={routeData.avoidHighways}
-                onCheckedChange={(checked) => setRouteData(prev => ({ ...prev, avoidHighways: checked }))}
+                checked={routeOptions.avoidHighways}
+                onCheckedChange={(checked) => setRouteOptions(prev => ({ ...prev, avoidHighways: checked }))}
+                disabled={isPanelLoading}
               />
             </div>
             <div className="flex items-center justify-between">
               <Label htmlFor="tolls">Avoid Tolls</Label>
               <Switch
                 id="tolls"
-                checked={routeData.avoidTolls}
-                onCheckedChange={(checked) => setRouteData(prev => ({ ...prev, avoidTolls: checked }))}
+                checked={routeOptions.avoidTolls}
+                onCheckedChange={(checked) => setRouteOptions(prev => ({ ...prev, avoidTolls: checked }))}
+                disabled={isPanelLoading}
               />
             </div>
           </div>
@@ -215,19 +334,43 @@ export const RouteControlPanel = ({ updateMapWithRoute }: { updateMapWithRoute: 
           <Button
             onClick={handleOptimizeRoute}
             className="w-full bg-primary hover:bg-primary/90"
-            disabled={isLoading}
+            disabled={isPanelLoading || !startPoint || !endPoint}
           >
-            {isLoading ? (
+            {isPanelLoading ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             ) : (
               <Route className="w-4 h-4 mr-2" />
             )}
-            {isLoading ? "Optimizing..." : "Optimize Route"}
+            {isPanelLoading ? "Optimizing..." : "Optimize Route"}
           </Button>
         </CardContent>
       </Card>
 
-      {/* Route Results */}
+      {currentWeather && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center">
+              <CloudRain className="w-5 h-5 mr-2 text-blue-500" />
+              Current Weather (Start Point)
+              {isWeatherLoading && <Loader2 className="ml-2 h-4 w-4 animate-spin text-muted-foreground" />}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex items-center justify-between">
+            <div className="flex items-center">
+              <img src={currentWeather.icon} alt={currentWeather.description} className="w-12 h-12 mr-2" />
+              <div>
+                <p className="text-lg font-semibold">{currentWeather.temperature}°C</p>
+                <p className="text-sm text-muted-foreground capitalize">{currentWeather.description}</p>
+              </div>
+            </div>
+            <div className="text-right">
+              <p className="text-sm">Humidity: {currentWeather.humidity}%</p>
+              <p className="text-sm">Wind: {currentWeather.windSpeed} m/s</p>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {routeResults && (
         <Card>
           <CardHeader>
@@ -248,7 +391,7 @@ export const RouteControlPanel = ({ updateMapWithRoute }: { updateMapWithRoute: 
                 <div className="text-lg font-montserrat font-bold text-secondary">
                   {routeResults.duration}
                 </div>
-                <div className="text-sm text-muted-foreground">Duration</div>
+                <div className="text-sm text-muted-foreground">Duration (with traffic)</div>
               </div>
             </div>
 
@@ -259,6 +402,12 @@ export const RouteControlPanel = ({ updateMapWithRoute }: { updateMapWithRoute: 
               <div className="text-sm text-muted-foreground">Est. Fuel Cost</div>
             </div>
 
+            {routeResults.alternatives > 0 && (
+              <p className="text-sm text-muted-foreground text-center">
+                Found {routeResults.alternatives} alternative route(s).
+              </p>
+            )}
+
             <Separator />
 
             <div className="flex space-x-2">
@@ -267,6 +416,7 @@ export const RouteControlPanel = ({ updateMapWithRoute }: { updateMapWithRoute: 
                 Save Route
               </Button>
               <Button className="flex-1 bg-secondary hover:bg-secondary/90">
+                <Save className="w-4 h-4 mr-2" />
                 Start Navigation
               </Button>
             </div>
@@ -274,31 +424,12 @@ export const RouteControlPanel = ({ updateMapWithRoute }: { updateMapWithRoute: 
         </Card>
       )}
 
-      {/* AI Insights - These would also be dynamic from backend/AI service */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center">
-            <div className="w-5 h-5 mr-2 bg-gradient-to-r from-primary to-secondary rounded"></div>
-            AI Route Insights
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span className="text-sm">Good traffic conditions ahead</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-              <span className="text-sm">Construction on Borrowdale Road</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-              <span className="text-sm">3 kombi stops along route</span>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      <AIChatCard
+        routeDetails={routeResults}
+        startPoint={startPoint}
+        endPoint={endPoint}
+        weather={currentWeather}
+      />
     </div>
   );
 };
