@@ -18,6 +18,7 @@ class RegisterUserView(APIView):
     Handles user registration using FullyCustomRegisterSerializer.
     """
     def post(self, request, *args, **kwargs):
+        print("RegisterUserView called with data:", request.data)
         serializer = FullyCustomRegisterSerializer(data=request.data, context={'request': request})
         
         serializer.is_valid(raise_exception=True)

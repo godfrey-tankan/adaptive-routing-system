@@ -23,6 +23,18 @@ interface AuthContextType {
     logout: () => void;
 }
 
+interface SignupData {
+    email: string;
+    password: string;
+    password2: string;
+    phone_number: string;
+    preferred_transport: string;
+    avoid_tolls?: boolean;
+    avoid_highways?: boolean;
+    location_anonymization?: boolean;
+}
+
+
 // Create the context with a default (null) value
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -181,23 +193,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
     }, [toast]); // Dependencies for useCallback
 
-    const signup = useCallback(async (name: string, email: string, password: string): Promise<boolean> => {
+
+    const signup = useCallback(async (signupData: SignupData): Promise<boolean> => {
         setIsLoadingAuth(true);
-        console.log(`AuthContext: Attempting signup for ${email}...`);
+        console.log(`AuthContext: Attempting signup for ${signupData.email}...`);
+
         try {
-            const response = await axios.post(`${API_BASE_URL}/users/register/`, {
-                name,
-                email,
-                password,
-            });
+            const response = await axios.post(`${API_BASE_URL}/users/register/`, signupData);
 
             const data = response.data;
 
-            // Assuming your backend returns tokens and potentially user info upon successful registration
             const newUser: User = {
-                name: data.user?.name || name,
-                email: email,
-                avatarFallback: data.user?.avatarFallback || name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2),
+                name: signupData.email.split("@")[0], // fallback, or use API user data
+                email: signupData.email,
+                avatarFallback: signupData.email[0].toUpperCase(),
                 token: data.access,
             };
 
@@ -211,21 +220,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 title: "Signup Successful",
                 description: `Your account for ${newUser.email} has been created.`,
             });
-            console.log("AuthContext: Signup successful for:", email);
             return true;
         } catch (error: any) {
             console.error("AuthContext: Signup failed:", error.response?.data || error.message);
             const errorMessage =
-                (error.response?.data as { detail?: string; email?: string[]; password?: string[]; non_field_errors?: string[] })?.detail ||
-                (error.response?.data as { email?: string[] })?.email?.[0] || // Django REST Framework email error
-                (error.response?.data as { password?: string[] })?.password?.[0] || // Django REST Framework password error
-                (error.response?.data as { non_field_errors?: string[] })?.non_field_errors?.[0] ||
+                error.response?.data?.detail ||
+                error.response?.data?.email?.[0] ||
+                error.response?.data?.password?.[0] ||
+                error.response?.data?.non_field_errors?.[0] ||
                 error.message ||
                 "Failed to create account. Please try again.";
+
             toast({
                 title: "Signup Failed",
                 description: errorMessage,
-                variant: "destructive"
+                variant: "destructive",
             });
             return false;
         } finally {

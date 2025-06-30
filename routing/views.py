@@ -231,7 +231,7 @@ class RouteDetailView(RetrieveDestroyAPIView): # New view for Retrieve and Delet
         return self.queryset.filter(user=self.request.user)
 
 class WeatherView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def post(self, request):
         lat = request.data.get('lat')

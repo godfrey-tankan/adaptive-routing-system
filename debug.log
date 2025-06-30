@@ -2400,3 +2400,141 @@ INFO 2025-06-29 16:28:16,653 views 165748 134578631075520 Generating insights fo
 INFO 2025-06-29 16:28:16,654 views 165748 134578631075520 Distance: 51.9 km, Duration: 65 mins, Traffic: Expected travel time with traffic is 65 mins., Time: 6/29/2025, 4:28:15 PM
 INFO 2025-06-29 16:28:18,049 views 165748 134578631075520 Insights Generated Successfully, sending response...
 INFO 2025-06-29 16:28:18,155 basehttp 165748 134578631075520 "POST /api/route/gemini-insights/ HTTP/1.1" 200 255
+INFO 2025-06-30 14:49:14,634 autoreload 345047 132078766760064 Watching for file changes with StatReloader
+INFO 2025-06-30 14:49:50,231 autoreload 345943 131472629952640 Watching for file changes with StatReloader
+INFO 2025-06-30 14:50:03,826 basehttp 345943 131472279205568 "OPTIONS /api/users/token/refresh/ HTTP/1.1" 200 0
+INFO 2025-06-30 14:50:03,881 basehttp 345943 131472279205568 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-30 14:50:39,144 basehttp 345943 131472279205568 "OPTIONS /api/users/register/ HTTP/1.1" 200 0
+WARNING 2025-06-30 14:50:39,216 log 345943 131472279205568 Bad Request: /api/users/register/
+WARNING 2025-06-30 14:50:39,217 basehttp 345943 131472279205568 "POST /api/users/register/ HTTP/1.1" 400 134
+WARNING 2025-06-30 14:51:19,869 log 345943 131472279205568 Bad Request: /api/users/register/
+WARNING 2025-06-30 14:51:19,870 basehttp 345943 131472279205568 "POST /api/users/register/ HTTP/1.1" 400 134
+WARNING 2025-06-30 14:51:51,541 log 345943 131472279205568 Bad Request: /api/users/register/
+WARNING 2025-06-30 14:51:51,542 basehttp 345943 131472279205568 "POST /api/users/register/ HTTP/1.1" 400 134
+INFO 2025-06-30 14:52:19,705 autoreload 345943 131472629952640 /home/tnqn/Documents/adaptive-routing-backend/users/views.py changed, reloading.
+INFO 2025-06-30 14:52:20,651 autoreload 348282 125713083961472 Watching for file changes with StatReloader
+WARNING 2025-06-30 14:52:24,968 log 348282 125712733304512 Bad Request: /api/users/register/
+WARNING 2025-06-30 14:52:24,968 basehttp 348282 125712733304512 "POST /api/users/register/ HTTP/1.1" 400 134
+INFO 2025-06-30 14:54:46,803 autoreload 348282 125713083961472 /home/tnqn/Documents/adaptive-routing-backend/users/serializers.py changed, reloading.
+INFO 2025-06-30 14:54:47,859 autoreload 350376 126210051379328 Watching for file changes with StatReloader
+WARNING 2025-06-30 14:54:51,330 log 350376 126209694365376 Bad Request: /api/users/register/
+WARNING 2025-06-30 14:54:51,333 basehttp 350376 126209694365376 "POST /api/users/register/ HTTP/1.1" 400 41
+INFO 2025-06-30 14:55:23,904 autoreload 350376 126210051379328 /home/tnqn/Documents/adaptive-routing-backend/users/serializers.py changed, reloading.
+INFO 2025-06-30 14:55:24,952 autoreload 350960 139525013414016 Watching for file changes with StatReloader
+WARNING 2025-06-30 14:55:28,883 log 350960 139524662359744 Bad Request: /api/users/register/
+WARNING 2025-06-30 14:55:28,883 basehttp 350960 139524662359744 "POST /api/users/register/ HTTP/1.1" 400 41
+WARNING 2025-06-30 15:00:05,961 log 350960 139524662359744 Bad Request: /api/users/register/
+WARNING 2025-06-30 15:00:05,965 basehttp 350960 139524662359744 "POST /api/users/register/ HTTP/1.1" 400 116
+WARNING 2025-06-30 15:06:17,451 log 350960 139524662359744 Bad Request: /api/users/register/
+WARNING 2025-06-30 15:06:17,456 basehttp 350960 139524662359744 "POST /api/users/register/ HTTP/1.1" 400 58
+INFO 2025-06-30 15:07:00,711 autoreload 350960 139525013414016 /home/tnqn/Documents/adaptive-routing-backend/users/serializers.py changed, reloading.
+INFO 2025-06-30 15:07:03,135 autoreload 360719 136994319724672 Watching for file changes with StatReloader
+WARNING 2025-06-30 15:08:04,303 log 360719 136994035332800 Bad Request: /api/users/register/
+WARNING 2025-06-30 15:08:04,320 basehttp 360719 136994035332800 "POST /api/users/register/ HTTP/1.1" 400 58
+WARNING 2025-06-30 15:09:26,457 log 360719 136994035332800 Bad Request: /api/users/register/
+WARNING 2025-06-30 15:09:26,459 basehttp 360719 136994035332800 "POST /api/users/register/ HTTP/1.1" 400 58
+WARNING 2025-06-30 15:12:58,113 log 360719 136994035332800 Bad Request: /api/users/register/
+WARNING 2025-06-30 15:12:58,114 basehttp 360719 136994035332800 "POST /api/users/register/ HTTP/1.1" 400 55
+WARNING 2025-06-30 15:14:51,243 log 360719 136994035332800 Bad Request: /api/users/register/
+WARNING 2025-06-30 15:14:51,247 basehttp 360719 136994035332800 "POST /api/users/register/ HTTP/1.1" 400 55
+INFO 2025-06-30 15:15:19,056 basehttp 360719 136994035332800 "POST /api/users/register/ HTTP/1.1" 201 162
+INFO 2025-06-30 15:16:50,132 basehttp 360719 136994035332800 "OPTIONS /api/route/weather/ HTTP/1.1" 200 0
+WARNING 2025-06-30 15:16:50,190 log 360719 136994035332800 Unauthorized: /api/route/weather/
+WARNING 2025-06-30 15:16:50,195 basehttp 360719 136994035332800 "POST /api/route/weather/ HTTP/1.1" 401 183
+INFO 2025-06-30 15:17:39,114 autoreload 360719 136994319724672 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-06-30 15:17:41,483 autoreload 370117 138783446458496 Watching for file changes with StatReloader
+WARNING 2025-06-30 15:17:45,419 log 370117 138783162889920 Unauthorized: /api/route/weather/
+WARNING 2025-06-30 15:17:45,421 basehttp 370117 138783162889920 "POST /api/route/weather/ HTTP/1.1" 401 183
+WARNING 2025-06-30 15:17:53,508 log 370117 138783162889920 Unauthorized: /api/users/token/refresh/
+WARNING 2025-06-30 15:17:53,509 basehttp 370117 138783162889920 "POST /api/users/token/refresh/ HTTP/1.1" 401 65
+INFO 2025-06-30 15:17:56,832 basehttp 370117 138783162889920 "OPTIONS /api/users/login/ HTTP/1.1" 200 0
+INFO 2025-06-30 15:17:57,548 basehttp 370117 138783162889920 "POST /api/users/login/ HTTP/1.1" 200 483
+INFO 2025-06-30 15:18:07,823 views 370117 138783162889920 Weather request received for lat: -17.8067527, lon: 31.0406769
+INFO 2025-06-30 15:18:08,481 views 370117 138783162889920 Weather Status Updated...
+INFO 2025-06-30 15:18:08,482 basehttp 370117 138783162889920 "POST /api/route/weather/ HTTP/1.1" 200 521
+INFO 2025-06-30 15:18:25,855 basehttp 370117 138783162889920 "OPTIONS /api/route/optimize/ HTTP/1.1" 200 0
+INFO 2025-06-30 15:18:25,889 views 370117 138783162889920 Route optimization request received
+INFO 2025-06-30 15:18:25,901 views 370117 138783162889920 Origin: POINT (31.0406769 -17.8067527), Destination: POINT (31.0764167 -17.820269)
+INFO 2025-06-30 15:18:25,901 views 370117 138783162889920 Transport mode: driving
+INFO 2025-06-30 15:18:26,510 services 370117 138783162889920 Google Maps Directions API response status: N/A
+INFO 2025-06-30 15:18:26,513 views 370117 138783162889920 Found 2 routes
+INFO 2025-06-30 15:18:26,519 views 370117 138783162889920 Routes successfully retrieved
+INFO 2025-06-30 15:18:28,775 views 370117 138783162889920 Route saved with ID: 27
+INFO 2025-06-30 15:18:28,778 basehttp 370117 138783162889920 "POST /api/route/optimize/ HTTP/1.1" 200 4580
+INFO 2025-06-30 15:18:29,093 basehttp 370117 138783162889920 "OPTIONS /api/route/gemini-insights/ HTTP/1.1" 200 0
+INFO 2025-06-30 15:18:29,097 views 370117 138783162889920 Generating insights for route from Belgravia to Eastlea Shops using DRIVING
+INFO 2025-06-30 15:18:29,097 views 370117 138783162889920 Distance: 5.9 km, Duration: 14 mins, Traffic: Expected travel time with traffic is 14 mins., Time: 6/30/2025, 3:18:29 PM
+INFO 2025-06-30 15:18:30,366 views 370117 138783162889920 Insights Generated Successfully, sending response...
+INFO 2025-06-30 15:18:30,380 basehttp 370117 138783162889920 "POST /api/route/gemini-insights/ HTTP/1.1" 200 255
+INFO 2025-06-30 15:19:03,369 basehttp 370117 138783162889920 "OPTIONS /api/route/history/ HTTP/1.1" 200 0
+INFO 2025-06-30 15:19:03,523 basehttp 370117 138783162889920 "GET /api/route/history/ HTTP/1.1" 200 641
+INFO 2025-06-30 15:19:07,526 basehttp 370117 138783162889920 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-30 15:19:07,752 basehttp 370117 138783162889920 "GET /api/route/history/ HTTP/1.1" 200 641
+INFO 2025-06-30 15:19:51,046 views 370117 138783162889920 Generating insights for route from Belvedere to Mbare using DRIVING
+INFO 2025-06-30 15:19:51,046 views 370117 138783162889920 Distance: , Duration: , Traffic: Expected travel time with traffic is ., Time: 6/30/2025, 3:19:51 PM
+INFO 2025-06-30 15:19:52,141 views 370117 138783162889920 Insights Generated Successfully, sending response...
+INFO 2025-06-30 15:19:52,150 basehttp 370117 138783162889920 "POST /api/route/gemini-insights/ HTTP/1.1" 200 228
+INFO 2025-06-30 15:20:16,603 views 370117 138783162889920 Generating insights for route from Waterfalls, Parktown to Mbare using DRIVING
+INFO 2025-06-30 15:20:16,603 views 370117 138783162889920 Distance: , Duration: , Traffic: Expected travel time with traffic is ., Time: 6/30/2025, 3:20:16 PM
+INFO 2025-06-30 15:20:18,188 views 370117 138783162889920 Insights Generated Successfully, sending response...
+INFO 2025-06-30 15:20:18,192 basehttp 370117 138783162889920 "POST /api/route/gemini-insights/ HTTP/1.1" 200 416
+INFO 2025-06-30 15:20:24,826 basehttp 370117 138783162889920 "OPTIONS /api/route/simulate/ HTTP/1.1" 200 0
+INFO 2025-06-30 15:20:24,852 views 370117 138783162889920 Simulate route request received
+INFO 2025-06-30 15:20:24,852 views 370117 138783162889920 Start Place ID: ChIJDwnnL72jMRkRBvemQiEnM5s, End Place ID: ChIJtbpaln2kMRkRf8H5rw4G0Xk, Mode: driving, Start Name: Waterfalls, Parktown, End Name: Mbare
+INFO 2025-06-30 15:20:25,315 services 370117 138783162889920 Resolved place ID 'ChIJDwnnL72jMRkRBvemQiEnM5s' to 'Waterfalls, Parktown' at -17.8926665,31.0214075
+INFO 2025-06-30 15:20:25,553 services 370117 138783162889920 Resolved place ID 'ChIJtbpaln2kMRkRf8H5rw4G0Xk' to 'Mbare' at -17.8642611,31.0363768
+INFO 2025-06-30 15:20:25,881 services 370117 138783162889920 Google Maps Directions API response status: N/A
+INFO 2025-06-30 15:20:25,882 views 370117 138783162889920 Simulation Route Created Successfully. Distance: 4.6 km, Duration: 13 mins
+INFO 2025-06-30 15:20:26,979 basehttp 370117 138783162889920 "POST /api/route/simulate/ HTTP/1.1" 200 709
+INFO 2025-06-30 15:24:46,415 autoreload 377871 133584681513088 Watching for file changes with StatReloader
+INFO 2025-06-30 15:26:28,867 basehttp 377871 133584330421952 "OPTIONS /api/users/token/refresh/ HTTP/1.1" 200 0
+INFO 2025-06-30 15:26:29,581 basehttp 377871 133584330421952 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-30 15:27:34,133 basehttp 377871 133584330421952 "OPTIONS /api/route/gemini-insights/ HTTP/1.1" 200 0
+INFO 2025-06-30 15:27:34,160 views 377871 133584330421952 Generating insights for route from Mazowe Dam to Waterfalls Police Camp using DRIVING
+INFO 2025-06-30 15:27:34,162 views 377871 133584330421952 Distance: , Duration: , Traffic: Expected travel time with traffic is ., Time: 6/30/2025, 3:27:34 PM
+INFO 2025-06-30 15:27:37,590 views 377871 133584330421952 Insights Generated Successfully, sending response...
+INFO 2025-06-30 15:27:37,592 basehttp 377871 133584330421952 "POST /api/route/gemini-insights/ HTTP/1.1" 200 524
+INFO 2025-06-30 15:28:49,444 basehttp 377871 133584330421952 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-06-30 15:29:04,865 views 377871 133584330421952 Generating insights for route from Mazowe Dam to Waterfalls Police Camp using DRIVING
+INFO 2025-06-30 15:29:04,869 views 377871 133584330421952 Distance: , Duration: , Traffic: Expected travel time with traffic is ., Time: 6/30/2025, 3:29:04 PM
+INFO 2025-06-30 15:29:06,145 views 377871 133584330421952 Insights Generated Successfully, sending response...
+INFO 2025-06-30 15:29:06,148 basehttp 377871 133584330421952 "POST /api/route/gemini-insights/ HTTP/1.1" 200 430
+INFO 2025-06-30 15:29:12,600 basehttp 377871 133584330421952 "OPTIONS /api/route/simulate/ HTTP/1.1" 200 0
+INFO 2025-06-30 15:29:12,650 views 377871 133584330421952 Simulate route request received
+INFO 2025-06-30 15:29:12,654 views 377871 133584330421952 Start Place ID: ChIJkZC0TFZRMBkRmVEl6eAPeXU, End Place ID: ChIJV4GeQ6ejMRkRBV1l6q3qnlg, Mode: driving, Start Name: Mazowe Dam, End Name: Waterfalls Police Camp
+INFO 2025-06-30 15:29:13,226 services 377871 133584330421952 Resolved place ID 'ChIJkZC0TFZRMBkRmVEl6eAPeXU' to 'Mazowe Dam' at -17.5335274,30.9962356
+INFO 2025-06-30 15:29:13,474 services 377871 133584330421952 Resolved place ID 'ChIJV4GeQ6ejMRkRBV1l6q3qnlg' to 'Waterfalls Police Camp' at -17.894988,31.032435
+INFO 2025-06-30 15:29:13,856 services 377871 133584330421952 Google Maps Directions API response status: N/A
+INFO 2025-06-30 15:29:13,856 views 377871 133584330421952 Simulation Route Created Successfully. Distance: 46.7 km, Duration: 1 hour 13 mins
+INFO 2025-06-30 15:29:15,107 basehttp 377871 133584330421952 "POST /api/route/simulate/ HTTP/1.1" 200 1555
+INFO 2025-06-30 15:29:18,338 basehttp 377871 133584330421952 "OPTIONS /api/route/history/ HTTP/1.1" 200 0
+INFO 2025-06-30 15:29:18,672 basehttp 377871 133584330421952 "GET /api/route/history/ HTTP/1.1" 200 641
+INFO 2025-06-30 15:29:28,677 basehttp 377871 133584330421952 "OPTIONS /api/route/weather/ HTTP/1.1" 200 0
+INFO 2025-06-30 15:29:28,710 views 377871 133584330421952 Weather request received for lat: -17.5335274, lon: 30.9962356
+INFO 2025-06-30 15:29:29,374 views 377871 133584330421952 Weather Status Updated...
+INFO 2025-06-30 15:29:29,378 basehttp 377871 133584330421952 "POST /api/route/weather/ HTTP/1.1" 200 520
+INFO 2025-06-30 15:29:44,616 basehttp 377871 133584330421952 "OPTIONS /api/route/optimize/ HTTP/1.1" 200 0
+INFO 2025-06-30 15:29:44,678 views 377871 133584330421952 Route optimization request received
+INFO 2025-06-30 15:29:44,680 views 377871 133584330421952 Origin: POINT (30.9962356 -17.5335274), Destination: POINT (31.032435 -17.894988)
+INFO 2025-06-30 15:29:44,681 views 377871 133584330421952 Transport mode: driving
+INFO 2025-06-30 15:29:45,257 services 377871 133584330421952 Google Maps Directions API response status: N/A
+INFO 2025-06-30 15:29:45,258 views 377871 133584330421952 Found 3 routes
+INFO 2025-06-30 15:29:45,260 views 377871 133584330421952 Routes successfully retrieved
+INFO 2025-06-30 15:29:46,503 views 377871 133584330421952 Route saved with ID: 28
+INFO 2025-06-30 15:29:46,505 basehttp 377871 133584330421952 "POST /api/route/optimize/ HTTP/1.1" 200 22639
+INFO 2025-06-30 15:29:46,741 views 377871 133584330421952 Generating insights for route from Mazowe Dam to Waterfalls Police Camp using DRIVING
+INFO 2025-06-30 15:29:46,741 views 377871 133584330421952 Distance: 46.7 km, Duration: 1 hour 13 mins, Traffic: Expected travel time with traffic is 1 hour 13 mins., Time: 6/30/2025, 3:29:46 PM
+WARNING 2025-06-30 15:29:46,742 views 377871 133584330421952 Could not parse duration string to float: 1 hour 13 mins
+INFO 2025-06-30 15:29:48,287 views 377871 133584330421952 Insights Generated Successfully, sending response...
+INFO 2025-06-30 15:29:48,292 basehttp 377871 133584330421952 "POST /api/route/gemini-insights/ HTTP/1.1" 200 350
+INFO 2025-06-30 15:31:46,274 views 377871 133584330421952 Simulate route request received
+INFO 2025-06-30 15:31:46,275 views 377871 133584330421952 Start Place ID: ChIJkZC0TFZRMBkRmVEl6eAPeXU, End Place ID: ChIJV4GeQ6ejMRkRBV1l6q3qnlg, Mode: driving, Start Name: Mazowe Dam, End Name: Waterfalls Police Camp
+INFO 2025-06-30 15:31:46,360 views 377871 133584186750656 Generating insights for route from Mazowe Dam to Waterfalls Police Camp using DRIVING
+INFO 2025-06-30 15:31:46,360 views 377871 133584186750656 Distance: , Duration: , Traffic: Expected travel time with traffic is ., Time: 6/30/2025, 3:31:46 PM
+INFO 2025-06-30 15:31:46,737 services 377871 133584330421952 Resolved place ID 'ChIJkZC0TFZRMBkRmVEl6eAPeXU' to 'Mazowe Dam' at -17.5335274,30.9962356
+INFO 2025-06-30 15:31:47,532 services 377871 133584330421952 Resolved place ID 'ChIJV4GeQ6ejMRkRBV1l6q3qnlg' to 'Waterfalls Police Camp' at -17.894988,31.032435
+INFO 2025-06-30 15:31:47,888 services 377871 133584330421952 Google Maps Directions API response status: N/A
+INFO 2025-06-30 15:31:47,889 views 377871 133584330421952 Simulation Route Created Successfully. Distance: 46.7 km, Duration: 1 hour 12 mins
+INFO 2025-06-30 15:31:48,393 views 377871 133584186750656 Insights Generated Successfully, sending response...
+INFO 2025-06-30 15:31:48,394 basehttp 377871 133584186750656 "POST /api/route/gemini-insights/ HTTP/1.1" 200 506
+INFO 2025-06-30 15:31:49,226 basehttp 377871 133584330421952 "POST /api/route/simulate/ HTTP/1.1" 200 1681
