@@ -2538,3 +2538,433 @@ INFO 2025-06-30 15:31:47,889 views 377871 133584330421952 Simulation Route Creat
 INFO 2025-06-30 15:31:48,393 views 377871 133584186750656 Insights Generated Successfully, sending response...
 INFO 2025-06-30 15:31:48,394 basehttp 377871 133584186750656 "POST /api/route/gemini-insights/ HTTP/1.1" 200 506
 INFO 2025-06-30 15:31:49,226 basehttp 377871 133584330421952 "POST /api/route/simulate/ HTTP/1.1" 200 1681
+INFO 2025-07-01 18:39:00,937 autoreload 396690 125511190761600 Watching for file changes with StatReloader
+INFO 2025-07-01 18:40:03,485 basehttp 396690 125510905493184 "OPTIONS /api/users/token/refresh/ HTTP/1.1" 200 0
+WARNING 2025-07-01 18:40:03,540 log 396690 125510905493184 Unauthorized: /api/users/token/refresh/
+WARNING 2025-07-01 18:40:03,542 basehttp 396690 125510905493184 "POST /api/users/token/refresh/ HTTP/1.1" 401 65
+INFO 2025-07-01 18:40:26,643 autoreload 396690 125511190761600 /home/tnqn/Documents/adaptive-routing-backend/routing/views.py changed, reloading.
+INFO 2025-07-01 18:40:27,948 autoreload 398003 127118480081024 Watching for file changes with StatReloader
+INFO 2025-07-01 18:41:38,082 basehttp 398003 127118129231552 "OPTIONS /api/users/register/ HTTP/1.1" 200 0
+WARNING 2025-07-01 18:41:38,137 log 398003 127118129231552 Bad Request: /api/users/register/
+WARNING 2025-07-01 18:41:38,137 basehttp 398003 127118129231552 "POST /api/users/register/ HTTP/1.1" 400 68
+INFO 2025-07-01 18:41:49,613 basehttp 398003 127118129231552 "POST /api/users/register/ HTTP/1.1" 201 164
+INFO 2025-07-01 18:42:11,222 basehttp 398003 127118129231552 "OPTIONS /api/route/weather/ HTTP/1.1" 200 0
+WARNING 2025-07-01 18:42:11,240 log 398003 127118129231552 Unauthorized: /api/route/weather/
+WARNING 2025-07-01 18:42:11,241 basehttp 398003 127118129231552 "POST /api/route/weather/ HTTP/1.1" 401 183
+INFO 2025-07-01 18:42:28,181 basehttp 398003 127118129231552 "OPTIONS /api/route/optimize/ HTTP/1.1" 200 0
+WARNING 2025-07-01 18:42:28,189 log 398003 127118129231552 Unauthorized: /api/route/optimize/
+WARNING 2025-07-01 18:42:28,190 basehttp 398003 127118129231552 "POST /api/route/optimize/ HTTP/1.1" 401 183
+WARNING 2025-07-01 18:42:38,732 log 398003 127118129231552 Unauthorized: /api/users/token/refresh/
+WARNING 2025-07-01 18:42:38,737 basehttp 398003 127118129231552 "POST /api/users/token/refresh/ HTTP/1.1" 401 65
+INFO 2025-07-01 18:42:53,364 basehttp 398003 127118129231552 "OPTIONS /api/users/login/ HTTP/1.1" 200 0
+INFO 2025-07-01 18:42:54,148 basehttp 398003 127118129231552 "POST /api/users/login/ HTTP/1.1" 200 483
+INFO 2025-07-01 18:43:01,700 views 398003 127118129231552 Weather request received for lat: -17.7938633, lon: 31.04344339999999
+INFO 2025-07-01 18:43:02,343 views 398003 127118129231552 Weather Status Updated...
+INFO 2025-07-01 18:43:02,346 basehttp 398003 127118129231552 "POST /api/route/weather/ HTTP/1.1" 200 498
+INFO 2025-07-01 18:43:36,891 basehttp 398003 127118129231552 "POST /api/users/login/ HTTP/1.1" 200 483
+INFO 2025-07-01 18:44:04,666 basehttp 398003 127118129231552 "OPTIONS /api/route/simulate/ HTTP/1.1" 200 0
+INFO 2025-07-01 18:44:04,679 views 398003 127118129231552 Simulate route request received
+INFO 2025-07-01 18:44:04,680 views 398003 127118129231552 Start Place ID: ChIJOTIPigulMRkRbfLYFebbLnQ, End Place ID: ChIJ0_1HKe2lMRkRSoRHp8-TG_o, Mode: driving, Start Name: Belgravia, End Name: Harare CBD
+INFO 2025-07-01 18:44:05,913 services 398003 127118129231552 Resolved place ID 'ChIJOTIPigulMRkRbfLYFebbLnQ' to 'Belgravia' at -17.8067527,31.0406769
+INFO 2025-07-01 18:44:06,142 services 398003 127118129231552 Resolved place ID 'ChIJ0_1HKe2lMRkRSoRHp8-TG_o' to 'Harare CBD' at -17.8216288,31.0492259
+INFO 2025-07-01 18:44:06,429 services 398003 127118129231552 Google Maps Directions API response status: N/A
+INFO 2025-07-01 18:44:06,430 views 398003 127118129231552 Simulation Route Created Successfully. Distance: 2.3 km, Duration: 5 mins
+INFO 2025-07-01 18:44:09,189 basehttp 398003 127118129231552 "POST /api/route/simulate/ HTTP/1.1" 200 401
+WARNING 2025-07-01 18:45:11,924 log 398003 127118129231552 Bad Request: /api/users/register/
+WARNING 2025-07-01 18:45:11,926 basehttp 398003 127118129231552 "POST /api/users/register/ HTTP/1.1" 400 68
+INFO 2025-07-01 18:45:22,582 basehttp 398003 127118129231552 "POST /api/users/register/ HTTP/1.1" 201 164
+WARNING 2025-07-01 18:45:28,609 log 398003 127118129231552 Unauthorized: /api/users/token/refresh/
+WARNING 2025-07-01 18:45:28,615 basehttp 398003 127118129231552 "POST /api/users/token/refresh/ HTTP/1.1" 401 65
+INFO 2025-07-01 18:45:33,845 basehttp 398003 127118129231552 "POST /api/users/login/ HTTP/1.1" 200 483
+INFO 2025-07-01 18:45:49,681 views 398003 127118129231552 Weather request received for lat: -17.7938633, lon: 31.04344339999999
+INFO 2025-07-01 18:45:50,325 views 398003 127118129231552 Weather Status Updated...
+INFO 2025-07-01 18:45:50,328 basehttp 398003 127118129231552 "POST /api/route/weather/ HTTP/1.1" 200 498
+INFO 2025-07-01 18:46:05,953 views 398003 127118129231552 Route optimization request received
+INFO 2025-07-01 18:46:05,958 views 398003 127118129231552 Origin: POINT (31.04344339999999 -17.7938633), Destination: POINT (31.0492259 -17.8216288)
+INFO 2025-07-01 18:46:05,958 views 398003 127118129231552 Transport mode: driving
+INFO 2025-07-01 18:46:06,475 services 398003 127118129231552 Google Maps Directions API response status: N/A
+INFO 2025-07-01 18:46:06,477 views 398003 127118129231552 Found 2 routes
+INFO 2025-07-01 18:46:06,478 views 398003 127118129231552 Routes successfully retrieved
+INFO 2025-07-01 18:46:08,167 views 398003 127118129231552 Route saved with ID: 29
+INFO 2025-07-01 18:46:08,199 basehttp 398003 127118129231552 "POST /api/route/optimize/ HTTP/1.1" 200 2525
+INFO 2025-07-01 18:46:08,410 basehttp 398003 127118129231552 "OPTIONS /api/route/gemini-insights/ HTTP/1.1" 200 0
+INFO 2025-07-01 18:46:08,426 views 398003 127118129231552 Generating insights for route from Belgravia Shopping Centre to Harare CBD using DRIVING
+INFO 2025-07-01 18:46:08,433 views 398003 127118129231552 Distance: 3.5 km, Duration: 7 mins, Traffic: Expected travel time with traffic is 7 mins., Time: 7/1/2025, 6:46:08 PM
+INFO 2025-07-01 18:46:09,716 views 398003 127118129231552 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:46:09,716 basehttp 398003 127118129231552 "POST /api/route/gemini-insights/ HTTP/1.1" 200 304
+INFO 2025-07-01 18:46:54,126 views 398003 127118129231552 Route optimization request received
+INFO 2025-07-01 18:46:54,126 views 398003 127118129231552 Origin: POINT (31.04344339999999 -17.7938633), Destination: POINT (31.0492259 -17.8216288)
+INFO 2025-07-01 18:46:54,127 views 398003 127118129231552 Transport mode: driving
+INFO 2025-07-01 18:46:54,623 services 398003 127118129231552 Google Maps Directions API response status: N/A
+INFO 2025-07-01 18:46:54,623 views 398003 127118129231552 Found 2 routes
+INFO 2025-07-01 18:46:54,623 views 398003 127118129231552 Routes successfully retrieved
+INFO 2025-07-01 18:46:56,039 views 398003 127118129231552 Route saved with ID: 30
+INFO 2025-07-01 18:46:56,040 basehttp 398003 127118129231552 "POST /api/route/optimize/ HTTP/1.1" 200 2537
+INFO 2025-07-01 18:46:56,183 views 398003 127118129231552 Generating insights for route from Belgravia Shopping Centre to Harare CBD using DRIVING
+INFO 2025-07-01 18:46:56,186 views 398003 127118129231552 Distance: 3.5 km, Duration: 7 mins, Traffic: Expected travel time with traffic is 7 mins., Time: 7/1/2025, 6:46:56 PM
+INFO 2025-07-01 18:46:57,455 views 398003 127118129231552 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:46:57,465 basehttp 398003 127118129231552 "POST /api/route/gemini-insights/ HTTP/1.1" 200 248
+INFO 2025-07-01 18:47:15,937 views 398003 127118129231552 Generating insights for route from Belgravia Shopping Centre to Longcheng Plaza using DRIVING
+INFO 2025-07-01 18:47:15,937 views 398003 127118129231552 Distance: 3.5 km, Duration: 7 mins, Traffic: Expected travel time with traffic is 7 mins., Time: 7/1/2025, 6:47:15 PM
+INFO 2025-07-01 18:47:17,272 views 398003 127118129231552 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:47:17,275 basehttp 398003 127118129231552 "POST /api/route/gemini-insights/ HTTP/1.1" 200 330
+INFO 2025-07-01 18:47:20,862 views 398003 127118129231552 Route optimization request received
+INFO 2025-07-01 18:47:20,863 views 398003 127118129231552 Origin: POINT (31.04344339999999 -17.7938633), Destination: POINT (31.0032596 -17.82613719999999)
+INFO 2025-07-01 18:47:20,864 views 398003 127118129231552 Transport mode: driving
+INFO 2025-07-01 18:47:21,354 services 398003 127118129231552 Google Maps Directions API response status: N/A
+INFO 2025-07-01 18:47:21,355 views 398003 127118129231552 Found 3 routes
+INFO 2025-07-01 18:47:21,355 views 398003 127118129231552 Routes successfully retrieved
+INFO 2025-07-01 18:47:22,709 views 398003 127118129231552 Route saved with ID: 31
+INFO 2025-07-01 18:47:22,711 basehttp 398003 127118129231552 "POST /api/route/optimize/ HTTP/1.1" 200 6896
+INFO 2025-07-01 18:47:22,813 views 398003 127118129231552 Generating insights for route from Belgravia Shopping Centre to Longcheng Plaza using DRIVING
+INFO 2025-07-01 18:47:22,813 views 398003 127118129231552 Distance: 7.8 km, Duration: 17 mins, Traffic: Expected travel time with traffic is 17 mins., Time: 7/1/2025, 6:47:22 PM
+INFO 2025-07-01 18:47:24,110 views 398003 127118129231552 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:47:24,111 basehttp 398003 127118129231552 "POST /api/route/gemini-insights/ HTTP/1.1" 200 278
+INFO 2025-07-01 18:47:52,739 views 398003 127118129231552 Route optimization request received
+INFO 2025-07-01 18:47:52,740 views 398003 127118129231552 Origin: POINT (31.04344339999999 -17.7938633), Destination: POINT (31.0032596 -17.82613719999999)
+INFO 2025-07-01 18:47:52,740 views 398003 127118129231552 Transport mode: driving
+INFO 2025-07-01 18:47:53,226 services 398003 127118129231552 Google Maps Directions API response status: N/A
+INFO 2025-07-01 18:47:53,226 views 398003 127118129231552 Found 3 routes
+INFO 2025-07-01 18:47:53,228 views 398003 127118129231552 Routes successfully retrieved
+INFO 2025-07-01 18:47:54,596 views 398003 127118129231552 Route saved with ID: 32
+INFO 2025-07-01 18:47:54,603 basehttp 398003 127118129231552 "POST /api/route/optimize/ HTTP/1.1" 200 6860
+INFO 2025-07-01 18:47:54,741 views 398003 127118129231552 Generating insights for route from Belgravia Shopping Centre to Longcheng Plaza using DRIVING
+INFO 2025-07-01 18:47:54,741 views 398003 127118129231552 Distance: 7.8 km, Duration: 17 mins, Traffic: Expected travel time with traffic is 17 mins., Time: 7/1/2025, 6:47:54 PM
+INFO 2025-07-01 18:47:55,882 views 398003 127118129231552 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:47:55,883 basehttp 398003 127118129231552 "POST /api/route/gemini-insights/ HTTP/1.1" 200 281
+INFO 2025-07-01 18:48:13,764 views 398003 127118129231552 Generating insights for route from Eastlea Shops to Longcheng Plaza using DRIVING
+INFO 2025-07-01 18:48:13,764 views 398003 127118129231552 Distance: 7.8 km, Duration: 17 mins, Traffic: Expected travel time with traffic is 17 mins., Time: 7/1/2025, 6:48:13 PM
+INFO 2025-07-01 18:48:13,798 views 398003 127117853443776 Weather request received for lat: -17.820269, lon: 31.0764167
+INFO 2025-07-01 18:48:14,433 views 398003 127117853443776 Weather Status Updated...
+INFO 2025-07-01 18:48:14,435 basehttp 398003 127117853443776 "POST /api/route/weather/ HTTP/1.1" 200 517
+INFO 2025-07-01 18:48:14,483 views 398003 127117853443776 Generating insights for route from Eastlea Shops to Longcheng Plaza using DRIVING
+INFO 2025-07-01 18:48:14,488 views 398003 127117853443776 Distance: 7.8 km, Duration: 17 mins, Traffic: Expected travel time with traffic is 17 mins., Time: 7/1/2025, 6:48:14 PM
+INFO 2025-07-01 18:48:15,389 views 398003 127118129231552 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:48:15,399 basehttp 398003 127118129231552 "POST /api/route/gemini-insights/ HTTP/1.1" 200 343
+INFO 2025-07-01 18:48:15,740 views 398003 127117853443776 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:48:15,743 basehttp 398003 127117853443776 "POST /api/route/gemini-insights/ HTTP/1.1" 200 305
+INFO 2025-07-01 18:48:26,787 views 398003 127117853443776 Generating insights for route from Groombridge Shopping Mall to Longcheng Plaza using DRIVING
+INFO 2025-07-01 18:48:26,787 views 398003 127117853443776 Distance: 7.8 km, Duration: 17 mins, Traffic: Expected travel time with traffic is 17 mins., Time: 7/1/2025, 6:48:26 PM
+INFO 2025-07-01 18:48:26,820 views 398003 127118129231552 Weather request received for lat: -17.7763593, lon: 31.06491860000001
+INFO 2025-07-01 18:48:27,439 views 398003 127118129231552 Weather Status Updated...
+INFO 2025-07-01 18:48:27,440 basehttp 398003 127118129231552 "POST /api/route/weather/ HTTP/1.1" 200 521
+INFO 2025-07-01 18:48:27,505 views 398003 127118129231552 Generating insights for route from Groombridge Shopping Mall to Longcheng Plaza using DRIVING
+INFO 2025-07-01 18:48:27,508 views 398003 127118129231552 Distance: 7.8 km, Duration: 17 mins, Traffic: Expected travel time with traffic is 17 mins., Time: 7/1/2025, 6:48:27 PM
+INFO 2025-07-01 18:48:28,963 views 398003 127118129231552 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:48:28,964 basehttp 398003 127118129231552 "POST /api/route/gemini-insights/ HTTP/1.1" 200 289
+INFO 2025-07-01 18:48:29,445 views 398003 127117853443776 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:48:29,446 basehttp 398003 127117853443776 "POST /api/route/gemini-insights/ HTTP/1.1" 200 326
+INFO 2025-07-01 18:48:38,309 views 398003 127117853443776 Generating insights for route from Groombridge Shopping Mall to Eastlea Shops using DRIVING
+INFO 2025-07-01 18:48:38,309 views 398003 127117853443776 Distance: 7.8 km, Duration: 17 mins, Traffic: Expected travel time with traffic is 17 mins., Time: 7/1/2025, 6:48:38 PM
+INFO 2025-07-01 18:48:39,671 views 398003 127117853443776 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:48:39,674 basehttp 398003 127117853443776 "POST /api/route/gemini-insights/ HTTP/1.1" 200 402
+INFO 2025-07-01 18:48:40,903 views 398003 127117853443776 Route optimization request received
+INFO 2025-07-01 18:48:40,904 views 398003 127117853443776 Origin: POINT (31.06491860000001 -17.7763593), Destination: POINT (31.0764167 -17.820269)
+INFO 2025-07-01 18:48:40,904 views 398003 127117853443776 Transport mode: driving
+INFO 2025-07-01 18:48:41,401 services 398003 127117853443776 Google Maps Directions API response status: N/A
+INFO 2025-07-01 18:48:41,401 views 398003 127117853443776 Found 3 routes
+INFO 2025-07-01 18:48:41,402 views 398003 127117853443776 Routes successfully retrieved
+INFO 2025-07-01 18:48:42,655 views 398003 127117853443776 Route saved with ID: 33
+INFO 2025-07-01 18:48:42,657 basehttp 398003 127117853443776 "POST /api/route/optimize/ HTTP/1.1" 200 8365
+INFO 2025-07-01 18:48:42,784 views 398003 127117853443776 Generating insights for route from Groombridge Shopping Mall to Eastlea Shops using DRIVING
+INFO 2025-07-01 18:48:42,784 views 398003 127117853443776 Distance: 6.2 km, Duration: 14 mins, Traffic: Expected travel time with traffic is 14 mins., Time: 7/1/2025, 6:48:42 PM
+INFO 2025-07-01 18:48:44,045 views 398003 127117853443776 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:48:44,047 basehttp 398003 127117853443776 "POST /api/route/gemini-insights/ HTTP/1.1" 200 304
+INFO 2025-07-01 18:49:07,934 views 398003 127117853443776 Route optimization request received
+INFO 2025-07-01 18:49:07,934 views 398003 127117853443776 Origin: POINT (31.06491860000001 -17.7763593), Destination: POINT (31.0764167 -17.820269)
+INFO 2025-07-01 18:49:07,934 views 398003 127117853443776 Transport mode: driving
+INFO 2025-07-01 18:49:08,423 services 398003 127117853443776 Google Maps Directions API response status: N/A
+INFO 2025-07-01 18:49:08,425 views 398003 127117853443776 Found 3 routes
+INFO 2025-07-01 18:49:08,426 views 398003 127117853443776 Routes successfully retrieved
+INFO 2025-07-01 18:49:09,948 views 398003 127117853443776 Route saved with ID: 34
+INFO 2025-07-01 18:49:09,949 basehttp 398003 127117853443776 "POST /api/route/optimize/ HTTP/1.1" 200 8421
+INFO 2025-07-01 18:49:10,046 views 398003 127117853443776 Generating insights for route from Groombridge Shopping Mall to Eastlea Shops using DRIVING
+INFO 2025-07-01 18:49:10,048 views 398003 127117853443776 Distance: 6.2 km, Duration: 14 mins, Traffic: Expected travel time with traffic is 14 mins., Time: 7/1/2025, 6:49:10 PM
+INFO 2025-07-01 18:49:11,058 views 398003 127117853443776 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:49:11,062 basehttp 398003 127117853443776 "POST /api/route/gemini-insights/ HTTP/1.1" 200 278
+INFO 2025-07-01 18:49:19,798 basehttp 398003 127117853443776 "OPTIONS /api/route/history/ HTTP/1.1" 200 0
+INFO 2025-07-01 18:49:19,898 basehttp 398003 127117853443776 "GET /api/route/history/ HTTP/1.1" 200 4687
+INFO 2025-07-01 18:49:22,781 basehttp 398003 127117853443776 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-07-01 18:49:23,016 basehttp 398003 127117853443776 "GET /api/route/history/ HTTP/1.1" 200 4687
+INFO 2025-07-01 18:50:04,037 views 398003 127117853443776 Simulate route request received
+INFO 2025-07-01 18:50:04,038 views 398003 127117853443776 Start Place ID: ChIJBQhOVtSkMRkR4XQRYkJcwaA, End Place ID: ChIJ0_1HKe2lMRkRSoRHp8-TG_o, Mode: driving, Start Name: Eastlea Shops, End Name: Harare CBD
+INFO 2025-07-01 18:50:04,638 services 398003 127117853443776 Resolved place ID 'ChIJBQhOVtSkMRkR4XQRYkJcwaA' to 'Eastlea Shops' at -17.820269,31.0764167
+INFO 2025-07-01 18:50:04,873 services 398003 127117853443776 Resolved place ID 'ChIJ0_1HKe2lMRkRSoRHp8-TG_o' to 'Harare CBD' at -17.8216288,31.0492259
+INFO 2025-07-01 18:50:05,111 services 398003 127117853443776 Google Maps Directions API response status: N/A
+INFO 2025-07-01 18:50:05,112 views 398003 127117853443776 Simulation Route Created Successfully. Distance: 4.1 km, Duration: 9 mins
+INFO 2025-07-01 18:50:06,256 basehttp 398003 127117853443776 "POST /api/route/simulate/ HTTP/1.1" 200 592
+INFO 2025-07-01 18:52:28,036 views 398003 127117853443776 Simulate route request received
+INFO 2025-07-01 18:52:28,037 views 398003 127117853443776 Start Place ID: ChIJDwcYMWelMRkRcebZ7od3ELk, End Place ID: ChIJE8FXTQClMRkRbzFxDmGSwrc, Mode: driving, Start Name: University of Zimbabwe, End Name: Belgravia Shopping Centre
+INFO 2025-07-01 18:52:28,485 services 398003 127117853443776 Resolved place ID 'ChIJDwcYMWelMRkRcebZ7od3ELk' to 'University of Zimbabwe' at -17.782445,31.0546398
+INFO 2025-07-01 18:52:28,705 services 398003 127117853443776 Resolved place ID 'ChIJE8FXTQClMRkRbzFxDmGSwrc' to 'Belgravia Shopping Centre' at -17.7938633,31.04344339999999
+INFO 2025-07-01 18:52:28,937 services 398003 127117853443776 Google Maps Directions API response status: N/A
+INFO 2025-07-01 18:52:28,938 views 398003 127117853443776 Simulation Route Created Successfully. Distance: 2.5 km, Duration: 6 mins
+INFO 2025-07-01 18:52:29,957 basehttp 398003 127117853443776 "POST /api/route/simulate/ HTTP/1.1" 200 593
+INFO 2025-07-01 18:53:43,609 views 398003 127117853443776 Weather request received for lat: -17.82776, lon: 31.0201071
+INFO 2025-07-01 18:53:44,242 views 398003 127117853443776 Weather Status Updated...
+INFO 2025-07-01 18:53:44,243 basehttp 398003 127117853443776 "POST /api/route/weather/ HTTP/1.1" 200 520
+INFO 2025-07-01 18:53:56,191 views 398003 127117853443776 Route optimization request received
+INFO 2025-07-01 18:53:56,192 views 398003 127117853443776 Origin: POINT (31.0201071 -17.82776), Destination: POINT (31.01381049999999 -17.8351399)
+INFO 2025-07-01 18:53:56,192 views 398003 127117853443776 Transport mode: driving
+INFO 2025-07-01 18:53:56,667 services 398003 127117853443776 Google Maps Directions API response status: N/A
+INFO 2025-07-01 18:53:56,668 views 398003 127117853443776 Found 2 routes
+INFO 2025-07-01 18:53:56,668 views 398003 127117853443776 Routes successfully retrieved
+INFO 2025-07-01 18:53:58,284 views 398003 127117853443776 Route saved with ID: 35
+INFO 2025-07-01 18:53:58,286 basehttp 398003 127117853443776 "POST /api/route/optimize/ HTTP/1.1" 200 2066
+INFO 2025-07-01 18:53:58,427 views 398003 127117853443776 Generating insights for route from Belvedere to Belvedere Technical Teachers' College using DRIVING
+INFO 2025-07-01 18:53:58,427 views 398003 127117853443776 Distance: 1.3 km, Duration: 3 mins, Traffic: Expected travel time with traffic is 3 mins., Time: 7/1/2025, 6:53:58 PM
+INFO 2025-07-01 18:53:59,954 views 398003 127117853443776 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:53:59,956 basehttp 398003 127117853443776 "POST /api/route/gemini-insights/ HTTP/1.1" 200 268
+INFO 2025-07-01 18:54:28,157 views 398003 127117853443776 Generating insights for route from Belvedere to Belvedere Road using DRIVING
+INFO 2025-07-01 18:54:28,158 views 398003 127117853443776 Distance: 1.3 km, Duration: 3 mins, Traffic: Expected travel time with traffic is 3 mins., Time: 7/1/2025, 6:54:28 PM
+INFO 2025-07-01 18:54:28,968 views 398003 127117853443776 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:54:28,969 basehttp 398003 127117853443776 "POST /api/route/gemini-insights/ HTTP/1.1" 200 208
+INFO 2025-07-01 18:54:30,096 views 398003 127117853443776 Route optimization request received
+INFO 2025-07-01 18:54:30,096 views 398003 127117853443776 Origin: POINT (31.0201071 -17.82776), Destination: POINT (31.0293182 -17.8354991)
+INFO 2025-07-01 18:54:30,096 views 398003 127117853443776 Transport mode: driving
+INFO 2025-07-01 18:54:30,594 services 398003 127117853443776 Google Maps Directions API response status: N/A
+INFO 2025-07-01 18:54:30,594 views 398003 127117853443776 Found 2 routes
+INFO 2025-07-01 18:54:30,594 views 398003 127117853443776 Routes successfully retrieved
+INFO 2025-07-01 18:54:31,873 views 398003 127117853443776 Route saved with ID: 36
+INFO 2025-07-01 18:54:31,874 basehttp 398003 127117853443776 "POST /api/route/optimize/ HTTP/1.1" 200 1712
+INFO 2025-07-01 18:54:32,043 views 398003 127117853443776 Generating insights for route from Belvedere to Belvedere Road using DRIVING
+INFO 2025-07-01 18:54:32,044 views 398003 127117853443776 Distance: 2.2 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 7/1/2025, 6:54:32 PM
+INFO 2025-07-01 18:54:33,104 views 398003 127117853443776 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:54:33,108 basehttp 398003 127117853443776 "POST /api/route/gemini-insights/ HTTP/1.1" 200 358
+INFO 2025-07-01 18:54:46,640 views 398003 127117853443776 Generating insights for route from Samora Machel Avenue to Belvedere Road using DRIVING
+INFO 2025-07-01 18:54:46,640 views 398003 127117853443776 Distance: 2.2 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 7/1/2025, 6:54:46 PM
+INFO 2025-07-01 18:54:46,673 views 398003 127118129231552 Weather request received for lat: -17.8271778, lon: 31.04636899999999
+INFO 2025-07-01 18:54:47,292 views 398003 127118129231552 Weather Status Updated...
+INFO 2025-07-01 18:54:47,294 basehttp 398003 127118129231552 "POST /api/route/weather/ HTTP/1.1" 200 519
+INFO 2025-07-01 18:54:47,363 views 398003 127118129231552 Generating insights for route from Samora Machel Avenue to Belvedere Road using DRIVING
+INFO 2025-07-01 18:54:47,365 views 398003 127118129231552 Distance: 2.2 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 7/1/2025, 6:54:47 PM
+INFO 2025-07-01 18:54:47,748 views 398003 127117853443776 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:54:47,749 basehttp 398003 127117853443776 "POST /api/route/gemini-insights/ HTTP/1.1" 200 277
+INFO 2025-07-01 18:54:48,620 views 398003 127118129231552 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:54:48,621 basehttp 398003 127118129231552 "POST /api/route/gemini-insights/ HTTP/1.1" 200 223
+INFO 2025-07-01 18:55:26,660 views 398003 127118129231552 Generating insights for route from Samora Machel Avenue to Eastgate Market using DRIVING
+INFO 2025-07-01 18:55:26,660 views 398003 127118129231552 Distance: 2.2 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 7/1/2025, 6:55:26 PM
+INFO 2025-07-01 18:55:27,811 views 398003 127118129231552 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:55:27,814 basehttp 398003 127118129231552 "POST /api/route/gemini-insights/ HTTP/1.1" 200 333
+INFO 2025-07-01 18:55:39,342 views 398003 127118129231552 Generating insights for route from Robert Mugabe Road to Eastgate Market using DRIVING
+INFO 2025-07-01 18:55:39,342 views 398003 127118129231552 Distance: 2.2 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 7/1/2025, 6:55:39 PM
+INFO 2025-07-01 18:55:39,373 views 398003 127117853443776 Weather request received for lat: -17.8318287, lon: 31.05264709999999
+INFO 2025-07-01 18:55:39,998 views 398003 127117853443776 Weather Status Updated...
+INFO 2025-07-01 18:55:40,015 basehttp 398003 127117853443776 "POST /api/route/weather/ HTTP/1.1" 200 519
+INFO 2025-07-01 18:55:40,085 views 398003 127117853443776 Generating insights for route from Robert Mugabe Road to Eastgate Market using DRIVING
+INFO 2025-07-01 18:55:40,089 views 398003 127117853443776 Distance: 2.2 km, Duration: 4 mins, Traffic: Expected travel time with traffic is 4 mins., Time: 7/1/2025, 6:55:40 PM
+INFO 2025-07-01 18:55:40,733 views 398003 127118129231552 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:55:40,734 basehttp 398003 127118129231552 "POST /api/route/gemini-insights/ HTTP/1.1" 200 300
+INFO 2025-07-01 18:55:41,089 views 398003 127117853443776 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:55:41,096 basehttp 398003 127117853443776 "POST /api/route/gemini-insights/ HTTP/1.1" 200 163
+INFO 2025-07-01 18:55:41,864 views 398003 127117853443776 Route optimization request received
+INFO 2025-07-01 18:55:41,865 views 398003 127117853443776 Origin: POINT (31.05264709999999 -17.8318287), Destination: POINT (31.0533108 -17.8319927)
+INFO 2025-07-01 18:55:41,865 views 398003 127117853443776 Transport mode: driving
+INFO 2025-07-01 18:55:42,314 services 398003 127117853443776 Google Maps Directions API response status: N/A
+INFO 2025-07-01 18:55:42,314 views 398003 127117853443776 Found 1 routes
+INFO 2025-07-01 18:55:42,315 views 398003 127117853443776 Routes successfully retrieved
+INFO 2025-07-01 18:55:43,450 views 398003 127117853443776 Route saved with ID: 37
+INFO 2025-07-01 18:55:43,451 basehttp 398003 127117853443776 "POST /api/route/optimize/ HTTP/1.1" 200 634
+INFO 2025-07-01 18:55:43,559 views 398003 127117853443776 Generating insights for route from Robert Mugabe Road to Eastgate Market using DRIVING
+INFO 2025-07-01 18:55:43,563 views 398003 127117853443776 Distance: 64 m, Duration: 1 min, Traffic: Expected travel time with traffic is 1 min., Time: 7/1/2025, 6:55:43 PM
+INFO 2025-07-01 18:55:44,714 views 398003 127117853443776 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:55:44,715 basehttp 398003 127117853443776 "POST /api/route/gemini-insights/ HTTP/1.1" 200 336
+INFO 2025-07-01 18:56:29,595 views 398003 127117853443776 Route optimization request received
+INFO 2025-07-01 18:56:29,597 views 398003 127117853443776 Origin: POINT (31.05264709999999 -17.8318287), Destination: POINT (31.0533108 -17.8319927)
+INFO 2025-07-01 18:56:29,598 views 398003 127117853443776 Transport mode: walking
+INFO 2025-07-01 18:56:30,027 services 398003 127117853443776 Google Maps Directions API response status: N/A
+INFO 2025-07-01 18:56:30,029 views 398003 127117853443776 Found 1 routes
+INFO 2025-07-01 18:56:30,030 views 398003 127117853443776 Routes successfully retrieved
+INFO 2025-07-01 18:56:31,017 views 398003 127117853443776 Route saved with ID: 38
+INFO 2025-07-01 18:56:31,024 basehttp 398003 127117853443776 "POST /api/route/optimize/ HTTP/1.1" 200 551
+INFO 2025-07-01 18:56:31,143 views 398003 127117853443776 Generating insights for route from Robert Mugabe Road to Eastgate Market using WALKING
+INFO 2025-07-01 18:56:31,145 views 398003 127117853443776 Distance: 64 m, Duration: 1 min, Traffic: Expected travel time with traffic is 1 min., Time: 7/1/2025, 6:56:31 PM
+INFO 2025-07-01 18:56:32,142 views 398003 127117853443776 Insights Generated Successfully, sending response...
+INFO 2025-07-01 18:56:32,143 basehttp 398003 127117853443776 "POST /api/route/gemini-insights/ HTTP/1.1" 200 339
+INFO 2025-07-01 18:57:10,072 basehttp 398003 127117853443776 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-07-01 18:57:30,137 views 398003 127117853443776 Simulate route request received
+INFO 2025-07-01 18:57:30,138 views 398003 127117853443776 Start Place ID: EiRSb2JlcnQgTXVnYWJlIFJvYWQsIEhhcmFyZSwgWmltYmFid2UiLiosChQKEgnT-8rx5aQxGRGXB37HGn0dfBIUChIJNdvdG-6kMRkRL08T5Zs7FKU, End Place ID: ChIJWzpsWTClMRkRuRjK9KfIRYE, Mode: walking, Start Name: Robert Mugabe Road, End Name: Eastgate Market
+INFO 2025-07-01 18:57:30,578 services 398003 127117853443776 Resolved place ID 'EiRSb2JlcnQgTXVnYWJlIFJvYWQsIEhhcmFyZSwgWmltYmFid2UiLiosChQKEgnT-8rx5aQxGRGXB37HGn0dfBIUChIJNdvdG-6kMRkRL08T5Zs7FKU' to 'Robert Mugabe Road' at -17.8318287,31.05264709999999
+INFO 2025-07-01 18:57:30,799 services 398003 127117853443776 Resolved place ID 'ChIJWzpsWTClMRkRuRjK9KfIRYE' to 'Eastgate Market' at -17.8319927,31.0533108
+INFO 2025-07-01 18:57:31,049 services 398003 127117853443776 Google Maps Directions API response status: N/A
+INFO 2025-07-01 18:57:31,050 views 398003 127117853443776 Simulation Route Created Successfully. Distance: 64 m, Duration: 1 min
+INFO 2025-07-01 18:57:32,417 basehttp 398003 127117853443776 "POST /api/route/simulate/ HTTP/1.1" 200 506
+INFO 2025-07-01 18:57:49,200 basehttp 398003 127117853443776 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-07-25 08:29:10,454 autoreload 67649 127850820481152 Watching for file changes with StatReloader
+INFO 2025-07-25 08:44:59,649 autoreload 84240 134189288640640 Watching for file changes with StatReloader
+INFO 2025-07-25 08:45:30,916 basehttp 84240 134188937246400 "OPTIONS /api/users/login/ HTTP/1.1" 200 0
+WARNING 2025-07-25 08:45:31,685 log 84240 134188937246400 Unauthorized: /api/users/login/
+WARNING 2025-07-25 08:45:31,686 basehttp 84240 134188937246400 "POST /api/users/login/ HTTP/1.1" 401 63
+WARNING 2025-07-25 08:45:37,863 log 84240 134188937246400 Unauthorized: /api/users/login/
+WARNING 2025-07-25 08:45:37,863 basehttp 84240 134188937246400 "POST /api/users/login/ HTTP/1.1" 401 63
+INFO 2025-07-25 08:45:46,600 basehttp 84240 134188937246400 "POST /api/users/login/ HTTP/1.1" 200 483
+INFO 2025-07-25 08:46:11,182 basehttp 84240 134188937246400 "OPTIONS /api/route/weather/ HTTP/1.1" 200 0
+INFO 2025-07-25 08:46:11,223 views 84240 134188937246400 Weather request received for lat: -17.8571956, lon: 31.0384486
+INFO 2025-07-25 08:46:12,758 views 84240 134188937246400 Weather Status Updated...
+INFO 2025-07-25 08:46:12,761 basehttp 84240 134188937246400 "POST /api/route/weather/ HTTP/1.1" 200 489
+INFO 2025-07-25 08:46:28,086 basehttp 84240 134188937246400 "OPTIONS /api/route/optimize/ HTTP/1.1" 200 0
+INFO 2025-07-25 08:46:28,119 views 84240 134188937246400 Route optimization request received
+INFO 2025-07-25 08:46:28,135 views 84240 134188937246400 Origin: POINT (31.0384486 -17.8571956), Destination: POINT (31.1190755 -17.7831732)
+INFO 2025-07-25 08:46:28,136 views 84240 134188937246400 Transport mode: driving
+INFO 2025-07-25 08:46:28,990 services 84240 134188937246400 Google Maps Directions API response status: N/A
+INFO 2025-07-25 08:46:28,991 views 84240 134188937246400 Found 3 routes
+INFO 2025-07-25 08:46:28,993 views 84240 134188937246400 Routes successfully retrieved
+INFO 2025-07-25 08:46:33,115 views 84240 134188937246400 Route saved with ID: 39
+INFO 2025-07-25 08:46:33,119 basehttp 84240 134188937246400 "POST /api/route/optimize/ HTTP/1.1" 200 11933
+INFO 2025-07-25 08:46:33,285 basehttp 84240 134188937246400 "OPTIONS /api/route/gemini-insights/ HTTP/1.1" 200 0
+INFO 2025-07-25 08:46:33,290 views 84240 134188937246400 Generating insights for route from Mbare Musika to Chisipite Shopping Centre using DRIVING
+INFO 2025-07-25 08:46:33,290 views 84240 134188937246400 Distance: 15.3 km, Duration: 30 mins, Traffic: Expected travel time with traffic is 30 mins., Time: 7/25/2025, 8:46:33 AM
+INFO 2025-07-25 08:46:34,569 views 84240 134188937246400 Insights Generated Successfully, sending response...
+INFO 2025-07-25 08:46:34,573 basehttp 84240 134188937246400 "POST /api/route/gemini-insights/ HTTP/1.1" 200 273
+INFO 2025-07-25 13:30:01,608 autoreload 199631 127583070294144 Watching for file changes with StatReloader
+INFO 2025-07-25 13:34:52,528 autoreload 202819 128712198692992 Watching for file changes with StatReloader
+INFO 2025-07-25 13:38:50,537 basehttp 202819 128711847311040 "OPTIONS /api/users/register/ HTTP/1.1" 200 0
+ERROR 2025-07-25 13:38:53,449 log 202819 128711847311040 Internal Server Error: /api/users/register/
+Traceback (most recent call last):
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "users_customuser_phone_number_c8ef076b_uniq"
+DETAIL:  Key (phone_number)=(+263779586059) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/users/views.py", line 26, in post
+    user = serializer.save()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 208, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/users/serializers.py", line 65, in create
+    user = CustomUser.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/users/managers.py", line 15, in create_user
+    user.save(using=self._db)
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 78, in save
+    super().save(*args, **kwargs)
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/models/base.py", line 822, in save
+    self.save_base(
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/models/base.py", line 909, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/models/base.py", line 1071, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/models/base.py", line 1112, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1823, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/tnqn/Documents/adaptive-routing-backend/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "users_customuser_phone_number_c8ef076b_uniq"
+DETAIL:  Key (phone_number)=(+263779586059) already exists.
+
+ERROR 2025-07-25 13:38:53,465 basehttp 202819 128711847311040 "POST /api/users/register/ HTTP/1.1" 500 216758
+INFO 2025-07-25 13:39:10,269 basehttp 202819 128711847311040 "POST /api/users/register/ HTTP/1.1" 201 164
+INFO 2025-07-25 13:41:30,230 basehttp 202819 128711847311040 "OPTIONS /api/route/weather/ HTTP/1.1" 200 0
+WARNING 2025-07-25 13:41:30,297 log 202819 128711847311040 Unauthorized: /api/route/weather/
+WARNING 2025-07-25 13:41:30,301 basehttp 202819 128711847311040 "POST /api/route/weather/ HTTP/1.1" 401 183
+INFO 2025-07-25 13:41:51,696 basehttp 202819 128711847311040 "OPTIONS /api/route/optimize/ HTTP/1.1" 200 0
+WARNING 2025-07-25 13:41:51,721 log 202819 128711847311040 Unauthorized: /api/route/optimize/
+WARNING 2025-07-25 13:41:51,729 basehttp 202819 128711847311040 "POST /api/route/optimize/ HTTP/1.1" 401 183
+INFO 2025-07-25 13:41:59,927 basehttp 202819 128711847311040 "OPTIONS /api/users/token/refresh/ HTTP/1.1" 200 0
+WARNING 2025-07-25 13:41:59,965 log 202819 128711847311040 Unauthorized: /api/users/token/refresh/
+WARNING 2025-07-25 13:41:59,966 basehttp 202819 128711847311040 "POST /api/users/token/refresh/ HTTP/1.1" 401 65
+INFO 2025-07-25 13:42:04,364 basehttp 202819 128711847311040 "OPTIONS /api/users/login/ HTTP/1.1" 200 0
+INFO 2025-07-25 13:42:06,623 basehttp 202819 128711847311040 "POST /api/users/login/ HTTP/1.1" 200 483
+INFO 2025-07-25 13:42:16,514 views 202819 128711847311040 Weather request received for lat: -17.8571956, lon: 31.0384486
+INFO 2025-07-25 13:42:17,275 views 202819 128711847311040 Weather Status Updated...
+INFO 2025-07-25 13:42:17,282 basehttp 202819 128711847311040 "POST /api/route/weather/ HTTP/1.1" 200 512
+INFO 2025-07-25 13:42:29,717 views 202819 128711847311040 Route optimization request received
+INFO 2025-07-25 13:42:29,737 views 202819 128711847311040 Origin: POINT (31.0384486 -17.8571956), Destination: POINT (31.0492259 -17.8216288)
+INFO 2025-07-25 13:42:29,738 views 202819 128711847311040 Transport mode: driving
+INFO 2025-07-25 13:42:30,367 services 202819 128711847311040 Google Maps Directions API response status: N/A
+INFO 2025-07-25 13:42:30,367 views 202819 128711847311040 Found 3 routes
+INFO 2025-07-25 13:42:30,367 views 202819 128711847311040 Routes successfully retrieved
+INFO 2025-07-25 13:42:33,716 views 202819 128711847311040 Route saved with ID: 40
+INFO 2025-07-25 13:42:33,722 basehttp 202819 128711847311040 "POST /api/route/optimize/ HTTP/1.1" 200 6658
+INFO 2025-07-25 13:42:33,942 basehttp 202819 128711847311040 "OPTIONS /api/route/gemini-insights/ HTTP/1.1" 200 0
+INFO 2025-07-25 13:42:33,961 views 202819 128711847311040 Generating insights for route from Mbare Musika to Harare CBD using DRIVING
+INFO 2025-07-25 13:42:33,962 views 202819 128711847311040 Distance: 5.3 km, Duration: 20 mins, Traffic: Expected travel time with traffic is 20 mins., Time: 7/25/2025, 1:42:33 PM
+INFO 2025-07-25 13:42:35,563 views 202819 128711847311040 Insights Generated Successfully, sending response...
+INFO 2025-07-25 13:42:35,570 basehttp 202819 128711847311040 "POST /api/route/gemini-insights/ HTTP/1.1" 200 344
+INFO 2025-07-25 13:44:07,936 basehttp 202819 128711847311040 "OPTIONS /api/route/history/ HTTP/1.1" 200 0
+INFO 2025-07-25 13:44:08,259 basehttp 202819 128711847311040 "GET /api/route/history/ HTTP/1.1" 200 751
+INFO 2025-07-25 13:44:13,662 basehttp 202819 128711847311040 "POST /api/users/token/refresh/ HTTP/1.1" 200 483
+INFO 2025-07-25 13:44:13,963 basehttp 202819 128711847311040 "GET /api/route/history/ HTTP/1.1" 200 751
+INFO 2025-07-25 13:46:51,224 basehttp 202819 128711847311040 "OPTIONS /api/route/simulate/ HTTP/1.1" 200 0
+INFO 2025-07-25 13:46:51,264 views 202819 128711847311040 Simulate route request received
+INFO 2025-07-25 13:46:51,265 views 202819 128711847311040 Start Place ID: ChIJDwcYMWelMRkRcebZ7od3ELk, End Place ID: ChIJE8FXTQClMRkRbzFxDmGSwrc, Mode: driving, Start Name: University of Zimbabwe, End Name: Belgravia Shopping Centre
+INFO 2025-07-25 13:46:51,946 services 202819 128711847311040 Resolved place ID 'ChIJDwcYMWelMRkRcebZ7od3ELk' to 'University of Zimbabwe' at -17.782445,31.0546398
+INFO 2025-07-25 13:46:52,725 services 202819 128711847311040 Resolved place ID 'ChIJE8FXTQClMRkRbzFxDmGSwrc' to 'Belgravia Shopping Centre' at -17.7938633,31.04344339999999
+INFO 2025-07-25 13:46:53,023 services 202819 128711847311040 Google Maps Directions API response status: N/A
+INFO 2025-07-25 13:46:53,024 views 202819 128711847311040 Simulation Route Created Successfully. Distance: 2.5 km, Duration: 7 mins
+INFO 2025-07-25 13:46:55,539 basehttp 202819 128711847311040 "POST /api/route/simulate/ HTTP/1.1" 200 529
+INFO 2025-07-25 13:56:43,737 views 202819 128711847311040 Weather request received for lat: -17.8216288, lon: 31.0492259
+INFO 2025-07-25 13:56:44,517 views 202819 128711847311040 Weather Status Updated...
+INFO 2025-07-25 13:56:44,544 basehttp 202819 128711847311040 "POST /api/route/weather/ HTTP/1.1" 200 514
+INFO 2025-07-25 13:56:56,294 views 202819 128711847311040 Route optimization request received
+INFO 2025-07-25 13:56:56,298 views 202819 128711847311040 Origin: POINT (31.0492259 -17.8216288), Destination: POINT (30.8343285 -20.0719916)
+INFO 2025-07-25 13:56:56,298 views 202819 128711847311040 Transport mode: driving
+INFO 2025-07-25 13:56:57,795 services 202819 128711847311040 Google Maps Directions API response status: N/A
+INFO 2025-07-25 13:56:57,797 views 202819 128711847311040 Found 1 routes
+INFO 2025-07-25 13:56:57,798 views 202819 128711847311040 Routes successfully retrieved
+INFO 2025-07-25 13:57:00,100 views 202819 128711847311040 Route saved with ID: 41
+INFO 2025-07-25 13:57:00,105 basehttp 202819 128711847311040 "POST /api/route/optimize/ HTTP/1.1" 200 19125
+INFO 2025-07-25 13:57:00,388 views 202819 128711847311040 Generating insights for route from Harare CBD to Masvingo using DRIVING
+INFO 2025-07-25 13:57:00,388 views 202819 128711847311040 Distance: 295 km, Duration: 3 hours 46 mins, Traffic: Expected travel time with traffic is 3 hours 46 mins., Time: 7/25/2025, 1:57:00 PM
+WARNING 2025-07-25 13:57:00,389 views 202819 128711847311040 Could not parse duration string to float: 3 hours 46 mins
+INFO 2025-07-25 13:57:01,571 views 202819 128711847311040 Insights Generated Successfully, sending response...
+INFO 2025-07-25 13:57:01,575 basehttp 202819 128711847311040 "POST /api/route/gemini-insights/ HTTP/1.1" 200 290
+INFO 2025-08-01 08:51:56,279 autoreload 48884 125468346855552 Watching for file changes with StatReloader
+INFO 2025-08-01 08:53:42,103 autoreload 48884 125468346855552 /home/tnqn/Documents/adaptive-routing-backend/core/settings.py changed, reloading.
+INFO 2025-08-01 08:53:43,123 autoreload 50015 135069384110208 Watching for file changes with StatReloader
+INFO 2025-08-01 09:05:18,126 autoreload 58188 124218090201216 Watching for file changes with StatReloader

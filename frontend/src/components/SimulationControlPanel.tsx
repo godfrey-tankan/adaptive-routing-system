@@ -565,7 +565,7 @@ export const SimulationControlPanel: React.FC<SimulationControlPanelProps> = ({
                 </Card>
             )}
 
-            <AIChatCard
+            {/* <AIChatCard
                 routeDetails={{
                     distance: calculatedRouteData ? `${(calculatedRouteData.distance / 1000).toFixed(1)} km` : '',
                     duration: calculatedRouteData ? `${Math.round(calculatedRouteData.duration / 60)} mins` : '',
@@ -575,7 +575,7 @@ export const SimulationControlPanel: React.FC<SimulationControlPanelProps> = ({
                 endPoint={endPoint}
                 aiInsights={simulationInsights}
                 parentComponentName="SimulationRouteControlPanel" // Pass parent component name for throttling
-            />
+            /> */}
         </div>
     );
 };

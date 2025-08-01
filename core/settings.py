@@ -102,7 +102,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
-if ENVIRONMENT.lower() == 'development':
+if ENVIRONMENT.lower() == 'developmentr':
     DATABASES = {
         'default': {
             'ENGINE': 'django.contrib.gis.db.backends.postgis',
@@ -117,7 +117,7 @@ else:
     tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.contrib.gis.db.backends.postgis',
             'NAME': tmpPostgres.path.replace('/', ''),
             'USER': tmpPostgres.username,
             'PASSWORD': tmpPostgres.password,
@@ -224,6 +224,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:8080",
     "https://ad-routing.vercel.app",
+    "https://adaptive-routing-system-v5ov.onrender.com",
     "https://adaptive-routing-system.onrender.com"
 ]
 CORS_ALLOW_CREDENTIALS = True 
@@ -232,6 +233,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'adaptive-routing-system.onrender.com',
+    "adaptive-routing-system-v5ov.onrender.com"
 ]
 
 # Google Maps and Gemini API keys

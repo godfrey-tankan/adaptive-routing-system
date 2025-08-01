@@ -20,8 +20,8 @@ import logging
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
-from datetime import datetime # Import datetime for current time in AI prompt
-from rest_framework.generics import RetrieveDestroyAPIView # New import for Delete functionality
+from datetime import datetime 
+from rest_framework.generics import RetrieveDestroyAPIView 
 
 logger = logging.getLogger(__name__)
 
