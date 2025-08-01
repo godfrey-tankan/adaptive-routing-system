@@ -102,7 +102,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
-if ENVIRONMENT.lower() == 'developmentr':
+if ENVIRONMENT.lower() == 'development':
     DATABASES = {
         'default': {
             'ENGINE': 'django.contrib.gis.db.backends.postgis',
